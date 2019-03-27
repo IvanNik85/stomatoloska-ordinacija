@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html {
+    scroll-behavior: smooth;
+}
+#submit {
+    width:130px; 
+    height:30px;
+    color: green;
+}
+form {
+    display: flex;
+    justify-content: center;
+    flex-flow: column wrap;
+    width: 500px;
+    margin: auto;
+    padding: 30px;
+}

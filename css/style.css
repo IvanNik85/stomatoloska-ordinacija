@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html {
+    scroll-behavior: smooth;
+}
+.navbar {
+    background-color: rgba(78, 130, 112, 0.8);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 25px;
+    padding-left: 25px;
+    color: white;
+}
+li.nav-item.active {
+    border: 3px solid #8a2be2;
+    color: red
+}
+h1, h2 {
+    text-align: center;
+}
+.Header {
+    height: 600px;
+    margin-top: 150px;
+}
+.Info {
+    height: 600px;
+}
+.Galerija{
+    height: 600px;
+}
+.Kontakt {
+    height: 600px;
+}
+.Footer {
+    height: 600px;
+    background-color: rgb(247, 226, 202);
+}
+#scrollTop {
+    width: 70px;
+    height: 70px;
+    border: 2px solid #31164b;   
+    border-radius: 5px;
+    background-color: transparent;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    bottom: 20px;
+    right: 30px;
+}
+#scrollTop:hover {
+    background-color: rgba(155, 180, 160, 0.4);
+    transition: 0.3s;
+}
+i {
+    color: #31164b;    
+    font-size: 60px;
+}
+.navbar {  
+    padding: 0;  
+}

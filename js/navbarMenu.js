@@ -1,0 +1,6 @@
+export function navMeni() {
+    
+    let meni = document.createElement('div');
+    meni.innerHTML = ' <nav class="navbar navbar-expand-lg navbar-dark"><a class="navbar-brand" href="#">Navbar</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarIvan" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse justify-content-center " id="navbarIvan"><ul class="navbar-nav"><li class="nav-item "><a class="nav-link" href="../index.html#header">Home <span class="sr-only">(current)</span></a></li><li class="nav-item"><a class="nav-link" href="../index.html#info">Info</a></li><li class="nav-item"><a class="nav-link " href="../index.html#galerija">Galerija</a></li><li class="nav-item"><a class="nav-link " href="../index.html#kontakt">Kontakt</a></li><li class="nav-item"><a class="nav-link" href="./login/loginUser.html">Login</a></li></ul></div></nav>'
+    return meni;
+}
