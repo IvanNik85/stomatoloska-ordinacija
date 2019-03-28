@@ -1,6 +1,22 @@
 export function navMeni() {
-    
-    let meni = document.createElement('div');
-    meni.innerHTML = ' <nav class="navbar navbar-expand-lg navbar-dark"><a class="navbar-brand" href="#">Navbar</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarIvan" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse justify-content-center " id="navbarIvan"><ul class="navbar-nav"><li class="nav-item "><a class="nav-link" href="../index.html#header">Home <span class="sr-only">(current)</span></a></li><li class="nav-item"><a class="nav-link" href="../index.html#info">Info</a></li><li class="nav-item"><a class="nav-link " href="../index.html#galerija">Galerija</a></li><li class="nav-item"><a class="nav-link " href="../index.html#kontakt">Kontakt</a></li><li class="nav-item"><a class="nav-link" href="./login/loginUser.html">Login</a></li></ul></div></nav>'
-    return meni;
+
+    $(document).ready(function () {
+
+        let niz = ['Home', 'Info', 'Galerija', 'Kontakt', 'Login'];
+        $('body').prepend(`<nav><a href="#home"class="logo"><img src="./images/logo.jpg"></a><a href="##"><i class="fa fa-bars"></a><ul></ul></nav>`);
+        for (let i = 0; i < 5; i++) {
+            $('ul').append(`<li><a href="#${niz[i].toLowerCase()}">${niz[i]}</a></li>`);
+        }
+
+        let rotate = 'fa-times rotate';
+        $('.fa-bars').click(function () {
+            $('nav ul li').toggle("slide", { direction: "left" }, 500);
+            $(this).toggleClass(rotate);
+        });
+                
+        $(window).resize(() => {
+            $(this).width() < 992 && $('nav ul li').hide();
+            $('i').removeClass(rotate);
+        });
+    })
 }

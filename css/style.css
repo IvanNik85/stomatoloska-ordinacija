@@ -5,40 +5,29 @@
 html {
     scroll-behavior: smooth;
 }
-.navbar {
-    background-color: rgba(78, 130, 112, 0.8);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-}
-.navbar-expand-lg .navbar-nav .nav-link {
-    padding-right: 25px;
-    padding-left: 25px;
-    color: white;
-}
-li.nav-item.active {
-    border: 3px solid #8a2be2;
-    color: red
-}
 h1, h2 {
     text-align: center;
 }
+/* refaktorisati */
 .Header {
     height: 600px;
-    margin-top: 150px;
+    padding-top: 100px;
 }
 .Info {
     height: 600px;
+    padding-top: 100px;
 }
 .Galerija{
     height: 600px;
+    padding-top: 100px;
 }
 .Kontakt {
     height: 600px;
+    padding-top: 100px;
 }
 .Footer {
     height: 600px;
+    padding-top: 100px;
     background-color: rgb(247, 226, 202);
 }
 #scrollTop {
@@ -57,7 +46,7 @@ h1, h2 {
     background-color: rgba(155, 180, 160, 0.4);
     transition: 0.3s;
 }
-i {
+#scrollTop i {
     color: #31164b;    
     font-size: 60px;
 }

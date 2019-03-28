@@ -1,14 +1,12 @@
 import {navMeni} from './navbarMenu.js'
+navMeni();
 
-$(document).ready(function () {
-    $('body').prepend(navMeni);  
+$(document).ready(function () {   
     let imeLogin = 'marija';
     let prezimeLogin = 'markovic';
     //napomena - prilikom unosa imena korisnika koristiti toLowerCase
 
-    $('#submit').click(function (event ) {
-        // let $vrednost = $('#ime').val().toLowerCase();
-        // let $vrednost1 = $('#prezime').val().toLowerCase();
+    $('#submit').click(function (event ) {        
         console.log($('#ime').val())
         potvrda();
         event.preventDefault();
@@ -22,14 +20,22 @@ $(document).ready(function () {
             event.preventDefault();
         }
     }
-    function potvrda() {        
-        if ($('#ime').val().toLowerCase() == imeLogin && $('#prezime').val().toLowerCase() == prezimeLogin) {
+    function potvrda() {  
+        let $logName = $('#ime').val().toLowerCase();   
+         let $logSurname = $('#prezime').val().toLowerCase();  
+        if ($logName == imeLogin && $logSurname == prezimeLogin) {
             console.log('Uspeh')
             $('ul li:last-child').text('Marija').css({color: 'yellow',padding: '8px'})
-        } else {
-            console.log('Nece');
-        }
+            $('form').css('display','none');
+            $('body').append(`<h1>Dobrodosla ${$logName}<br/>Uspesno ste se Ulogovali</h1>`)
+         } //else if($logName = ' '){
+        //     $('#ime').attr('placeholder','molimo unesite ime');
+        //     setTimeout(function() {
+        //         $('#ime').removeAttr('placeholder')
+        //     }, 1500)           
+        // }        
     }
+
     $("a.nav-link").click(function(){
         console.log('nesto')        
         $('.navbar-nav').find(".active").removeClass("active");
@@ -48,12 +54,6 @@ $(document).ready(function () {
     function topFunction() {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
-      }
-    //   $("a.nav-link").click(function(){
-    //   if($(this).attr('a[href^="./login"]')) {
-    //       console.log('true')
-    //    $('a[href^=/login"]') = $('a[href^=/login"]')
-    //   }
-    // });
+      }    
 });
 
