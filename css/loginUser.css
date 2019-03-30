@@ -9,15 +9,32 @@ html {
     scroll-behavior: smooth;
 }
 #submit {
-    width:130px; 
-    height:30px;
-    color: green;
+    width:80px; 
+    height:80px;
+    color: #000;
+    margin-top: 30px ;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    outline: none;
+    border: 3px solid rgb(40, 66, 40);
+    font-weight: bold;
+    background-color: rgb(113, 189, 233)
+}
+input#ime, input#pass {
+    height: 50px;
 }
 form {
     display: flex;
     justify-content: center;
     flex-flow: column wrap;
-    width: 500px;
+    height: 500px;
+    width: 100%;
     margin: auto;
     padding: 30px;
+}
+fieldset {
+    border: 2px solid black;
+    margin: 20px;
 }

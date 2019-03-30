@@ -1,7 +1,6 @@
 * {
     margin: 0;
-    padding: 0;  
-    box-sizing: border-box;  
+    padding: 0; 
 }
 nav {
     position: fixed;
@@ -9,9 +8,16 @@ nav {
     width: 100%;
     top: 0;
     height: 60px;
-    border: 1px solid gray;
+    border-bottom: 1px solid gray;
     line-height: 60px;   
     z-index: 1;
+}
+.navActive {
+    background-color: rgba(0,0,0,.7);
+    transition: 0.5s;
+}
+.newClass {
+    background-color: transparent;
 }
 nav ul {     
     display: flex; 
@@ -22,9 +28,9 @@ nav ul li {
     list-style-type: none;
 }
 nav ul li a {
-    display: block;
+    display: block;    
     padding:0 20px;
-    color: #000;
+    color: #fff;
     text-decoration: none;
 }
 nav ul li a:hover {
@@ -40,7 +46,7 @@ nav img {
 }
 nav a i {   
     font-size: 0;
-    color: orange;
+    color: yellow;
 }
 .rotate {
     transition: transform 0.6s;
@@ -63,17 +69,19 @@ nav a i {
         text-align: center;   
         width: 100%;    
         background-color: rgba(0,0,0,.8); 
+        margin-top: 60px;
     }
     nav ul li {
         display: none;       
         border-bottom: 1px solid orange;  
-    }
-    nav ul li:first-child {
-        margin-top: 60px;
-    }  
+    }    
     nav ul li a {
         color: rgb(216, 214, 86);
-    }  
+    } 
+    nav ul li a:hover { 
+        color:#ffe600;
+        text-shadow: 0 0 8px #ffe600;
+    }
     nav a i {
         display: block;
         position: absolute;
