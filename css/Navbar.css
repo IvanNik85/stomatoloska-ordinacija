@@ -34,9 +34,9 @@ nav ul li a {
     text-decoration: none;
 }
 nav ul li a:hover {
-    background-color: rgba(0,0,0,.75);
     text-decoration: none;
-    color: #fff;      
+    color: rgb(219, 201, 34);  
+    transition: color .2s    
 } 
 nav img {
     height: 100%;

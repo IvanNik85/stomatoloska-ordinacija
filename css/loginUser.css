@@ -8,33 +8,94 @@ body {
 html {
     scroll-behavior: smooth;
 }
+nav {
+    background-color: rgba(0, 0, 0, .5);
+}
 #submit {
     width:80px; 
     height:80px;
     color: #000;
-    margin-top: 30px ;
+    margin-top: 45px;
     display: block;
     margin-left: auto;
     margin-right: auto;
     border-radius: 50%;
     outline: none;
-    border: 3px solid rgb(40, 66, 40);
+    transform: scale(1);
+    border: 3px solid rgb(10, 33, 59);
     font-weight: bold;
     background-color: rgb(113, 189, 233)
 }
+#submit:hover {
+    color: rgb(240, 238, 235);
+    text-shadow: 0 0 5px rgb(255, 253, 253);;
+    background-color: rgb(33, 113, 179);
+    box-shadow: -8px 0 8px rgba(0, 0, 0, .6);    
+    transition: all 0.3s;
+    font-size: 17px;
+}
+#submit:active {
+    transform: scale(.94);
+}
 input#ime, input#pass {
+    border: 1px solid rgb(15, 78, 129);
+    border-radius: 5px;
+    padding-left: 10px;
     height: 50px;
+}
+input#ime:focus, input#pass:focus {
+    border: 2px solid rgb(33, 113, 179); 
+    outline: none;
+    transition: 0.15s;
 }
 form {
     display: flex;
     justify-content: center;
     flex-flow: column wrap;
+    position: relative;
     height: 500px;
     width: 100%;
     margin: auto;
-    padding: 30px;
+    padding: 40px;
 }
 fieldset {
     border: 2px solid black;
+    border-radius: 5px;
     margin: 20px;
+}
+/* schedule */
+select {
+    height: 30px;
+    border-radius: 4px;
+}
+.userData input {
+    border: 1px solid rgb(15, 78, 129);
+    border-radius: 5px;
+    padding-left: 10px;
+    height: 40px;
+    outline: none;
+}
+.prev, .next {
+    position: absolute;
+    width: 100px;
+    height: 40px;
+    outline: none;
+    border-radius: 10px; 
+    border: 3px solid rgb(138, 30, 30); 
+    font-weight: bold;
+    background-color:#a50a0ae3;
+    color: #fff;
+}
+.prev:active, .next:active {
+    transform: scale(.94);
+    transition: 0.3s;
+    outline: none;
+}
+.prev {
+    bottom: 30px;
+    left: 60px;
+}
+.next {
+    bottom: 30px;
+    right: 60px;
 }
