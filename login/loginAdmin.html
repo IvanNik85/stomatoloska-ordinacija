@@ -21,7 +21,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xl col-sm"></div>
-            <div class="col-xl-8 col-md-10 toggle">
+            <div class="col-xl-8 col-md-9 toggle">
                 <h1>Admin login</h1>
                 <fieldset>
                     <form>
@@ -47,10 +47,11 @@
                     <div class="filters">
                         <h3>Filtritaj pacijente po:</h3>
                         <input type="text" placeholder="Imenu" id="imePac">
+                        <input type="text" placeholder="Prezimenu" id="prezimePac">
                         <input type="text" placeholder="Broju kartona" id="karton">
+                        <input type="text" placeholder="Br.telefona ili email-u" id="telEmail">
                         <input type="text" placeholder="Tipu obavljenih pregleda" id="usluga">
-                        <input type="text" placeholder="Odabranom stomatologu" id="stomatolog">
-                        <input type="text" placeholder="br.tel ili email-u" id="telEmail">
+                        <input type="text" placeholder="Odabranom stomatologu" id="stomatolog">                        
                         <button type="button" id="filter">Filtritaj</button>
                     </div>
                     <!-- <span>Imenu</span><br>
@@ -59,8 +60,11 @@
                     <span>Odabranom stomatologu</span><br>
                     <span>br.tel ili email-u</span><br> -->
                 </div>
-                <div class="col-xl-8 col-md-12 table">                
-                    <h3>Izaberite neku od opcija pretrage pacijenata po odgovarajućim kriterijumima</h3>
+                <div class="col-xl-8 col-lg-10 col-md-12">  
+                    <div class="table">            
+                        <h3>Izaberite neku od opcija pretrage pacijenata po odgovarajućim kriterijumima</h3>
+                        <h4 id="dd">Nema odabranih parametara, pokusajte ponovo!</h4>
+                    </div>  
                 </div>               
             </div>
         </div>

@@ -15,13 +15,13 @@ export function navMeni() {
             // $('#adm, #log').mouseleave(function(){
             //     let a = $(this).attr('href');               
             //     let all = document.querySelectorAll('li a');
-            //     if(window.location.pathname == a.slice(1)) {
+            //     if(location.pathname == a.slice(1)) {
             //         console.log('true')
             //     for (let i in links) {
             //         all[i].setAttribute('href', '.' + links[i]); 
             //     }  
             // }
-            // })
+            // })          
 
         let rotate = 'fa-times rotate';
         $('.fa-bars').click(function () {
