@@ -63,39 +63,3 @@ fieldset {
     border-radius: 5px;
     margin: 20px;
 }
-/* schedule */
-select {
-    height: 30px;
-    border-radius: 4px;
-}
-.userData input {
-    border: 1px solid rgb(15, 78, 129);
-    border-radius: 5px;
-    padding-left: 10px;
-    height: 40px;
-    outline: none;
-}
-.prev, .next {
-    position: absolute;
-    width: 100px;
-    height: 40px;
-    outline: none;
-    border-radius: 10px; 
-    border: 3px solid rgb(138, 30, 30); 
-    font-weight: bold;
-    background-color:#a50a0ae3;
-    color: #fff;
-}
-.prev:active, .next:active {
-    transform: scale(.94);
-    transition: 0.3s;
-    outline: none;
-}
-.prev {
-    bottom: 30px;
-    left: 60px;
-}
-.next {
-    bottom: 30px;
-    right: 60px;
-}

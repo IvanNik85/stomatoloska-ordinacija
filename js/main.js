@@ -25,7 +25,7 @@ $(document).ready(function () {
         let $logPass = $('#pass').val().toLowerCase();
         if ($logName == imeAdmin && $logPass == passAdmin) {
             console.log('Uspeh')
-            $('ul li:last-child').hide().html(`<li><a href="##">Ivan</a></li>`).css({ color: 'red' });
+            $('ul li:last-child').hide().html(`<li><a href="##">Ivan</a></li>`);
             $('.toggle').hide();
             $('.adminContent').show();
             $('.welcome').append(`<h1>Dobrodosli na Admin stranu</h1>`)
@@ -54,13 +54,22 @@ $(document).ready(function () {
         document.documentElement.scrollTop = 0;
     }
 
-    class Pacijent {
+    class Patient {
         constructor(ime, prezime, email, telefon, brojKartona) {
             this.ime = ime;
             this.prezime = prezime;
             this.email = email;
             this.telefon = telefon;
             this.brojKartona = brojKartona;
+        }
+    }
+    class PatientData extends Patient {
+        constructor(ime, prezime, email, telefon, brojKartona, usluga, stomatolog, password) {
+            super(ime, prezime, email, telefon, brojKartona);
+            this.usluga = usluga;
+            this.stomatolog = stomatolog;
+            this.pass = password;
+            // this.datum = datum;
         }
     }
     let allPatients = [];
@@ -73,27 +82,39 @@ $(document).ready(function () {
         'Velickovic', 'Sretenovic', 'Smiljanic', 'Milivojevic', 'Urosevic', 'Stankovic'];
     let email = ['gmail', 'yahoo', 'outlook'];
     let mreza = ['061', '062', '063', '064', '065'];
+    let usluga = ['Pregled', 'Plombiranje', 'Vađenje', 'Protetika'];
+    let stomatolog = ['Dr Milan Stankovic', 'Dr Marijana Cvetkovic', 'Dr Ana Rebic'];
 
-    function randNumber() {
-        return Math.floor(Math.random() * 9000000);
+    function randNumber(nm) {
+        return Math.floor(Math.random() * 9990000);
     }
     function generate(value) {
         return value[Math.floor(Math.random() * value.length)];
     }
 
     // Dodati datum kao objekt ili niz    
-    function generatePatients(num) {
-        for (let i = 0; i < num; i++) {
-            let phone = `${generate(mreza)}/${randNumber()}`;
-            patient.ime = generate(ime);
-            patient.prezime = generate(prezime);
-            patient.email = `${patient.ime}.${patient.prezime}@${generate(email)}.com`;            
-            allPatients.push(new Pacijent(patient.ime, patient.prezime, patient.email, phone, randNumber()));
+    function generatePatients() {  
+        patient.ime = generate(ime);
+        patient.prezime = generate(prezime);
+        patient.email = `${patient.ime}.${patient.prezime}@${generate(email)}.com`; 
+        patient.pass = `${patient.ime}${(randNumber()%1000)}`
+        patient.usluga = generate(usluga);
+        patient.stomatolog = generate(stomatolog);        
+        let phone = `${generate(mreza)}/${randNumber()}`;
+        let newPatient = new PatientData(patient.ime, patient.prezime, patient.email, phone, randNumber(), patient.usluga, patient.stomatolog, patient.pass);
+        for(let j in allPatients) {
+            if(patient.ime === allPatients[j].ime && patient.prezime === allPatients[j].prezime) {
+                allPatients.splice(j, 1);
+            } 
+        }   
+        allPatients.push(newPatient);        
+    }    
+
+    while(allPatients.length < 100) {
+        generatePatients();
         }
-    }
-    // var set = new Set(allPatients); //   {1,2,3}
-    // var arr = Array.from(set);//  [1,2,3]        
-    generatePatients(100);
+
+    // console.log(allPatients);
     if (!localStorage.getItem('listaPacijenata')) {
         let myJSON = JSON.stringify(allPatients);
         localStorage.setItem('listaPacijenata', myJSON);
@@ -102,18 +123,22 @@ $(document).ready(function () {
     $('.finish').click(function () {
         let inputName = $('#ime1').val();
         let inputSurname = $('#prezime1').val();
-        let inputEmail = $('#email').val();
+        let inputEmail = $('#email1').val();
         let phone = $('#phone').val();
         let insertSlash = (str, sub, pos) => `${str.slice(0, pos)}${sub}${str.slice(pos)}`;
-        let inputPhone = insertSlash(phone, '/', 3)
+        let inputPhone = insertSlash(phone, '/', 3);
+        let pregled = $('#pregled').val();
+        let stomat = $('#stomat').val();
+        let password = $('#pass').val();
         // let newStr = inputPhone.split(''); 
         // newStr.splice(3,0, '/');
         // newStr = newStr.join('');
 
         if (localStorage.getItem('listaPacijenata')) {
             allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));
-            allPatients.push(new Pacijent(inputName, inputSurname, inputEmail, inputPhone, randNumber()));
+            allPatients.push(new PatientData(inputName, inputSurname, inputEmail, inputPhone, randNumber(), pregled, stomat, password));
             localStorage.setItem('listaPacijenata', JSON.stringify(allPatients));
+            $("input, select").val('');
             console.log(allPatients);
         }
     });
@@ -124,7 +149,7 @@ $(document).ready(function () {
     let tbody = document.createElement('tbody');
     table.setAttribute('id', 'patientsTable');
 
-    function izvucena(val) {
+    function createTable(val) {
         showTable.appendChild(table);
         table.appendChild(thead);
         table.appendChild(tbody);
@@ -164,36 +189,46 @@ $(document).ready(function () {
     $('#allPatients').click(function () {
         remPrevTable();
         allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));
-        izvucena(allPatients);
+        createTable(allPatients);
     });
 
     let filter = [];
-    let values = [];   //uporediti vrednosti unosa sa allPatients.ime npr.
-    let search = ['#imePac', '#prezimePac', '#karton', '#telEmail', '#usluga', '#stomatolog',];
-    let searchValues = ['ime', 'prezime', 'email', 'telefon', 'brojKartona'];
+    let values = [];  
+    let search = ['#imePac', '#prezimePac', '#email', '#telefon', '#karton', '#usluga', '#stomatolog'];
+    let searchValues = ['ime', 'prezime', 'email', 'telefon', 'brojKartona', 'usluga', 'stomatolog'];
 
-
-    $('#filter').click(function () {
+    $('#filter').click(function () {        
         remPrevTable();
         allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 8; i++) {
             values.push($(search[i]).val());
         }
-        for (let i in allPatients) {
-            for (let j of values) {
-                for (let k of searchValues) {
-                    if (j == allPatients[i][k]) {
+        for (let i in allPatients) {           
+            for (let j in values) {
+                for (let k in searchValues) {
+                    if (values[j] == allPatients[i][searchValues[k]] && j == k) {
                         filter.push(allPatients[i]);
                     }
                 }
-            }
-        }
+            }            
+        }                
         console.log(filter)
 
-        filter.length ? izvucena(filter): $('.table h4').show();        
+        filter.length ? createTable(filter): $('.table h4').show();        
 
         filter = [];
         values = [];
     });
+       //date min today
+       var today = new Date();
+       var dd = today.getDate();
+       var mm = today.getMonth() + 1; //January is 0!
+       var yyyy = today.getFullYear();
+
+       dd < 10 && (dd = '0' + dd);         
+       mm < 10 && (mm = '0' + mm); 
+
+       today = yyyy + '-' + mm + '-' + dd;
+       $("#date").attr("min", today);
 
 });

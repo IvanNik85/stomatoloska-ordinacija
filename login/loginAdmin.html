@@ -46,19 +46,31 @@
                     <button type="button" id="allPatients">Prikaz pacijenata</button><br>
                     <div class="filters">
                         <h3>Filtritaj pacijente po:</h3>
+
                         <input type="text" placeholder="Imenu" id="imePac">
-                        <input type="text" placeholder="Prezimenu" id="prezimePac">
+                        <input type="text" placeholder="Prezimenu" id="prezimePac">                        
+                        <input type="email" placeholder="Email-u" id="email" autocomplete="off">
+                        <input type="text" placeholder="Br.telefona" id="telefon">
                         <input type="text" placeholder="Broju kartona" id="karton">
-                        <input type="text" placeholder="Br.telefona ili email-u" id="telEmail">
-                        <input type="text" placeholder="Tipu obavljenih pregleda" id="usluga">
-                        <input type="text" placeholder="Odabranom stomatologu" id="stomatolog">                        
+                        <!-- <input type="date" placeholder="Datumu pregleda" id="datum"> -->
+
+                        <select id="usluga">
+                            <option value="">Tipu obavljenog pregleda</option>
+                            <option value="Pregled">Pregled</option>
+                            <option value="Plombiranje">Plombiranje</option>
+                            <option value="Vađenje">Vađenje</option>
+                            <option value="Protetika">Protetika</option>
+                        </select><br />
+
+                        <select id="stomatolog">
+                            <option value="">Odabranom stomatologu</option>
+                            <option value="Dr Milan Stankovic">Dr Milan Stankovic</option>
+                            <option value="Dr Marijana Cvetkovic">Dr Marijana Cvetkovic</option>
+                            <option value="Dr Ana Rebic">Dr Ana Rebic</option>
+                        </select><br />
+                                              
                         <button type="button" id="filter">Filtritaj</button>
-                    </div>
-                    <!-- <span>Imenu</span><br>
-                    <span>Broju kartona</span><br>
-                    <span>Tipu obavljenih pregleda</span><br>
-                    <span>Odabranom stomatologu</span><br>
-                    <span>br.tel ili email-u</span><br> -->
+                    </div>                    
                 </div>
                 <div class="col-xl-8 col-lg-10 col-md-12">  
                     <div class="table">            
