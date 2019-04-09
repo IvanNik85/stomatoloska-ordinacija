@@ -20,28 +20,28 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-xl col-sm"></div>
-            <div class="col-xl-8 col-md-9 toggle">
+            <div class="col-lg col-md"></div>
+            <div class="col-lg-8 col-md-10 toggle">
                 <h1>Admin login</h1>
                 <fieldset>
                     <form>
                         <label for="ime">Ime:</label>
-                        <input type="text" id='ime' autocomplete="off" required><br />
+                        <input type="text" id='imeAdm' autocomplete="off" required><br />
 
                         <label for="pass">Password:</label>
-                        <input type="password" id="pass" required>
+                        <input type="password" id="passAdm" required>
 
-                        <button type="submit" id='submitAdmin'>Login</button>
+                        <button type="button" id='submitAdmin'>Login</button>
                     </form>
                 </fieldset>
             </div>
-            <div class="col-xl col-sm"></div>
+            <div class="col-lg col"></div>
         </div>
     </div>    
     <div class="container">
-        <div class="adminContent hide">          
+        <div class="content hide">          
             <div class="row">
-                <div class="col-md-12 welcome"></div>
+                <div class="col-md-12"><h1>Dobrodosli na Admin stranu</h1></div>
                 <div class="col-xl-4 filter">
                     <button type="button" id="allPatients">Prikaz pacijenata</button><br>
                     <div class="filters">

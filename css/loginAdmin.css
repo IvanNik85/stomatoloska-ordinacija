@@ -38,19 +38,23 @@ nav {
 #submitAdmin:active {
     transform: scale(.94);
 }
-input#ime, input#pass {
+input#imeAdm, input#passAdm {
     border: 1px solid rgb(100, 19, 73); 
     border-radius: 5px;
     padding-left: 10px;
     width: 100%;
     height: 50px;
 }
-input#ime:focus, input#pass:focus {
+input#imeAdm:focus, input#passAdm:focus {
     border: 2px solid rgb(100, 19, 73); 
     width: 100%;
     outline: none;
-    transition: 0.1s;
+    transition: 0.15s;
 }
+#imeAdm::placeholder, #passAdm::placeholder { 
+    color: red;
+    opacity: 1; /* Firefox */
+  }
 form {
     display: flex;
     justify-content: center;
@@ -146,7 +150,3 @@ select#usluga:focus, select#stomatolog:focus {
     align-items: center;
     flex-flow: column wrap;
 } */
-#ime::placeholder, #pass::placeholder { 
-    color: red;
-    opacity: 1; /* Firefox */
-  }

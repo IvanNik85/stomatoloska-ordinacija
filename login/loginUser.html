@@ -18,11 +18,11 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
-            <div class="col-xl-3 col-md"></div>
-            <div class="col-xl-6 col-md-9">
-                <h1>Login forma</h1>
+            <div class="col-xl col-md"></div>
+            <div class="col-xl-7 col-md-9 toggle">
+                <h1>Login User</h1>
                 <fieldset>
                     <form>
                         <label for="ime">Ime:</label>
@@ -35,7 +35,20 @@
                     </form>
                 </fieldset>
             </div>
-            <div class="col-xl-3 col-md"></div>
+            <div class="col-xl col-md"></div>
+        </div>
+        <div class="content hide">          
+            <div class="row">
+                <div class="col-md-12"><h1>Uspešno ste se ulogovali</h1></div>
+                <div class="col-lg-4 btns">
+                    <button type="button" id="schedule">Zakazivanje</button>
+                    <button type="button" id="userInfo">Pregled</button>
+                </div>
+                <div class="col-lg-8 userContent"> 
+                    <h3>Zakažite termin pregleda</h3>
+                    <h3>Pregledajte istoriju svojih pregleda</h3>
+                </div>               
+            </div>
         </div>
     </div>
 

@@ -2,42 +2,61 @@ import { navMeni } from './navbarMenu.js'
 navMeni();
 
 $(document).ready(function () {
-    let imeAdmin = 'ivan';
-    let passAdmin = 'nik';
+    let admName = 'ivan';
+    let admPass = 'nik';
+    let parms = [admName, admPass, '#imeAdm', '#passAdm'];
     //napomena - prilikom unosa imena korisnika koristiti toLowerCase
-
-    $('#submitAdmin').click(function (event) {
-        console.log($('#ime').val())
-        potvrda();
-        event.preventDefault();
+   
+    $('#submitAdmin').click(function () {
+        $('#imeAdm').val() == admName && $('#passAdm').val() == admPass ?
+        potvrda(...parms):
+        nijePotvrda(...parms);
     })
-    $('#ime').keypress(enter);
-    $('#prezime').keypress(enter);
+
+    $('#imeAdm, #passAdm').keypress(enter);
+    // $(window).keypress(enter);
 
     function enter(event) {
         if (event.which == 13) {
-            potvrda();
+            potvrda(...parms) || 
+            nijePotvrda(...parms);
             // event.preventDefault();
         }
-    }
-    function potvrda(e) {
-        let $logName = $('#ime').val().toLowerCase();
-        let $logPass = $('#pass').val().toLowerCase();
-        if ($logName == imeAdmin && $logPass == passAdmin) {
-            console.log('Uspeh')
-            $('ul li:last-child').hide().html(`<li><a href="##">Ivan</a></li>`);
+    }    
+    function potvrda(a, b, c, d) { 
+        if ($(c).val() == a && $(d).val() == b) {
+            // $('ul li:last-child').hide().html(`<li><a href="##">Ivan</a></li>`);
             $('.toggle').hide();
-            $('.adminContent').show();
-            $('.welcome').append(`<h1>Dobrodosli na Admin stranu</h1>`)
-        } else if (!$logName || !$logPass) {
-            $('#ime').attr('placeholder','Molimo unesite ime');
-            $('#pass').attr('placeholder','Molimo unesite password');
+            $('.content').show();
+        } 
+    }
+    function nijePotvrda(a, b, c, d) {
+        if ($(c).val() != a || $(d).val() != b) {
+            $(c).attr('placeholder', 'Molimo unesite ime');
+            $(d).attr('placeholder', 'Molimo unesite password');
             setTimeout(function () {
-                $('#ime').removeAttr('placeholder');
-                $('#pass').removeAttr('placeholder');
-            }, 2000)
+                alert(`Neispravno ime ili password. Pokušajte ponovo!`)
+            }, 20);
+            setTimeout(function () {
+                $('#imeAdm, #passAdm').removeAttr('placeholder');
+                $('#ime, #pass').removeAttr('placeholder');
+            }, 1500)
         }
     }
+  
+    $('#submit').click(function () {      
+        allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));
+        for (let i in allPatients) {
+            let ime = allPatients[i].ime;
+            let password = allPatients[i].pass;
+            var parUser = [ime, password, '#ime', '#pass']
+            if (ime == $('#ime').val() && password == $('#pass').val()) {
+                potvrda(...parUser);
+                break;
+            }     
+        }
+         nijePotvrda(...parUser);  
+    });
 
     $('#scrollTop').click(topFunction);
     window.onscroll = function () { scrollFunction() };
@@ -64,10 +83,11 @@ $(document).ready(function () {
         }
     }
     class PatientData extends Patient {
-        constructor(ime, prezime, email, telefon, brojKartona, usluga, stomatolog, password) {
+        constructor(ime, prezime, email, telefon, brojKartona, usluga, stomatolog, date, password) {
             super(ime, prezime, email, telefon, brojKartona);
             this.usluga = usluga;
             this.stomatolog = stomatolog;
+            this.date = date
             this.pass = password;
             // this.datum = datum;
         }
@@ -85,34 +105,41 @@ $(document).ready(function () {
     let usluga = ['Pregled', 'Plombiranje', 'Vađenje', 'Protetika'];
     let stomatolog = ['Dr Milan Stankovic', 'Dr Marijana Cvetkovic', 'Dr Ana Rebic'];
 
-    function randNumber(nm) {
+    function randNumber() {
         return Math.floor(Math.random() * 9990000);
+    }
+    function randomDate(start, end) {
+        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+        // if(randDate.getDay()!=0 &&randDate.getDay()!=6) {           
+        // } 
     }
     function generate(value) {
         return value[Math.floor(Math.random() * value.length)];
     }
 
     // Dodati datum kao objekt ili niz    
-    function generatePatients() {  
+    function generatePatients() {
         patient.ime = generate(ime);
         patient.prezime = generate(prezime);
-        patient.email = `${patient.ime}.${patient.prezime}@${generate(email)}.com`; 
-        patient.pass = `${patient.ime}${(randNumber()%1000)}`
+        patient.email = `${patient.ime}.${patient.prezime}@${generate(email)}.com`;
         patient.usluga = generate(usluga);
-        patient.stomatolog = generate(stomatolog);        
+        patient.stomatolog = generate(stomatolog);
+        patient.date = randomDate(new Date('2016-05-01'), new Date()).toDateString();          
+        patient.pass = `${patient.ime}${(randNumber() % 1000)}`
         let phone = `${generate(mreza)}/${randNumber()}`;
-        let newPatient = new PatientData(patient.ime, patient.prezime, patient.email, phone, randNumber(), patient.usluga, patient.stomatolog, patient.pass);
-        for(let j in allPatients) {
-            if(patient.ime === allPatients[j].ime && patient.prezime === allPatients[j].prezime) {
+        let newPatient = new PatientData(patient.ime, patient.prezime, patient.email, phone, randNumber(),
+                                         patient.usluga, patient.stomatolog, patient.date, patient.pass);
+        for (let j in allPatients) {
+            if (patient.ime === allPatients[j].ime && patient.prezime === allPatients[j].prezime) {
                 allPatients.splice(j, 1);
-            } 
-        }   
-        allPatients.push(newPatient);        
-    }    
-
-    while(allPatients.length < 100) {
-        generatePatients();
+            }
         }
+        allPatients.push(newPatient);
+    }
+
+    while (allPatients.length < 100) {
+        generatePatients();
+    }
 
     // console.log(allPatients);
     if (!localStorage.getItem('listaPacijenata')) {
@@ -129,6 +156,7 @@ $(document).ready(function () {
         let inputPhone = insertSlash(phone, '/', 3);
         let pregled = $('#pregled').val();
         let stomat = $('#stomat').val();
+        // let date = $('#date').val();
         let password = $('#pass').val();
         // let newStr = inputPhone.split(''); 
         // newStr.splice(3,0, '/');
@@ -158,7 +186,7 @@ $(document).ready(function () {
         for (let i = 0; i < val.length; i++) {
             let tr = document.createElement('tr');
             tbody.appendChild(tr);
-            for (let j = 0; j < Object.keys(val[0]).length; j++) {
+            for (let j = 0; j < Object.keys(val[0]).length - 1; j++) {
                 if (i == 0 && j == 0) {
                     let num = document.createElement('th');
                     num.innerHTML = 'Br.';
@@ -193,42 +221,47 @@ $(document).ready(function () {
     });
 
     let filter = [];
-    let values = [];  
+    let values = [];
     let search = ['#imePac', '#prezimePac', '#email', '#telefon', '#karton', '#usluga', '#stomatolog'];
     let searchValues = ['ime', 'prezime', 'email', 'telefon', 'brojKartona', 'usluga', 'stomatolog'];
 
-    $('#filter').click(function () {        
+    $('#filter').click(function () {
         remPrevTable();
         allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));
         for (let i = 0; i < 8; i++) {
             values.push($(search[i]).val());
         }
-        for (let i in allPatients) {           
+        for (let i in allPatients) {
             for (let j in values) {
                 for (let k in searchValues) {
                     if (values[j] == allPatients[i][searchValues[k]] && j == k) {
                         filter.push(allPatients[i]);
                     }
                 }
-            }            
-        }                
+            }
+        }
         console.log(filter)
 
-        filter.length ? createTable(filter): $('.table h4').show();        
+        filter.length ? createTable(filter) : $('.table h4').show();
 
         filter = [];
         values = [];
     });
-       //date min today
-       var today = new Date();
-       var dd = today.getDate();
-       var mm = today.getMonth() + 1; //January is 0!
-       var yyyy = today.getFullYear();
+    //date min today
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
 
-       dd < 10 && (dd = '0' + dd);         
-       mm < 10 && (mm = '0' + mm); 
+    dd < 10 && (dd = '0' + dd);
+    mm < 10 && (mm = '0' + mm);
 
-       today = yyyy + '-' + mm + '-' + dd;
-       $("#date").attr("min", today);
+    today = yyyy + '-' + mm + '-' + dd;
+    $("#date").attr("min", today);
+
+    let dateKAl = document.getElementById('date');
+    $('.prev').click(function () {
+        console.log(dateKAl.value)
+    })
 
 });
