@@ -1,6 +1,7 @@
 * {
     margin: 0;
-    padding: 0;    
+    padding: 0;   
+    box-sizing: border-box; 
 }
 body {
     padding-top: 90px;
@@ -90,4 +91,20 @@ h3 {
 }
 .btns, .userContent {
     margin-top: 150px;
+}
+.patientsTable th, .patientsTable td {
+    width: 140px;
+    height: 45px;
+    border: 1px solid black;
+    text-align: left;   
+    padding-left: 20px;
+}
+.patientsTable tbody tr th {
+    background-color: rgb(212, 208, 208);
+}
+#userTable td {
+    width: 350px; 
+}
+#userTable tr:hover {
+    background-color: aqua;
 }

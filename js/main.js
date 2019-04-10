@@ -1,9 +1,16 @@
 import { navMeni } from './navbarMenu.js'
-navMeni();
 
-$(document).ready(function () {
+if(window.location.href.indexOf('/login/')!= -1) {    
+    navMeni('.', '');    
+} else {
+    navMeni('', '/login');  
+}
+
+$(document).ready(function () {  
     let admName = 'ivan';
     let admPass = 'nik';
+    let user = [];
+    let adm = 0;
     let parms = [admName, admPass, '#imeAdm', '#passAdm'];
     //napomena - prilikom unosa imena korisnika koristiti toLowerCase
    
@@ -51,6 +58,7 @@ $(document).ready(function () {
             let password = allPatients[i].pass;
             var parUser = [ime, password, '#ime', '#pass']
             if (ime == $('#ime').val() && password == $('#pass').val()) {
+                user.push(allPatients[i]);
                 potvrda(...parUser);
                 break;
             }     
@@ -175,7 +183,7 @@ $(document).ready(function () {
     let table = document.createElement('table');
     let thead = document.createElement('thead');
     let tbody = document.createElement('tbody');
-    table.setAttribute('id', 'patientsTable');
+    table.setAttribute('class', 'patientsTable');
 
     function createTable(val) {
         showTable.appendChild(table);
@@ -206,7 +214,13 @@ $(document).ready(function () {
                 td.innerHTML = Object.values(val[i])[j];
                 tr.appendChild(td);
             }
-        }
+        }    
+        $('.patientsTable tbody tr').click(function(){ 
+            remPrevTable();
+            user.push(val[this.firstChild.innerHTML-1]); 
+            userData(user[0]);
+            user = [];
+        }); 
     }
     function remPrevTable() {
         $('thead').empty();
@@ -259,9 +273,39 @@ $(document).ready(function () {
     today = yyyy + '-' + mm + '-' + dd;
     $("#date").attr("min", today);
 
-    let dateKAl = document.getElementById('date');
-    $('.prev').click(function () {
-        console.log(dateKAl.value)
-    })
+    // let dateKAl = document.getElementById('date');
+    // $('.prev').click(function () {
+    //     console.log(dateKAl.value)
+    // })
 
+    let userContent = document.querySelector('.table, .userContent'); //.table
+    function userData(val) { 
+        userContent.appendChild(table);
+        // table.setAttribute('id', 'userTable');
+        table.appendChild(tbody);
+        for(let i=0; i<Object.keys(val).length - 1; i++) {
+            let tr = document.createElement('tr');
+            tbody.appendChild(tr);
+            for(let j=0; j<2;j++) {
+                if(j==0) {                   
+                    let th = document.createElement('th');
+                    th.innerHTML = Object.keys(val)[i];
+                    tr.appendChild(th);
+                } else {
+                    let td = document.createElement('td');
+                    td.innerHTML = Object.values(val)[i];
+                    tr.appendChild(td);
+                }
+            }
+        }
+    }
+    $('#userInfo').click(function(){
+        userData(user[0]);
+        user = [];
+    });
+
+    // let patTable = document.getElementById('patientsTable');
+    // patTable.addEventListener('click',function(){
+    //     console.log(`nesto`);
+    // });
 });
