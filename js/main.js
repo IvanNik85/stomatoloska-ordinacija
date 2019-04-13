@@ -135,7 +135,7 @@ $(document).ready(function () {
         patient.date = randomDate(new Date('2016-05-01'), new Date()).toDateString();          
         patient.pass = `${patient.ime}${(randNumber() % 1000)}`
         let phone = `${generate(mreza)}/${randNumber()}`;
-        let newPatient = new PatientData(patient.ime, patient.prezime, patient.email, phone, randNumber(),
+        let newPatient = new PatientData(patient.ime, patient.prezime, patient.email, phone, randNumber(), 
                                          patient.usluga, patient.stomatolog, patient.date, patient.pass);
         for (let j in allPatients) {
             if (patient.ime === allPatients[j].ime && patient.prezime === allPatients[j].prezime) {
@@ -304,8 +304,40 @@ $(document).ready(function () {
         user = [];
     });
 
-    // let patTable = document.getElementById('patientsTable');
-    // patTable.addEventListener('click',function(){
-    //     console.log(`nesto`);
-    // });
+    // let currentDate = new Date();  
+    //     $("#date").val(currentDate);
+    let dateVal = document.getElementById("date");
+    dateVal.valueAsDate = new Date();
+    
+    let startTime = 10;
+    let minutes = 3;
+    let $dateVal = new Date().toDateString();
+    let buttons = [];    
+    
+    $('#date').change(function() {
+        let newValue = new Date($('#date').val()).toDateString();
+        $('#dateTime').text(newValue);
+
+        $('button').each(function(item) {
+            $(this).attr('value', `${newValue} ${$(this).text()}`)
+        })
+    })
+
+    for(let i=0; i< 15; i++) {
+        if(i % 2 !=0 && i != 1) {
+            startTime++;   
+            console.log(startTime)     
+        } 
+        console.log(startTime)  
+        if(i==0) {
+            $('.dateTime').prepend(`<button type="button" id="dateTime" disabled>${$dateVal}</button>`);
+        } else if(i % 2 != 0){
+            minutes = 0;
+            $('.time').append(`<button type="button" value="${$dateVal} ${startTime}:${minutes}0">${startTime}:${minutes}0</button>`)
+        } else {
+            minutes = 3
+            $('.time').append(`<button type="button" value="${$dateVal} ${startTime}:${minutes}0">${startTime}:${minutes}0</button>`)
+        }        
+    }
+
 });

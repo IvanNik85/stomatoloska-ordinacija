@@ -40,6 +40,9 @@
                             <option value="Dr Ana Rebic">Dr Ana Rebic</option>
                         </select><br />
 
+                        <label for="pass">Password:</label>
+                        <input type="password" id='pass' autocomplete="off" required><br />
+
                         <button type="button" class="prev">Prev</button>
                         <button type="button" class="next">Next</button> 
                     </form>
@@ -75,23 +78,26 @@
         </div>        
     
         <div class="row">
-            <div class="col-xl-3 col-md"></div>
-            <div class="col-xl-6 col-md-9">
+            <div class="col-xl col-md"></div>
+            <div class="col-xl-7 col-md-9">
                 <h1>Odaberite datum i vreme pregleda</h1>
-                <fieldset>
-                    <form>  
-                        <label for="pass">Password:</label>
-                        <input type="password" id='pass' autocomplete="off" required><br />
-
-                        <label for="date">Date:</label>
-                        <input type="date" id='date' autocomplete="off" required><br />
-
-                        <button type="button" class="prev">Prev</button>
-                        <button type="button" class="next finish">Finish</button>                                               
-                    </form>
-                </fieldset>
+                <div class="wrapDates">
+                    <div class="row">
+                        <div class="col-xl-5">                      
+                            <form>   
+                                <label for="date">Date:</label>
+                                <input type="date" id='date' autocomplete="off" required><br />                                                                         
+                            </form>                      
+                        </div>
+                        <div class="col-xl-7 dateTime">
+                            <div class=" time"></div>
+                        </div>
+                    </div>  
+                </div>
+                <button type="button" class="prev">Prev</button>
+                <button type="button" class="next finish">Finish</button> 
             </div>
-            <div class="col-xl-3 col-md"></div>            
+            <div class="col-xl col-md"></div>            
         </div>        
     </div>
 
