@@ -23,13 +23,17 @@
             <div class="col-xl col-md"></div>
             <div class="col-xl-7 col-md-9 toggle">
                 <h1>Login User</h1>
-                <fieldset>
+                <fieldset class="box">
                     <form>
-                        <label for="ime">Ime:</label>
-                        <input type="text" id='ime' autocomplete="off" required><br />
+                        <div>                           
+                            <input type="text" id='ime' autocomplete="off" required><br />
+                            <label>Ime:</label>
+                        </div>
 
-                        <label for="pass">Password:</label>
-                        <input type="password" id="pass" autocomplete="off" required>
+                       <div>                            
+                            <input type="password" id="pass" autocomplete="off" required>
+                            <label>Password:</label>
+                       </div>
 
                         <button type="button" id='submit'>Login</button>
                     </form>

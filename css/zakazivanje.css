@@ -24,17 +24,17 @@ select {
     height: 30px;
     border-radius: 4px;
 }
-.userData input {
+.userData input, #pass{
     border: 1px solid rgb(15, 78, 129);
     border-radius: 5px;
     padding-left: 10px;
     height: 40px;
     outline: none;
+    width: 100%;
 }
 input#date {
     width: 90%;
 }
-
 #dateTime {
     width: 30%;
     height: 40px;
@@ -48,11 +48,6 @@ input#date {
     flex-flow: row wrap;
     justify-content: center;
     margin-top: 35px;   
-}
-.time button {   
-    width: 150px;
-    height: 30px;
-    margin: 0 5px;
 }
 
 /* prev and next buttons */
@@ -79,4 +74,67 @@ input#date {
 .next {
     bottom: 30px;
     right: 60px;
+}
+/* buttons */
+.cont {
+    display: inline-block;
+    width: 170px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px; 
+    position: relative;
+    border: 2px solid#c5b1b1;
+    border-radius: 35px;
+    font-size: 18px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+.cont input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.check {
+    position: absolute;
+    top: 10px;
+    left: 25px;
+    height: 18px;
+    width: 18px;
+    background-color:rgb(207, 204, 204);  
+    border-radius: 5px;
+}
+.cont:hover input ~ .check {
+    background-color:rgb(136, 133, 133);
+    transition: 0.25s;
+}
+.cont:hover {
+    border: 2px solid rgb(190, 10, 10); 
+    transition: 0.25s;
+}
+.cont input:checked ~ .check {
+    background-color: rgb(220, 228, 106);
+}
+.check:after {
+    content: "";
+    position: absolute;
+    display: none;    
+}
+.cont input:checked ~ .check:after {
+    display: block;
+}
+.cont .check:after {
+    background-color: #000;
+    top: 4px;
+    left: 4px;
+    height: 10px;
+    width: 10px;
+    border-radius: 4px;
+}
+#dateTime {
+    font-weight: bold;
+    font-size: 18px;
+    width: 200px;
+    border-radius: 4px;    
+    border: 2px solid red;
+    background-color: rgb(236, 234, 234);
 }

@@ -41,12 +41,14 @@ $(document).ready(function () {
         if ($(c).val() != a || $(d).val() != b) {
             $(c).attr('placeholder', 'Molimo unesite ime');
             $(d).attr('placeholder', 'Molimo unesite password');
+            $('.box label').hide();
             setTimeout(function () {
                 alert(`Neispravno ime ili password. Pokušajte ponovo!`)
             }, 20);
             setTimeout(function () {
                 $('#imeAdm, #passAdm').removeAttr('placeholder');
                 $('#ime, #pass').removeAttr('placeholder');
+                $('.box label').show();
             }, 1500)
         }
     }
@@ -115,7 +117,7 @@ $(document).ready(function () {
 
     function randNumber() {
         return Math.floor(Math.random() * 9990000);
-    }
+    }    
     function randomDate(start, end) {
         return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
         // if(randDate.getDay()!=0 &&randDate.getDay()!=6) {           
@@ -164,7 +166,7 @@ $(document).ready(function () {
         let inputPhone = insertSlash(phone, '/', 3);
         let pregled = $('#pregled').val();
         let stomat = $('#stomat').val();
-        // let date = $('#date').val();
+        let dateTime = $("input[name='time']:checked").val();
         let password = $('#pass').val();
         // let newStr = inputPhone.split(''); 
         // newStr.splice(3,0, '/');
@@ -172,7 +174,8 @@ $(document).ready(function () {
 
         if (localStorage.getItem('listaPacijenata')) {
             allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));
-            allPatients.push(new PatientData(inputName, inputSurname, inputEmail, inputPhone, randNumber(), pregled, stomat, password));
+            allPatients.push(new PatientData(inputName, inputSurname, inputEmail, inputPhone, randNumber(), 
+                                             pregled, stomat, dateTime, password));
             localStorage.setItem('listaPacijenata', JSON.stringify(allPatients));
             $("input, select").val('');
             console.log(allPatients);
@@ -306,8 +309,11 @@ $(document).ready(function () {
 
     // let currentDate = new Date();  
     //     $("#date").val(currentDate);
-    let dateVal = document.getElementById("date");
-    dateVal.valueAsDate = new Date();
+    if(window.location.href.indexOf('zakazivanje')!= -1) {
+        let dateVal = document.getElementById("date");
+        dateVal.valueAsDate = new Date();
+    }
+    
     
     let startTime = 10;
     let minutes = 3;
@@ -318,26 +324,38 @@ $(document).ready(function () {
         let newValue = new Date($('#date').val()).toDateString();
         $('#dateTime').text(newValue);
 
-        $('button').each(function(item) {
-            $(this).attr('value', `${newValue} ${$(this).text()}`)
+        $('.cont input').each(function() {
+            $(this).attr('value', `${newValue} ${$(this).next().text()}`)
         })
     })
-
+    function time() {
+        // $('.time').append(`<button type="button" value="${$dateVal} ${startTime}:${minutes}0">${startTime}:${minutes}0</button>`);
+        $('.time').append(`<label class="cont"><input type="radio" name="time" value ="${$dateVal} ${startTime}:${minutes}0">
+                           <span>${startTime}:${minutes}0</span><span class="check"></span></label>`)   
+    }
     for(let i=0; i< 15; i++) {
         if(i % 2 !=0 && i != 1) {
             startTime++;   
-            console.log(startTime)     
         } 
         console.log(startTime)  
         if(i==0) {
             $('.dateTime').prepend(`<button type="button" id="dateTime" disabled>${$dateVal}</button>`);
         } else if(i % 2 != 0){
             minutes = 0;
-            $('.time').append(`<button type="button" value="${$dateVal} ${startTime}:${minutes}0">${startTime}:${minutes}0</button>`)
+           time();           
         } else {
             minutes = 3
-            $('.time').append(`<button type="button" value="${$dateVal} ${startTime}:${minutes}0">${startTime}:${minutes}0</button>`)
+            time();
         }        
     }
+
+    function stateCheck(check) {
+        (check.val().length > 0) ?
+            check.addClass('valid'):               
+            check.removeClass('valid');                
+    }
+    $('.box input').focusout(function() {
+        stateCheck($(this));
+    })
 
 });
