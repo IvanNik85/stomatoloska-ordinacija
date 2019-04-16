@@ -73,9 +73,9 @@ $(document).ready(function () {
     function scrollFunction() {
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 1850) {
             // $(window).scrollTop()
-            $('#scrollTop').css('display', 'block');
+            $('#scrollTop').slideDown(400);           
         } else {
-            $('#scrollTop').css('display', 'none');
+            $('#scrollTop').slideUp(400);
         }
     }
     function topFunction() {
@@ -99,7 +99,6 @@ $(document).ready(function () {
             this.stomatolog = stomatolog;
             this.date = date
             this.pass = password;
-            // this.datum = datum;
         }
     }
     let allPatients = [];
@@ -119,22 +118,25 @@ $(document).ready(function () {
         return Math.floor(Math.random() * 9990000);
     }    
     function randomDate(start, end) {
-        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-        // if(randDate.getDay()!=0 &&randDate.getDay()!=6) {           
-        // } 
+        let date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+        if(new Date(date).getDay()!=0 && new Date(date).getDay()!=6) {
+        return date;
+        } 
     }
     function generate(value) {
         return value[Math.floor(Math.random() * value.length)];
     }
-
     // Dodati datum kao objekt ili niz    
     function generatePatients() {
         patient.ime = generate(ime);
         patient.prezime = generate(prezime);
         patient.email = `${patient.ime}.${patient.prezime}@${generate(email)}.com`;
         patient.usluga = generate(usluga);
-        patient.stomatolog = generate(stomatolog);
-        patient.date = randomDate(new Date('2016-05-01'), new Date()).toDateString();          
+        patient.stomatolog = generate(stomatolog);      
+        do {
+            patient.date = randomDate(new Date('2016-05-01'), new Date());
+            } while (!patient.date)
+        patient.date = new Date(patient.date).toDateString();
         patient.pass = `${patient.ime}${(randNumber() % 1000)}`
         let phone = `${generate(mreza)}/${randNumber()}`;
         let newPatient = new PatientData(patient.ime, patient.prezime, patient.email, phone, randNumber(), 
@@ -264,22 +266,21 @@ $(document).ready(function () {
         filter = [];
         values = [];
     });
-    //date min today
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
+    //date min today. max a year from now
+    function dateLimit(d) {
+        let today = new Date();
+        let dd = today.getDate();
+        let mm = today.getMonth() + 1; //January is 0!
+        let yyyy = today.getFullYear();        
 
-    dd < 10 && (dd = '0' + dd);
-    mm < 10 && (mm = '0' + mm);
-
-    today = yyyy + '-' + mm + '-' + dd;
-    $("#date").attr("min", today);
-
-    // let dateKAl = document.getElementById('date');
-    // $('.prev').click(function () {
-    //     console.log(dateKAl.value)
-    // })
+        dd < 10 && (dd = '0' + dd);
+        mm < 10 && (mm = '0' + mm);
+    
+        return today = (yyyy + d) + '-' + mm + '-' + dd;
+    }   
+    
+    $("#date").attr("min", dateLimit(0));
+    $("#date").attr("max", dateLimit(1));
 
     let userContent = document.querySelector('.table, .userContent'); //.table
     function userData(val) { 
@@ -354,8 +355,37 @@ $(document).ready(function () {
             check.addClass('valid'):               
             check.removeClass('valid');                
     }
-    $('.box input').focusout(function() {
-        stateCheck($(this));
+    $('.box input').blur(function() {
+        stateCheck($(this));       
+    })
+
+    $('.userData').hide();
+    $('.wrapDates').hide();
+    $('.next').click(function() {               
+        if($(this).closest('fieldset').hasClass('usluge')) {
+            $('.usluge').hide();
+            $('.userData').show();
+            $('#ul .active').next().addClass('active');
+            $('.wrap1 h1').text('Unesite podatke')
+        } else {
+            $('.userData').hide();
+            $('.wrapDates').show();
+            $('#ul li:nth-child(3)').addClass('active')
+            $('.wrap1 h1').text('Odaberite datum i vreme pregleda')
+        }
+    })
+    $('.prev').click(function() {               
+        if($(this).closest('fieldset').hasClass('wrapDates')) {
+            $('.wrapDates').hide();
+            $('.userData').show();
+            $('#ul li:nth-child(3)').removeClass('active');
+            $('.wrap1 h1').text('Unesite podatke')
+        } else {
+            $('.userData').hide();
+            $('.usluge').show();
+            $('#ul li:nth-child(2)').removeClass('active');
+            $('.wrap1 h1').text('Odaberite uslugu i stomatologa')
+        }
     })
 
 });

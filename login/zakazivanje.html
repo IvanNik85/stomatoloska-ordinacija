@@ -21,81 +21,74 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl-3 col-md"></div>
-            <div class="col-xl-6 col-md-9">
-                <h1>Odaberite uslugu i stomatologa</h1>
-                <fieldset>
-                    <form>
-                        <select class="choise" id="pregled">
-                            <option value="">Izaberite uslugu</option>
-                            <option value="Pregled">Pregled</option>
-                            <option value="Plombiranje">Plombiranje</option>
-                            <option value="Vađenje">Vađenje</option>
-                            <option value="Protetika">Protetika</option>
-                        </select><br />
-
-                        <select class="choise" id="stomat">
-                            <option value="">Odaberite stomatologa</option>
-                            <option value="Dr Milan Stankovic">Dr Milan Stankovic</option>
-                            <option value="Dr Marijana Cvetkovic">Dr Marijana Cvetkovic</option>
-                            <option value="Dr Ana Rebic">Dr Ana Rebic</option>
-                        </select><br />
-
-                        <label for="pass">Password:</label>
-                        <input type="password" id='pass' autocomplete="off" required><br />
-
-                        <button type="button" class="prev">Prev</button>
-                        <button type="button" class="next">Next</button> 
-                    </form>
-                </fieldset>
-            </div>
-            <div class="col-xl-3 col-md"></div>
-        </div>
-            
-        <div class="row">
-            <div class="col-xl-3 col-md"></div>
-            <div class="col-xl-6 col-md-9">
-                <h1>Unesite podatke</h1>
-                <fieldset>
-                    <form class="userData">
-                        <label for="ime1">Ime:</label>
-                        <input type="text" id='ime1' autocomplete="off" required><br />
-                
-                        <label for="prezime1">Prezime</label>
-                        <input type="text" id='prezime1' autocomplete="off" required><br />
-                
-                        <label for="email">Email:</label>
-                        <input type="email" id='email1' autocomplete="off" required><br />                       
-                
-                        <label for="phone">Telefon:</label>
-                        <input type="tel" id='phone' autocomplete="off" required><br />
-
-                        <button type="button" class="prev">Prev</button>
-                        <button type="button" class="next">Next</button>                                             
-                    </form>
-                </fieldset>
-            </div>
-            <div class="col-xl-3 col-md"></div>            
-        </div>        
+            <div class="col-xl-6 col-md-9 wrap1">
+                    <h1>Odaberite uslugu i stomatologa</h1>
+                    <ul id="ul">
+                        <li class="active">Usluge</li>
+                        <li>Lični podaci</li>
+                        <li>Datum i vreme</li>
+                    </ul>
     
-        <div class="row">
-            <div class="col-xl col-md"></div>
-            <div class="col-xl-6 col-md-9">
-                <h1>Odaberite datum i vreme pregleda</h1>
-                <div class="wrapDates">
-                    <div class="row">
-                        <div class="col-xl-5">                      
-                            <form>   
-                                <label for="date">Date:</label>
-                                <input type="date" id='date' autocomplete="off" required><br />                                                                         
-                            </form>                      
-                        </div>
-                        <div class="col-xl-7 dateTime">
-                            <div class=" time"></div>
-                        </div>
-                    </div>  
-                </div>
-                <button type="button" class="prev">Prev</button>
-                <button type="button" class="next finish">Finish</button> 
+                    <div class="multyLine">
+                        <fieldset class="usluge">
+                            <form class='ds'>
+                                <select class="choise" id="pregled">
+                                    <option value="">Izaberite uslugu</option>
+                                    <option value="Pregled">Pregled</option>
+                                    <option value="Plombiranje">Plombiranje</option>
+                                    <option value="Vađenje">Vađenje</option>
+                                    <option value="Protetika">Protetika</option>
+                                </select><br />
+        
+                                <select class="choise" id="stomat">
+                                    <option value="">Odaberite stomatologa</option>
+                                    <option value="Dr Milan Stankovic">Dr Milan Stankovic</option>
+                                    <option value="Dr Marijana Cvetkovic">Dr Marijana Cvetkovic</option>
+                                    <option value="Dr Ana Rebic">Dr Ana Rebic</option>
+                                </select><br />
+        
+                                <label for="pass">Password:</label>
+                                <input type="password" id='pass' autocomplete="off" required><br />
+                                
+                                <button type="button" class="next">Next</button> 
+                            </form>
+                        </fieldset>
+                        <fieldset class="userData">
+                            <form>
+                                <label for="ime1">Ime:</label>
+                                <input type="text" id='ime1' autocomplete="off" required><br />
+                        
+                                <label for="prezime1">Prezime</label>
+                                <input type="text" id='prezime1' autocomplete="off" required><br />
+                        
+                                <label for="email">Email:</label>
+                                <input type="email" id='email1' autocomplete="off" required><br />                       
+                        
+                                <label for="phone">Telefon:</label>
+                                <input type="tel" id='phone' autocomplete="off" required><br />
+        
+                                <button type="button" class="prev">Prev</button>
+                                <button type="button" class="next">Next</button>                                             
+                            </form>
+                        </fieldset>
+                        <fieldset class="wrapDates">
+                            <form>
+                            <div class="row">
+                                <div class="col-xl-5">                      
+                                    <form>   
+                                        <label for="date">Date:</label>
+                                        <input type="date" id='date' autocomplete="off" required><br />                                                                         
+                                    </form>                      
+                                </div>
+                                <div class="col-xl-7 dateTime">
+                                    <div class=" time"></div>
+                                </div>
+                            </div> 
+                            <button type="button" class="prev">Prev</button>
+                            <button type="button" class="next finish">Finish</button>  
+                        </form>
+                        </fieldset>
+                    </div>
             </div>
             <div class="col-xl col-md"></div>            
         </div>        

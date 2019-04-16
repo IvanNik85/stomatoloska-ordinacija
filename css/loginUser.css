@@ -25,7 +25,8 @@ nav {
     transform: scale(1);
     border: 3px solid rgb(10, 33, 59);
     font-weight: bold;
-    background-color: rgb(113, 189, 233)
+    background-color: rgb(113, 189, 233);
+    transition: all 0.3s;
 }
 #submit:hover {
     color: rgb(240, 238, 235);
@@ -137,7 +138,8 @@ h3 {
     font-size: 12px;
     color: orangered;
     font-weight: bold;
+    border: none;
 }
- .box input:focus { /*.box input.valid */
+.box input:focus { /*.box input.valid     */
     border-bottom: 3px solid orangered;
 }

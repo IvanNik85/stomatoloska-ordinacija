@@ -26,6 +26,7 @@ nav {
     border: 3px solid rgb(29, 27, 14);
     font-weight: bold;
     background-color: rgb(100, 19, 73);
+    transition: all 0.3s;
 }
 #submitAdmin:hover {
     color: rgb(230, 208, 19);

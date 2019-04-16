@@ -8,11 +8,11 @@ export function navMeni(c, d) {
                            <a href="##"><i class="fa fa-bars"></a><ul></ul></nav>`);
         for (let i = 0; i < 5; i++) {
             let link = `${c}./index.html#${niz[i].toLowerCase()}`
-            $('ul').append(`<li><a href="${link}">${niz[i]}</a></li>`);             
+            $('nav ul').append(`<li><a href="${link}">${niz[i]}</a></li>`);             
             links.push(`${link}`); 
         }  
-        $('ul').append(`<li><a href=".${d}/loginAdmin.html" id="adm">Admin</a></li>`);     
-        $('ul').append(`<li><a href=".${d}/loginUser.html" id="log">Login</a></li>`);                        
+        $('nav ul').append(`<li><a href=".${d}/loginAdmin.html" id="adm">Admin</a></li>`);     
+        $('nav ul').append(`<li><a href=".${d}/loginUser.html" id="log">Login</a></li>`);                        
         
         let rotate = 'fa-times rotate';
         $('.fa-bars').click(function () {
