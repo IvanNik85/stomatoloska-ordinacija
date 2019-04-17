@@ -1,12 +1,17 @@
-import { navMeni } from './navbarMenu.js'
+import { navMeni} from './navbarMenu.js'
+import { gallery} from './gallery.js'
 
 if(window.location.href.indexOf('/login/')!= -1) {    
     navMeni('.', '');    
 } else {
     navMeni('', '/login');  
 }
+if(window.location.href.indexOf('/login/')== -1) {
+    gallery();
+}
 
-$(document).ready(function () {  
+
+$(document).ready(function () { 
     let admName = 'ivan';
     let admPass = 'nik';
     let user = [];

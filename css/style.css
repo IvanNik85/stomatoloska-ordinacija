@@ -19,7 +19,7 @@ h1, h2 {
     height: 100%;   
 }
 .Header h1 {
-    padding-top: 100px;
+    padding: 100px;
     color: #fff;
 }
 .Header p {
@@ -30,12 +30,12 @@ h1, h2 {
     padding-top: 100px;
 }
 .Galerija {
-    height: 600px;
+    height: 700px;
     padding-top: 100px;
 }
 .Zakazivanje {
     height: 600px;
-    padding-top: 100px;
+    padding-top: 300px;
 }
 .col-md-6 p {
     padding-top: 30px;
@@ -47,7 +47,7 @@ h1, h2 {
 }
 .Kontakt {
     height: 600px;
-    padding-top: 100px;
+    padding-top: 200px;
 }
 .Footer {
     height: 600px;
@@ -85,4 +85,109 @@ h1, h2 {
 .navbar {  
     padding: 0;  
 }
-
+/* gallery */
+/* .gallery {
+    height: 612px;
+    position: relative;  
+} */
+.slideImage {
+    width: 100%;
+    height: 650px;
+    position: relative;
+    margin: 40px 0 15px 0;
+}
+.slideImage img {
+    width: 100%;
+    height: auto;
+    position: absolute;
+}
+.sliderCont {
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    width: 30%;
+    height: 30px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+}
+.sliderCont a {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    border: 1px solid #0f5994;
+    margin: 25px 5px;
+    background-color: rgb(214, 205, 205);
+    cursor: pointer;
+}
+.slideImage i {
+    font-size: 60px;
+    padding: 10px;
+    border: 2px solid black;
+    color: orange;
+    /* position: absolute;
+    left: 200; */
+    z-index: 1;
+    display: block;
+}
+.fa-arrow-right {
+    position: absolute;
+    transform: translate(0, -50%);
+    top: 55%;
+    right: 0; 
+}
+.fa-arrow-left {
+    position: absolute;
+    transform: translate(0, -50%);
+    top: 50%;
+    left: 0;   
+}
+.fas:hover {
+    background-color: rgba(0, 0, 0, 0.75);
+    cursor: pointer;
+}
+@media (max-width: 768px) {
+    .fa-arrow-right {     
+        top: 25%;
+    }
+    .fa-arrow-left {      
+        top: 25%;
+    }
+    .sliderCont {    
+        bottom: 45%;      
+     }
+}
+@media (min-width: 768px) {
+    .fa-arrow-right {     
+        top: 30%;
+    }
+    .fa-arrow-left {     
+        top: 30%;
+    }
+    .sliderCont {      
+        bottom: 30%;     
+     } 
+}
+@media (min-width: 992px) {
+    .fa-arrow-right {      
+        top: 45%;
+    }
+    .fa-arrow-left {       
+        top: 45%;
+    }
+    .sliderCont {     
+       bottom: 10%;    
+    }
+}
+@media (min-width: 1200px) {
+    .fa-arrow-right {    
+        top: 55%;
+    }
+    .fa-arrow-left {     
+        top: 55%;
+    }  
+    .sliderCont {      
+        bottom: -5%;      
+     } 
+}

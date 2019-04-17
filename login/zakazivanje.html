@@ -30,7 +30,7 @@
                     </ul>
     
                     <div class="multyLine">
-                        <fieldset class="usluge">
+                        <fieldset class="usluge box">
                             <form class='ds'>
                                 <select class="choise" id="pregled">
                                     <option value="">Izaberite uslugu</option>
@@ -45,27 +45,37 @@
                                     <option value="Dr Milan Stankovic">Dr Milan Stankovic</option>
                                     <option value="Dr Marijana Cvetkovic">Dr Marijana Cvetkovic</option>
                                     <option value="Dr Ana Rebic">Dr Ana Rebic</option>
-                                </select><br />
-        
-                                <label for="pass">Password:</label>
-                                <input type="password" id='pass' autocomplete="off" required><br />
+                                </select><br />        
+                                
+                               <div>
+                                    <input type="password" id='pass' autocomplete="off" required>
+                                    <label for="pass">Password:</label><br />
+                               </div>
                                 
                                 <button type="button" class="next">Next</button> 
                             </form>
                         </fieldset>
-                        <fieldset class="userData">
-                            <form>
-                                <label for="ime1">Ime:</label>
-                                <input type="text" id='ime1' autocomplete="off" required><br />
-                        
-                                <label for="prezime1">Prezime</label>
-                                <input type="text" id='prezime1' autocomplete="off" required><br />
-                        
-                                <label for="email">Email:</label>
-                                <input type="email" id='email1' autocomplete="off" required><br />                       
-                        
-                                <label for="phone">Telefon:</label>
-                                <input type="tel" id='phone' autocomplete="off" required><br />
+                        <fieldset class="userData box">
+                            <form>                                
+                                <div>
+                                    <input type="text" id='ime1' autocomplete="off" required><br />
+                                    <label for="ime1">Ime:</label>  
+                                </div>                      
+                                
+                                <div>
+                                    <input type="text" id='prezime1' autocomplete="off" required><br />
+                                    <label for="prezime1">Prezime</label>
+                                </div>                        
+                                
+                                <div>
+                                    <input type="email" id='email1' autocomplete="off" required><br /> 
+                                    <label for="email">Email:</label>  
+                                </div>
+                               
+                                <div>
+                                    <input type="tel" id='phone' autocomplete="off" required><br />
+                                    <label for="phone">Telefon:</label>
+                                </div>
         
                                 <button type="button" class="prev">Prev</button>
                                 <button type="button" class="next">Next</button>                                             
