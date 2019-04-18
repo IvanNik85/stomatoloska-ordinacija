@@ -48,7 +48,7 @@ nav ul li a::after {
 nav ul li a:hover::after {
     width: 100%;
     height: 100%;
-    border: 2px solid #ffe600;;
+    border: 3px solid #ffe600;;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -98,10 +98,16 @@ nav a i {
     }    
     nav ul li a {
         color: rgb(216, 214, 86);
+        margin: 0;
     } 
     nav ul li a:hover { 
         color:#ffe600;
         text-shadow: 0 0 8px #ffe600;
+        border-left: 4px solid #ffe600; 
+        border-right: 4px solid transparent;   
+    }
+    nav ul li a::after {
+        content: none;
     }
     nav a i {
         display: block;

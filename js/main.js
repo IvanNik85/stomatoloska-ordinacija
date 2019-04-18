@@ -195,7 +195,7 @@ $(document).ready(function () {
     let tbody = document.createElement('tbody');
     table.setAttribute('class', 'patientsTable');
 
-    function createTable(val) {
+    function createTable(val,len,add) {
         showTable.appendChild(table);
         table.appendChild(thead);
         table.appendChild(tbody);
@@ -204,13 +204,24 @@ $(document).ready(function () {
         for (let i = 0; i < val.length; i++) {
             let tr = document.createElement('tr');
             tbody.appendChild(tr);
-            for (let j = 0; j < Object.keys(val[0]).length - 1; j++) {
+            for (let j = 0; j < len; j++) { //Object.keys(val[0]).length - 1
                 if (i == 0 && j == 0) {
                     let num = document.createElement('th');
                     num.innerHTML = 'Br.';
                     tr1.appendChild(num);
                 }
-                if (i == 0) {
+                if(i == 0 && j == add) {
+                    let addTh = document.createElement('th');
+                    addTh.innerHTML = '+';
+                    tr1.appendChild(addTh);
+                }
+                if(j == add) {
+                    let add1 = document.createElement('td');
+                    add1.className = 'expand';
+                    add1.innerHTML = '+';
+                    tr.appendChild(add1);
+                }
+                if (i == 0 && j != add) {
                     let th = document.createElement('th');
                     th.innerHTML = Object.keys(val[0])[j];
                     tr1.appendChild(th);
@@ -220,11 +231,13 @@ $(document).ready(function () {
                     num.innerHTML = i + 1;
                     tr.appendChild(num);
                 }
+                if(j != add) {
                 let td = document.createElement('td');
                 td.innerHTML = Object.values(val[i])[j];
                 tr.appendChild(td);
+                }
             }
-        }    
+        }   
         $('.patientsTable tbody tr').click(function(){ 
             remPrevTable();
             user.push(val[this.firstChild.innerHTML-1]); 
@@ -232,6 +245,7 @@ $(document).ready(function () {
             user = [];
         }); 
     }
+    
     function remPrevTable() {
         $('thead').empty();
         $('tbody').empty();
@@ -241,36 +255,68 @@ $(document).ready(function () {
     $('#allPatients').click(function () {
         remPrevTable();
         allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));
-        createTable(allPatients);
+        createTable(allPatients,6,5);
+        $('.expand').click(function() {
+            remPrevTable();
+            createTable(allPatients,8,-1)
+        });
     });
 
     let filter = [];
     let values = [];
+    let count = [];
     let search = ['#imePac', '#prezimePac', '#email', '#telefon', '#karton', '#usluga', '#stomatolog'];
     let searchValues = ['ime', 'prezime', 'email', 'telefon', 'brojKartona', 'usluga', 'stomatolog'];
 
     $('#filter').click(function () {
         remPrevTable();
+        filter = [];
         allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));
         for (let i = 0; i < 8; i++) {
             values.push($(search[i]).val());
         }
+        count = [];
+        for(let c in values) {           
+            if(values[c]) {
+                count.push(values[c])
+                console.log(count)
+            }   
+        }          
+            // let nizNum = ['a','b','c','d','e','f','g','h']
+            // let num = [0,1,2,3,4,5,6,7,8]    
+        
+            //      let x = {};  
+            //      for(let i in nizNum) { 
+            //          x[nizNum[i]] = num.slice();
+            //      }    
+               
+        console.log(values.length)
+        
         for (let i in allPatients) {
-            for (let j in values) {
-                for (let k in searchValues) {
-                    if (values[j] == allPatients[i][searchValues[k]] && j == k) {
+            for (let j=0;j<values.length;j++) {
+                for (let k=0;k<searchValues.length;k++) {
+                    let compare = (values[k] == allPatients[i][searchValues[k]])
+                    let compare1 = (values[j] == allPatients[i][searchValues[j]] && j != k);
+                    if (count.length == 1 && compare) {
                         filter.push(allPatients[i]);
-                    }
+                    } else if(count.length == 2 && compare && compare1) {                       
+                        filter.push(allPatients[i]);
+                    }                  
                 }
+                break;
             }
         }
         console.log(filter)
 
-        filter.length ? createTable(filter) : $('.table h4').show();
-
-        filter = [];
+        filter.length ? createTable(filter,6,5) : $('.table h4').show();  
+            $('.expand').click(function() {   
+                remPrevTable();                   
+                createTable(filter,8,-1);               
+            });  
+       
         values = [];
     });
+    
     //date min today. max a year from now
     function dateLimit(d) {
         let today = new Date();
@@ -301,8 +347,8 @@ $(document).ready(function () {
                     th.innerHTML = Object.keys(val)[i];
                     tr.appendChild(th);
                 } else {
-                    let td = document.createElement('td');
-                    td.innerHTML = Object.values(val)[i];
+                    let td = document.createElement('input'); //td
+                    td.value = Object.values(val)[i];   //td.innerHTML
                     tr.appendChild(td);
                 }
             }
