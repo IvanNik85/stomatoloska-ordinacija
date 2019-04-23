@@ -39,19 +39,6 @@ nav {
 #submitAdmin:active {
     transform: scale(.94);
 }
-input#imeAdm, input#passAdm {
-    border: 1px solid rgb(100, 19, 73); 
-    border-radius: 5px;
-    padding-left: 10px;
-    width: 100%;
-    height: 50px;
-}
-input#imeAdm:focus, input#passAdm:focus {
-    border: 2px solid rgb(100, 19, 73); 
-    width: 100%;
-    outline: none;
-    transition: 0.15s;
-}
 #imeAdm::placeholder, #passAdm::placeholder { 
     color: red;
     opacity: 1; /* Firefox */
@@ -63,7 +50,8 @@ form {
     height: 500px;
     width: 100%;
     margin: auto;
-    padding: 30px;
+    padding: 40px;
+    padding-top: 100px;
 }
 fieldset {
     border: 2px solid black;
@@ -169,3 +157,44 @@ select#usluga:focus, select#stomatolog:focus {
     align-items: center;
     flex-flow: column wrap;
 } */
+.box img {
+    position: absolute;  
+    transform: translate(-50%);
+    left: 50%;
+    top: 15%;
+    margin: auto;
+    width: 50px;
+    height: 50px;
+}
+/* input floating placeholder */
+.box input {
+    padding: 10px 0;
+    margin-bottom: 35px;
+    font-size: 17px;
+    padding-left: 5px;
+    border: none;
+    outline: none;
+    width: 100%;
+    border-bottom: 2px solid black;
+}
+.box div {
+    position: relative;
+}
+.box label {
+    position: absolute;
+    font-size: 17px;
+    left: 5px;
+    top: 10px;
+    transition: .4s;
+}
+.box input:focus ~ label,
+.box input.valid ~ label{
+    top: -12px;
+    font-size: 12px;
+    color: orangered;
+    font-weight: bold;
+    border: none;
+}
+.box input:focus { /*.box input.valid     */
+    border-bottom: 2px solid orangered;
+}

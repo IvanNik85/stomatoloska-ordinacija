@@ -13,8 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/Navbar.css" />
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript"
-        src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+    <script src="../node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
 </head>
 
 <body>
@@ -24,15 +23,16 @@
             <div class="col-xl-7 col-md-9 toggle">
                 <h1>Login User</h1>
                 <fieldset class="box">
+                    <img src="../images/userImg.png" alt="userImg">
                     <form>
                         <div>                           
                             <input type="text" id='ime' autocomplete="off" required><br />
-                            <label>Ime:</label>
+                            <label for="ime">Ime:</label>
                         </div>
 
                        <div>                            
                             <input type="password" id="pass" autocomplete="off" required>
-                            <label>Password:</label>
+                            <label for="pass">Password:</label>
                        </div>
 
                         <button type="button" id='submit'>Login</button>
@@ -45,7 +45,7 @@
             <div class="row">
                 <div class="col-md-12"><h1>Uspešno ste se ulogovali</h1></div>
                 <div class="col-lg-4 btns">
-                    <button type="button" id="schedule">Zakazivanje</button>
+                    <a href="./zakazivanje.html"><button type="button" id="schedule">Zakazivanje</button></a>
                     <button type="button" id="userInfo">Pregled</button>
                 </div>
                 <div class="col-lg-8 userContent"> 

@@ -13,8 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/Navbar.css" />
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript"
-        src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+    <script src="../node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
 </head>
 
 <body>    
@@ -26,6 +25,7 @@
                     <ul id="ul">
                         <li class="active">Usluge</li>
                         <li>Lični podaci</li>
+                        <li>Korisnicko ime i lozinka</li>
                         <li>Datum i vreme</li>
                     </ul>
     
@@ -45,12 +45,7 @@
                                     <option value="Dr Milan Stankovic">Dr Milan Stankovic</option>
                                     <option value="Dr Marijana Cvetkovic">Dr Marijana Cvetkovic</option>
                                     <option value="Dr Ana Rebic">Dr Ana Rebic</option>
-                                </select><br />        
-                                
-                               <div>
-                                    <input type="password" id='pass' autocomplete="off" required>
-                                    <label for="pass">Password:</label><br />
-                               </div>
+                                </select><br /> 
                                 
                                 <button type="button" class="next">Next</button> 
                             </form>
@@ -69,7 +64,7 @@
                                 
                                 <div>
                                     <input type="email" id='email1' autocomplete="off" required><br /> 
-                                    <label for="email">Email:</label>  
+                                    <label for="email1">Email:</label>  
                                 </div>
                                
                                 <div>
@@ -81,6 +76,27 @@
                                 <button type="button" class="next">Next</button>                                             
                             </form>
                         </fieldset>
+                        <fieldset class="userLog box">
+                                <form>                                
+                                    <div>
+                                        <input type="text" id='username' autocomplete="off" required><br />
+                                        <label for="username">Username:</label>  
+                                    </div>                      
+                                    
+                                    <div>
+                                        <input type="pass" id='passUser' autocomplete="off" required><br />
+                                        <label for="passUser">Password</label>
+                                    </div>                        
+                                    
+                                    <div>
+                                        <input type="pass" id='confPass' autocomplete="off" required><br /> 
+                                        <label for="confPass">Confirm pass:</label>  
+                                    </div>  
+            
+                                    <button type="button" class="prev">Prev</button>
+                                    <button type="button" class="next">Next</button>                                             
+                                </form>
+                            </fieldset>
                         <fieldset class="wrapDates">
                             <form>
                             <div class="row">

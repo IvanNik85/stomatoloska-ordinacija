@@ -4,7 +4,7 @@ export function navMeni(c, d) {
         let dot = c;
         var links = [] 
         let niz = ['Home', 'Info', 'Galerija', 'Zakazivanje', 'Kontakt', 'Login'];
-        $('body').prepend(`<nav><a href="${c}./index.html#home"class="logo"><img src="${c}./images/logo.jpg"></a>
+        $('body').prepend(`<nav><a href="${c}./index.html#home"class="logo"><img src="${c}./images/logo.jpg" alt="logo"></a>
                            <a href="##"><i class="fa fa-bars"></a><ul></ul></nav>`);
         for (let i = 0; i < 5; i++) {
             let link = `${c}./index.html#${niz[i].toLowerCase()}`
@@ -26,6 +26,6 @@ export function navMeni(c, d) {
         });
         $(window).scroll(() => {
             $(this).scrollTop() > 20 ? $('nav').addClass('navActive'): $('nav').removeClass('navActive'); 
-        })
-    })
+        });        
+    });
 }

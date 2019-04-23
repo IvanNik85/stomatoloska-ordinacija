@@ -13,8 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/Navbar.css" />
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript"
-        src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+    <script src="../node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
 </head>
 
 <body>
@@ -23,13 +22,18 @@
             <div class="col-lg col-md"></div>
             <div class="col-lg-8 col-md-10 toggle">
                 <h1>Admin login</h1>
-                <fieldset>
-                    <form>
-                        <label for="ime">Ime:</label>
-                        <input type="text" id='imeAdm' autocomplete="off" required><br />
-
-                        <label for="pass">Password:</label>
-                        <input type="password" id="passAdm" required>
+                <fieldset class="box">
+                    <img src="../images/pass.png" alt="password">
+                    <form>                        
+                        <div>
+                            <input type="text" id='imeAdm' autocomplete="off" required><br />
+                            <label for="imeAdm">Ime:</label>
+                        </div>
+                        
+                        <div>
+                            <input type="password" id="passAdm" required>
+                            <label for="passAdm">Password:</label>
+                        </div>
 
                         <button type="button" id='submitAdmin'>Login</button>
                     </form>
