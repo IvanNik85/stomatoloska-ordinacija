@@ -15,6 +15,11 @@ $(document).ready(function () {
     let admPass = 'nik';
     let user = [];
     let loggedUser = [];
+    let startTime = 10;
+    let randTime = [];
+    let minutes;
+    let $dateVal = new Date().toDateString(); 
+    setTime(time);
     let parms = [admName, admPass, '#imeAdm', '#passAdm'];
     //napomena - prilikom unosa imena korisnika koristiti toLowerCase
    
@@ -136,19 +141,26 @@ $(document).ready(function () {
     }
     // Dodati datum kao objekt ili niz    
     function generatePatients() {
+        let visit = Math.ceil(Math.random()*3);
         patient.ime = generate(ime);
         patient.prezime = generate(prezime);
         patient.email = `${patient.ime}.${patient.prezime}@${generate(email)}.com`;
-        patient.usluga = generate(usluga);
-        patient.stomatolog = generate(stomatolog);      
-        do {
-            patient.date = randomDate(new Date('2016-05-01'), new Date());
-            } while (!patient.date);
-        let randNum = ('0000' + randNumber()).slice(-7);  
-        patient.date = new Date(patient.date).toDateString();
+        patient.usluga = [];
+        patient.stomatolog = [];
+        patient.date = [];       
+        for(let i=0; i<visit; i++) {
+            patient.usluga.push(generate(usluga));
+            patient.stomatolog.push(generate(stomatolog)); 
+            do {
+                patient.noWeekend = randomDate(new Date('2016-05-01'), new Date());
+                } while (!patient.noWeekend);
+            patient.date.push(`${new Date(patient.noWeekend).toDateString()} ${randTime[Math.floor(Math.random()*14)]}`);
+        }  
+        let randNum = ('0000' + randNumber()).slice(-7); 
         patient.username = `${patient.ime}${patient.prezime.slice(0,3)}`;
         patient.pass = `${patient.ime}${(randNumber() % 1000)}`;
         let phone = `${generate(mreza)}/${randNumber()}`;
+        // patient.date = `${new Date(patient.date).toDateString()} ${randTime[Math.floor(Math.random()*14)]}`;
         let newPatient = new PatientData(patient.ime, patient.prezime, patient.email, phone, randNum, 
                          patient.usluga, patient.stomatolog, patient.date, patient.username, patient.pass);
         for (let j in allPatients) {
@@ -264,7 +276,7 @@ $(document).ready(function () {
         createTable(allPatients,6,5);
         $('.expand').click(function() {
             remPrevTable();
-            createTable(allPatients,8,-1)
+            createTable(allPatients,8,-1);
         });
     });
 
@@ -324,7 +336,7 @@ $(document).ready(function () {
     });
     
     //date min today. max a year from now
-    function dateLimit(d) {
+    function dateLimit(oneYear) {
         let today = new Date();
         let dd = today.getDate();
         let mm = today.getMonth() + 1; //January is 0!
@@ -333,7 +345,7 @@ $(document).ready(function () {
         dd < 10 && (dd = '0' + dd);
         mm < 10 && (mm = '0' + mm);
     
-        return today = (yyyy + d) + '-' + mm + '-' + dd;
+        return today = (yyyy + oneYear) + '-' + mm + '-' + dd;
     }   
     
     $("#date").attr("min", dateLimit(0));
@@ -344,7 +356,7 @@ $(document).ready(function () {
         userContent.appendChild(table);
         // table.setAttribute('id', 'userTable');
         table.appendChild(tbody);
-        for(let i=0; i<Object.keys(val).length - 1; i++) {
+        for(let i=0; i<Object.keys(val).length - 2; i++) {
             let tr = document.createElement('tr');
             tbody.appendChild(tr);
             for(let j=0; j<2;j++) {
@@ -379,10 +391,6 @@ $(document).ready(function () {
         } 
     });
     
-    let startTime = 10;
-    let minutes = 3;
-    let $dateVal = new Date().toDateString();    
-    
     $('#date').change(function() {
         let newValue = new Date($('#date').val()).toDateString();
         $('#dateTime').text(newValue);
@@ -393,24 +401,28 @@ $(document).ready(function () {
     });
     function time() {
         // $('.time').append(`<button type="button" value="${$dateVal} ${startTime}:${minutes}0">${startTime}:${minutes}0</button>`);
-        $('.time').append(`<label class="cont"><input type="radio" name="time" value ="${$dateVal} ${startTime}:${minutes}0">
-                           <span>${startTime}:${minutes}0</span><span class="check"></span></label>`)   
+        $('.time').append(`<label class="cont"><input type="radio" name="time" 
+                            value = "${$dateVal} ${startTime}:${minutes}0">
+                           <span>${startTime}:${minutes}0</span>
+                           <span class="check"></span></label>`)   
     }
-    for(let i=0; i< 15; i++) {
-        if(i % 2 !=0 && i != 1) {
-            startTime++;   
-        } 
-        console.log(startTime)  
-        if(i==0) {
-            $('.dateTime').prepend(`<button type="button" id="dateTime" disabled>${$dateVal}</button>`);
-        } else if(i % 2 != 0){
-            minutes = 0;
-           time();           
-        } else {
-            minutes = 3
-            time();
-        }        
-    }
+    $('.dateTime').prepend(`<button type="button" id="dateTime" disabled>${$dateVal}</button>`);
+    
+    function setTime(timeCall) {
+        for(let i=1; i< 15; i++) {
+            if(i % 2 !=0 && i != 1) {
+                startTime++;   
+            } 
+            if(i % 2 != 0){
+                minutes = 0;
+                timeCall();          
+            } else {
+                minutes = 3
+                timeCall();
+            }   
+            randTime.push(`${startTime}:${minutes}0`);     
+        }
+    }    
 
     function stateCheck(check) {
         (check.val().length > 0) ?

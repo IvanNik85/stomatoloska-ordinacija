@@ -6,14 +6,16 @@ export function navMeni(c, d) {
         let niz = ['Home', 'Info', 'Galerija', 'Zakazivanje', 'Kontakt', 'Login'];
         $('body').prepend(`<nav><a href="${c}./index.html#home"class="logo"><img src="${c}./images/logo.jpg" alt="logo"></a>
                            <a href="##"><i class="fa fa-bars"></a><ul></ul></nav>`);
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 6; i++) {
             let link = `${c}./index.html#${niz[i].toLowerCase()}`
-            $('nav ul').append(`<li><a href="${link}">${niz[i]}</a></li>`);             
+            $('nav ul').append(`<li><a href="${link}">${niz[i]}</li>`);             
             links.push(`${link}`); 
+            if(i == 5)  {                
+                $('nav ul li:last-child').addClass('dropdown').html(`Login <i class="fas fa-angle-down"></a>`);
+            } 
         }  
-        $('nav ul').append(`<li><a href=".${d}/loginAdmin.html" id="adm">Admin</a></li>`);     
-        $('nav ul').append(`<li><a href=".${d}/loginUser.html" id="log">Login</a></li>`);                        
-        
+        $('nav ul li:last-child').append(`<div class="dropCont"><li><a href=".${d}/loginAdmin.html" id="adm">Admin</a></li>
+                                         <li><a href=".${d}/loginUser.html" id="log">User</a></li></div>`);   
         let rotate = 'fa-times rotate';
         $('.fa-bars').click(function () {
             $('nav ul li').toggle("slide", { direction: "left" }, 500);
@@ -21,11 +23,13 @@ export function navMeni(c, d) {
         });
                 
         $(window).resize(() => {            
-            $(this).width() < 992 && $('nav ul li').hide();
+            $(this).width() < 992 && $('nav ul li').hide();  
             $('i').removeClass(rotate);
         });
         $(window).scroll(() => {
-            $(this).scrollTop() > 20 ? $('nav').addClass('navActive'): $('nav').removeClass('navActive'); 
-        });        
+            $(this).scrollTop() > 20 ? $('nav').addClass('navActive'): $('nav').removeClass('navActive');           
+        });           
+        
+        (location.reload) && $('nav').addClass('navActive');  
     });
 }

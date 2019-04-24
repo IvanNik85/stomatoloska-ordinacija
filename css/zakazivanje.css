@@ -88,6 +88,7 @@ input#date {
     margin: 5px auto;
     transform: translate(0,-50%);
     line-height: 30px;
+    /* border: 2px solid rgb(19, 78, 19); */
     border-radius: 50%;
     background-color: rgb(201, 195, 195);    
     transition: 0.3s;
