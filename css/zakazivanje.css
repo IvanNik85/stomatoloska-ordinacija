@@ -29,14 +29,13 @@ select {
     height: 30px;
     border-radius: 4px;
 }
-/* .userData input, #pass{
-    border: 1px solid rgb(15, 78, 129);
-    border-radius: 5px;
-    padding-left: 10px;
-    height: 40px;
-    outline: none;
-    width: 100%;
-} */
+#ime1::placeholder, #prezime1::placeholder,
+#email1::placeholder, #phone::placeholder,
+#passUser::placeholder,#confPass::placeholder,
+#username::placeholder { 
+    color: red;
+    opacity: 1; /* Firefox */
+  }
 input#date {
     width: 90%;
 }
@@ -222,7 +221,7 @@ input#date {
     transition: .4s;
 }
 .box input:focus ~ label,
-.box input.valid ~ label{
+.box input.valid ~ label {
     top: -12px;
     font-size: 12px;
     color: orangered;

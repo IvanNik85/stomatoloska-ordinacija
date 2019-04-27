@@ -15,35 +15,49 @@ $(document).ready(function () {
     let admPass = 'nik';
     let user = [];
     let loggedUser;
+    let loggedAdmin;
     let startTime = 10;
     let randTime = [];
     let minutes;
     let $dateVal = new Date().toDateString(); 
     setTime(time);
     let parms = [admName, admPass, '#imeAdm', '#passAdm'];
-    if(localStorage.getItem('loggedUser')) {
-        loggedUser = JSON.parse(localStorage.getItem('loggedUser'));        
-    }  else {
-        loggedUser = [];
-    }   
+    
+    localStorage.getItem('loggedUser')?
+    loggedUser = JSON.parse(localStorage.getItem('loggedUser')): 
+    loggedUser = [];
+    
+    localStorage.getItem('loggedAdmin')?
+    loggedAdmin = JSON.parse(localStorage.getItem('loggedAdmin')): 
+    loggedAdmin = '';
     //napomena - prilikom unosa imena korisnika koristiti toLowerCase
    
     $('#submitAdmin').click(function () {
-        $('#imeAdm').val() == admName && $('#passAdm').val() == admPass ?
-        potvrda(...parms):
-        nijePotvrda(...parms);
+        refactorAdmin();
     });
 
-    $('#imeAdm, #passAdm').keypress(enter);
+    $('#imeAdm, #passAdm').keypress(enterAdm);
     // $(window).keypress(enter);
-
-    function enter(event) {
-        if (event.which == 13) {
-            potvrda(...parms) || 
-            nijePotvrda(...parms);
-            // event.preventDefault();
-        }
+    function enterAdm(event) {
+        event.which == 13 && refactorAdmin();
     }    
+
+    function refactorAdmin() {
+        if(loggedUser[0]) {
+            alert(`Niste se izlogovali`);
+            return;
+        }
+        if($('#imeAdm').val() == admName && $('#passAdm').val() == admPass) {
+            potvrda(...parms);
+            loggedAdmin = admName;
+            localStorage.setItem('loggedAdmin', JSON.stringify(loggedAdmin));
+            $('.dropdown span').text(loggedAdmin);
+            $('#logout').show();                                
+        } else {
+            nijePotvrda(...parms);
+        }
+    }
+    
     function potvrda(a, b, c, d) { 
         if ($(c).val() == a && $(d).val() == b) {
             // $('ul li:last-child').hide().html(`<li><a href="##">Ivan</a></li>`);
@@ -65,16 +79,28 @@ $(document).ready(function () {
                 $('.box label').show();
             }, 1500)
         }
-    }
-  
-    $('#submit').click(function () {      
+    }  
+   
+    $('#submit').click(function () {
+        refactorUser();
+    });
+
+    $('#ime, #pass').keypress(enter);
+    function enter(event) {
+        event.which == 13 && refactorUser();
+    }    
+
+    function refactorUser() {
         allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));
         for (let i in allPatients) {
             let username = allPatients[i].username;
             let password = allPatients[i].pass;
-            var parUser = [username, password, '#ime', '#pass']
-            if (username == $('#ime').val() && password == $('#pass').val()) {
-                user.push(allPatients[i]);
+            var parUser = [username, password, '#ime', '#pass'];
+            if(loggedAdmin) {
+                alert(`Niste se izlogovali`);
+                return;
+            }
+            if (username == $('#ime').val() && password == $('#pass').val()) {               
                 loggedUser.push(allPatients[i]);
                 localStorage.setItem('loggedUser',JSON.stringify(loggedUser));
                 $('.dropdown span').text(loggedUser[0].ime);
@@ -83,8 +109,8 @@ $(document).ready(function () {
                 break;
             }     
         }
-         nijePotvrda(...parUser);  
-    });   
+        nijePotvrda(...parUser);  
+    }
 
     $('#scrollTop').click(topFunction);
     window.onscroll = function () { scrollFunction() };
@@ -378,8 +404,7 @@ $(document).ready(function () {
         mm < 10 && (mm = '0' + mm);
     
         return today = (yyyy + oneYear) + '-' + mm + '-' + dd;
-    }   
-    
+    }       
     $("#date").attr("min", dateLimit(0));
     $("#date").attr("max", dateLimit(1));
 
@@ -428,7 +453,7 @@ $(document).ready(function () {
             }   
             randTime.push(`${startTime}:${minutes}0`);     
         }
-    }    
+    }      
 
     function stateCheck(check) {
         (check.val().length > 0) ?  //verifikacija input polja
@@ -438,7 +463,87 @@ $(document).ready(function () {
     $('.box input').blur(function() {
         stateCheck($(this));       
     });
-    
+
+    $('#ime1,#prezime1').blur(function() {
+        let str = $('#ime1').val();
+        let str1 = $('#prezime1').val();
+        let patt = /\d|\W|[_]/g;      
+        if(str.match(patt) || str.length == 1) { 
+            placeholder('#ime1', 'Molimo unesite ime');           
+        }
+
+        if(str1.match(patt) || str1.length == 1) { 
+            placeholder('#prezime1', 'Molimo unesite prezime');
+        }
+    });    
+    $('#email1').blur(function() {
+        let email = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        let str2 = $('#email1').val(); 
+        if(!email.test(str2) && str2 != '') {
+            placeholder(this, 'Molimo unesite validan email')
+        }else {
+            $(this).addClass('true'); 
+        }
+    });                    
+    $('#phone').blur(function() {
+        let phone=/^(\d{9,10}|\(\d{3}\)\d{3}-\d{4}|\d{3}-\d{3}-\d{4}|\d{3}\/\d{3}-\d{4}|\d{3}\/\d{3}-\d{2}-\d{2}|\d{3}\/\d{6,7})$/;
+        let str3 = $('#phone').val(); 
+        if(!phone.test(str3) && str3 != '') {
+            placeholder(this, 'Molimo unesite validan broj telefona'); 
+        } else {
+            $(this).addClass('true'); 
+        }
+    });
+
+    function placeholder(id, text) {
+        $(id).val('').attr('placeholder',text);
+        setTimeout(function() {
+            $(id).val('').attr('placeholder','');
+            $(id).removeClass('valid');
+        },1300)
+    }  
+
+    let confirm;
+    let b = 0;
+    $('.usluge .next').click(function() {
+        if($("#pregled").val() && $("#stomat").val()) {
+            confirm = 'true' 
+        } else {              
+            confirm = '';
+        }       
+    });    
+    $('.userData .next').click(function() {
+        confirm = '';   
+        b=0;
+        $('.userData input').each(function(){            
+            if($(this).val() == '') { 
+                confirm = '';  
+                b++;         
+                $(this).addClass('valid');
+                placeholder(this, 'Molimo popunite polje');
+                $(this).removeClass('true');
+                console.log(b);
+                return;
+            } else if(b==0){
+                confirm = 'true'; 
+            }           
+        });   
+    });
+    $('.userLog .next').click(function() {
+        $('.userLog input').each(function(){ 
+            if($(this).val() ==''){       
+                $(this).addClass('valid');
+                placeholder(this, 'Molimo popunite ispravno polje');
+                confirm = '';
+            } else if($("#passUser").val()!=$("#confPass").val()){             
+                placeholder("#passUser", 'lozinke se ne poklapaju');   
+                placeholder("#confPass", 'lozinke se ne poklapaju');            
+            }  else {
+                confirm = 'true';                
+            }
+        })  
+    })
+
     let formId = ['usluge','userData','userLog','wrapDates']
     let headerText = ['Odaberite uslugu i stomatologa','Unesite podatke',
           'Korisnicko ime i lozinka','Odaberite datum i vreme pregleda'];
@@ -449,7 +554,8 @@ $(document).ready(function () {
     function schedule(num,num1,neg) {
         $('.next').click(function() {      
             for(let i=0; i<num; i++) {
-                if($(this).closest('fieldset').hasClass(formId[i])) { 
+                if($(this).closest('fieldset').hasClass(formId[i]) && confirm =='true') { 
+                    confirm = '';
                     $(`.${formId[i]}`).hide();
                     $(`.${formId[i+num1]}`).show();
                     $('#ul .active').next().is(':hidden')?
@@ -484,20 +590,30 @@ $(document).ready(function () {
         schedule(4,1,1);         
     }
    
-    if (!localStorage.getItem('loggedUser')) {
-        localStorage.setItem('loggedUser', JSON.stringify(loggedUser));        
-    }   
-    if(loggedUser[0]) {        
-        $('.dropdown span').text(loggedUser[0].ime);
+    !localStorage.getItem('loggedUser') &&
+    localStorage.setItem('loggedUser', JSON.stringify(loggedUser));  
+    !localStorage.getItem('loggedAdmin') &&
+    localStorage.setItem('loggedAdmin', JSON.stringify(loggedAdmin)); 
+
+    loggedUser[0] && param(loggedUser[0].ime,'.user','.userCont');     
+    loggedAdmin && param(loggedAdmin,'.admn','.admCont');
+    
+    function param(username,show,hide) {
+        $('.dropdown span').text(username);
         $('#logout').show();
-        $('.user').hide();
-        $('.userCont').show();
-    } 
+        $(show).hide();
+        $(hide).show();
+    }
     $('#logout').click(function() {              
         localStorage.removeItem('loggedUser');
+        localStorage.removeItem('loggedAdmin');
         loggedUser = [];
+        loggedAdmin = '';
         location.reload();
         $('.dropdown span').text('Login');
         $('#logout').hide();
     }); 
+
+    
+
 });
