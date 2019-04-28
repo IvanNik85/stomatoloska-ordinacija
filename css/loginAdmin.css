@@ -87,7 +87,7 @@ fieldset {
     text-align: center;   
 }
 .patientsTable tr:hover {
-    background-color: rgb(238, 136, 136);
+    background-color: rgb(136, 238, 229);
 }
 table {
     margin-top: 40px;
@@ -104,6 +104,13 @@ table {
 }
 .expand:hover {
     background-color: rgb(79, 185, 76); 
+    cursor: pointer;
+}
+.delete {
+    background-color: rgb(230, 134, 134); 
+}
+.delete:hover {
+    background-color:rgb(204, 42, 42); 
     cursor: pointer;
 }
 tr input {

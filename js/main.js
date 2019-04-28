@@ -83,6 +83,7 @@ $(document).ready(function () {
    
     $('#submit').click(function () {
         refactorUser();
+        // console.log(loggedUser[0].ime)
     });
 
     $('#ime, #pass').keypress(enter);
@@ -212,6 +213,8 @@ $(document).ready(function () {
         let myJSON = JSON.stringify(allPatients);
         localStorage.setItem('listaPacijenata', myJSON);
     }
+    let set = () => localStorage.setItem('listaPacijenata', JSON.stringify(allPatients));
+    allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));  
 
     $('.finish').click(function () {
         let inputName = $('#ime1').val();
@@ -220,23 +223,34 @@ $(document).ready(function () {
         let phone = $('#phone').val();
         let insertSlash = (str, sub, pos) => `${str.slice(0, pos)}${sub}${str.slice(pos)}`;
         let inputPhone = insertSlash(phone, '/', 3);
-        let pregled = $('#pregled').val();
-        let stomat = $('#stomat').val();
-        let dateTime = $("input[name='time']:checked").val();
+        let pregled = [$('#pregled').val()];
+        let stomat = [$('#stomat').val()];
+        let dateTime = [$("input[name='time']:checked").val()];
         let username = $('#username').val();
-        let password = $('#confPass').val();
-        // let newStr = inputPhone.split(''); 
-        // newStr.splice(3,0, '/');
-        // newStr = newStr.join('');
-
+        let password = $('#confPass').val(); 
+        
+        for(let i in allPatients) {
+            if(loggedUser[0] && loggedUser[0].ime == allPatients[i].ime && 
+                loggedUser[0].prezime == allPatients[i].prezime ) {
+                allPatients.splice(i,1);
+                set();
+                loggedUser[0]['date'].push(dateTime[0]);
+                loggedUser[0]['usluga'].push(pregled[0]);
+                loggedUser[0]['stomatolog'].push(stomat[0]);
+                allPatients.push(loggedUser[0]);
+                set();
+                return;      
+            }
+        }
         if (localStorage.getItem('listaPacijenata')) {
             allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));
             allPatients.push(new PatientData(inputName, inputSurname, inputEmail, inputPhone, randNumber(), 
                                              pregled, stomat, dateTime, username, password));
             localStorage.setItem('listaPacijenata', JSON.stringify(allPatients));
             $("input, select").val('');
+            location.reload();
             console.log(allPatients);
-        }
+        } 
     });
 
     let showTable = document.querySelector('.table');
@@ -245,7 +259,7 @@ $(document).ready(function () {
     let tbody = document.createElement('tbody');
     table.setAttribute('class', 'patientsTable');
 
-    function createTable(val,len,add) {
+    function createTable(val,len,add,del) {
         showTable.appendChild(table);
         table.appendChild(thead);
         table.appendChild(tbody);
@@ -265,13 +279,24 @@ $(document).ready(function () {
                     addTh.innerHTML = '+';
                     tr1.appendChild(addTh);
                 }
+                if(i == 0 && j == del) {
+                    let delTh = document.createElement('th');
+                    delTh.innerHTML = '-';
+                    tr1.appendChild(delTh);
+                }
                 if(j == add) {
                     let add1 = document.createElement('td');
                     add1.className = 'expand';
                     add1.innerHTML = '+';
                     tr.appendChild(add1);
                 }
-                if (i == 0 && j != add) {
+                if(j == del) {
+                    let del = document.createElement('td');
+                    del.className = 'delete';
+                    del.innerHTML = '-';
+                    tr.appendChild(del);
+                }
+                if (i == 0 && j != add && j != del) {
                     let th = document.createElement('th');
                     th.innerHTML = Object.keys(val[0])[j];
                     tr1.appendChild(th);
@@ -281,18 +306,22 @@ $(document).ready(function () {
                     num.innerHTML = i + 1;
                     tr.appendChild(num);
                 }
-                if(j != add) {
+                if(j != add && j != del) {
                 let td = document.createElement('td');
                 td.innerHTML = Object.values(val[i])[j];
                 tr.appendChild(td);
                 }
             }
         }   
-        $('.patientsTable tbody tr').click(function(){ 
-            remPrevTable();
-            user.push(val[this.firstChild.innerHTML-1]); 
-            userData(user[0]);
-            user = [];
+        $('.patientsTable tbody tr').click(function(e){   
+            if(($(e.target).hasClass('delete'))) {
+                e.preventDefault();
+            } else {
+                remPrevTable();
+                user.push(val[this.firstChild.innerHTML-1]); 
+                userData(user[0]);
+                user = [];
+            }
         }); 
     }
     
@@ -304,7 +333,7 @@ $(document).ready(function () {
         for(let i=0; i<Object.keys(val).length - 2; i++) {
             let tr = document.createElement('tr');
             tbody.appendChild(tr);
-            for(let j=0; j<2;j++) {
+            for(let j=0; j<2; j++) {
                 if(j==0) {                   
                     let th = document.createElement('th');
                     th.innerHTML = Object.keys(val)[i];
@@ -331,12 +360,36 @@ $(document).ready(function () {
     $('#allPatients').click(function () {
         remPrevTable();
         allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));
-        createTable(allPatients,6,5);
-        $('.expand').click(function() {
+        createTable(allPatients,6,5,4);
+        $('.expand').click(function() {           
             remPrevTable();
-            createTable(allPatients,8,-1);
-        });
+            createTable(allPatients,8);
+        });  
+
+        let tr = document.querySelectorAll('tr .delete'); 
+        for(let i=0;i< tr.length; i++) {
+            tr[i].addEventListener('click',delete1(allPatients, 'allPatients'));
+        }
     });
+
+    // allPatients = JSON.parse(localStorage.getItem('listaPacijenata')); 
+    // let set = function() {localStorage.setItem('listaPacijenata',JSON.stringify(value))};
+
+    function delete1(value,text) { 
+        return function() {  
+            if(window.confirm(`Da li zelite da obrisete pacijenta?`)){
+            $(this).parent().fadeOut(1300); 
+                let b = this.parentElement.firstChild.innerHTML;
+                console.log(b);
+                for(let i = value.length; i > b; i--){ 
+                    allPatients.splice(b-1,1);  
+                    set();
+                    setTimeout(function() {document.getElementById(text).click()},1000);
+                    break;
+                } 
+            }
+        }
+    };  
 
     let filter = [];
     let values = [];
@@ -384,12 +437,15 @@ $(document).ready(function () {
         }
         console.log(filter)
 
-        filter.length ? createTable(filter,6,5) : $('.table h4').show();  
+        filter.length ? createTable(filter,6,5,4) : $('.table h4').show();  
             $('.expand').click(function() {   
                 remPrevTable();                   
-                createTable(filter,8,-1);               
+                createTable(filter,8);               
             });  
-       
+        let tr = document.querySelectorAll('tr .delete'); 
+        for(let i=0;i< tr.length; i++) {
+            tr[i].addEventListener('click',delete1(filter, 'filter'));
+        }           
         values = [];
     });
     
@@ -531,9 +587,10 @@ $(document).ready(function () {
     });
     $('.userLog .next').click(function() {
         $('.userLog input').each(function(){ 
+            let text = 'Molimo popunite polje';
             if($(this).val() ==''){       
                 $(this).addClass('valid');
-                placeholder(this, 'Molimo popunite ispravno polje');
+                placeholder(this, text);
                 confirm = '';
             } else if($("#passUser").val()!=$("#confPass").val()){             
                 placeholder("#passUser", 'lozinke se ne poklapaju');   
@@ -613,7 +670,5 @@ $(document).ready(function () {
         $('.dropdown span').text('Login');
         $('#logout').hide();
     }); 
-
-    
 
 });
