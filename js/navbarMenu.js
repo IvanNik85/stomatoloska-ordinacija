@@ -4,7 +4,7 @@ export function navMeni(c, d) {
         let dot = c;
         var links = [] 
         let niz = ['Pocetna', 'Informacije', 'Galerija', 'Zakazivanje', 'Kontakt', 'Login'];
-        $('body').prepend(`<nav><a href="${c}./index.html#pocetna"class="logo"><img src="${c}./images/logo.jpg" alt="logo"></a>
+        $('body').prepend(`<nav><a href="${c}./index.html#pocetna"class="logo"><img src="${c}./images/logo1.jpg" alt="logo"></a>
                            <a href="##"><i class="fa fa-bars"></a><ul></ul></nav>`);
         for (let i = 0; i < 6; i++) {
             let link = `${c}./index.html#${niz[i].toLowerCase()}`
