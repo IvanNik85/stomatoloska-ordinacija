@@ -10,7 +10,7 @@ h1, h2 {
 }
 /* refaktorisati */
 .Header {
-    height: 600px;
+    height: 800px;
     background: url(../images/image.jpg) no-repeat center;
     background-size: cover;
 }
@@ -19,23 +19,136 @@ h1, h2 {
     height: 100%;   
 }
 .Header h1 {
-    padding: 100px;
+    padding-top: 150px;
+    padding-bottom: 40px;
+    font-size: 45px;
     color: #fff;
 }
 .Header p {
+    font-size: 18px;
     color: #fff;
 }
 .Info {
     height: 600px;
-    padding-top: 100px;
 }
+.Info .image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .infWrap {
+    padding-bottom: 50px; 
+  }
+.infoTitle p {
+    color: #333;
+    font-size: 18px;
+    line-height: 28px;
+    margin-top: 45px;
+    text-align: center;
+    text-align: justify;
+    text-indent: 50px;
+}
+.infoTitle {
+    margin-top: 100px;
+    margin-bottom: 60px;
+}
+.card:hover {
+box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4);
+transition: 0.3s;
+}
+.stomInfo h4, p {
+    text-align: center;
+    padding-top: 10px;
+}
+.stomInfo h4 {
+    font-weight: bold;
+}
+.stomatologPodaci {
+    display: none;
+}
+.infowrap {
+    text-align: center;
+    padding: 15px;
+}
+.infowrap i {
+    float: right;
+    transition: 0.2s;
+}
+.infowrap i:hover {
+    background: none;
+}
+.card:hover i {
+    color: rgb(241, 195, 66);    
+    transition: 0.2s;
+}  
+.active1 {
+    transform: rotate(180deg);
+    color: rgb(66, 241, 188);    
+    transition: 0.2s;
+}
+.stomatologPodaci {
+    box-shadow: 0 4px 8px rgb(0, 0, 0,.4);
+    position: relative;
+}
+.stomatologPodaci p {
+    padding: 0 50px 50px 50px;
+    text-align: justify;
+    margin: 0;
+}
+.stomatologPodaci h4 {
+    padding: 45px 35px 35px;
+    margin-left: 15px;
+}
+.stomatologPodaci i {
+    position: absolute;
+    border: 1px solid transparent;
+    font-size: 18px;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px;
+}
+.stomatologPodaci i:hover {
+    border: 1px solid #c5c5c5;
+    color: rgb(241, 195, 66);   
+    background: none;
+    box-sizing: border-box;
+    border-radius: 4px;
+} 
 .Galerija {
-    height: 700px;
+    /* height: 700px; */
     padding-top: 100px;
 }
-.Zakazivanje {
-    height: 600px;
-    padding-top: 300px;
+.gallery h2 {
+    padding-bottom: 20px;
+}
+/* .Zakazivanje {
+    height: 600px; 
+    padding-top: 300px; 
+} */
+.content {
+    margin-top: 100px;    
+}
+.content p, .content span {
+    text-align: justify;   
+    font-size: 18px;
+    text-indent: 50px;
+}
+.content h2 {
+    margin-bottom: 45px;
+}
+.login, .schedule {
+    background-color:#1c92b5;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 40px;
+}
+.content a button:hover {
+    background-color: #10649e
+}
+.content a button:active {   
+   outline: none;
 }
 .col-md-6 p {
     padding-top: 30px;
@@ -46,14 +159,67 @@ h1, h2 {
     margin: 30px;
 }
 .Kontakt {
-    height: 600px;
-    padding-top: 200px;
+    /* height: 600px; */
+    padding-bottom: 150px;
+}
+.Kontakt i {
+    color: #1c92b5;
 }
 .Footer {
-    height: 600px;
-    padding-top: 100px;
-    background-color: rgb(14, 13, 12);
+    height: 300px;
+    background-color: rgb(14, 13, 12);   
+}
+.Footer h5 {
+    text-align: center;
+    padding: 30px;
+    color: #fff;
+}
+.Footer p {
     color:#ffe600;
+    font-size: 12px;
+    padding-top: 100px;
+}
+.social-icons ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;   
+}
+.social-icons ul li {
+    list-style-type: none; 
+    padding: 0 10px;
+}
+.social-icons ul li a {
+    text-decoration: none; 
+    display: inline-block;
+    text-align: center;
+    border: 2px solid #9d9d9d;
+    font-size: 20px;
+    border-radius: 4px;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    color: #9d9d9d;
+    transition: all .3s;   
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s; 
+}
+#facebook:hover {    
+    border: 2px solid #395599;
+    color: #fff;
+}
+#instagram:hover {    
+    border: 2px solid #6835ba;
+    color:  #fff;
+}
+#youtube:hover {    
+    border: 2px solid #f80000;
+    color:  #fff;
+}
+#twitter:hover {
+    border: 2px solid  #29a4da;
+    color:  #fff;
 }
 #scrollTop {
     width: 70px;
@@ -68,24 +234,24 @@ h1, h2 {
     right: 30px;
 }
 #scrollTop i {
-    color: rgb(177, 34, 41);    
+    color: #10649e;    
     font-size: 60px;  
 }
-#scrollTop:hover {
-    /* background-color: rgb(218, 205, 30); */
-    background-color: #000;
-    box-shadow: 0 0 20px #ffe600;
-    transition: 0.3s;
-}
-#scrollTop i:hover {
-    color: #ffe600;
+#scrollTop:hover {   
+    background-color:rgba(0,0,0,0.4);   
     text-shadow: 0 0 8px #ffe600;
-    transition: 0.7s;    
+    border: 1px solid #ffe600;
+    transition: 0.2s;
+}
+#scrollTop:hover i {
+    color: #ffe600;    
+    transition: 0.2s;    
 }
 .navbar {  
     padding: 0;  
 }
-/* gallery */
+/* GALLERY */
+
 /* .gallery {
     height: 612px;
     position: relative;  
@@ -100,20 +266,16 @@ h1, h2 {
 .slideImage img {
     width: 100%;
     height: auto;
-    position: absolute;   
+    position: absolute;  
 }
 .sliderCont {
-    position: absolute;
-    transform: translate(-50%,-50%);
-    -webkit-transform: translate(-50%,-50%);
-    -moz-transform: translate(-50%, -50%);
-    left: 50%;
+    position: relative;    
     width: 30%;
     height: 30px;
     margin: auto;
     display: flex;
-    justify-content: center;
-    padding-top: 40px;    
+    justify-content: center;  
+    z-index: 2;
 }
 .sliderCont a {
     width: 17px;
@@ -129,6 +291,7 @@ h1, h2 {
     padding: 10px;
     border: 2px solid black;
     color: orange;
+    margin: 0;
     /* position: absolute;
     left: 200; */
     z-index: 1;
@@ -195,6 +358,12 @@ h1, h2 {
         top: 55%;
     }  
     .sliderCont {      
-        bottom: -5%;      
+        top: 0;      
      } 
+}
+@media (min-width: 768px) and (max-width: 992px) { 
+    #dr1 h4 {
+        height: 67px;
+        line-height: 67px
+    }
 }

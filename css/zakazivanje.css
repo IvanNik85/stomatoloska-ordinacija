@@ -29,6 +29,12 @@ select {
     height: 30px;
     border-radius: 4px;
 }
+#error {
+    height: 25px;
+    visibility: hidden;
+    color:red;
+    font-size: 17px;
+}
 #ime1::placeholder, #prezime1::placeholder,
 #email1::placeholder, #phone::placeholder,
 #passUser::placeholder,#confPass::placeholder,

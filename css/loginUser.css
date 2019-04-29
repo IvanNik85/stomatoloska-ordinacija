@@ -70,12 +70,16 @@ fieldset {
     border: 2px solid rgb(0, 0, 0);
     border-radius: 5px;
     margin: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, .5);
     /* background-color:rgba(47, 72, 117, 0.67) */
 }
 .hide {
     display: none;
 }
-#schedule, #userInfo {
+.btns a {
+    text-decoration: none;
+}
+#schedule, #userInfo, .confirmBtn {    
     display: block;
     margin: 10px auto;
     width: 150px;
@@ -83,8 +87,9 @@ fieldset {
     background-color: rgba(230, 228, 142, 0.67);
     border: 3px solid rgb(43, 43, 146);
     border-radius: 40px;
+    outline: none;
 }
-#schedule:hover, #userInfo:hover {
+#schedule:hover, #userInfo:hover, .confirmBtn:hover{   
     background-color: rgb(79, 79, 207);
     color: #fff;
     transition: all 0.3s;

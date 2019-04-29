@@ -57,6 +57,7 @@ fieldset {
     border: 2px solid black;
     border-radius: 5px;
     margin: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, .5);
 }
 .hide {
     display: none;

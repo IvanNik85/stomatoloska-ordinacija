@@ -298,7 +298,8 @@ $(document).ready(function () {
                 }
                 if (i == 0 && j != add && j != del) {
                     let th = document.createElement('th');
-                    th.innerHTML = Object.keys(val[0])[j];
+                    let capitalised = Object.keys(val[0])[j];
+                    th.innerHTML = capitalised.charAt(0).toUpperCase() + capitalised.slice(1);
                     tr1.appendChild(th);
                 }
                 if (j == 0) {
@@ -336,7 +337,8 @@ $(document).ready(function () {
             for(let j=0; j<2; j++) {
                 if(j==0) {                   
                     let th = document.createElement('th');
-                    th.innerHTML = Object.keys(val)[i];
+                    let capitalised = Object.keys(val)[i];
+                    th.innerHTML = capitalised.charAt(0).toUpperCase() + capitalised.slice(1);
                     tr.appendChild(th);
                 } else {
                     let td = document.createElement('input'); //td
@@ -345,16 +347,22 @@ $(document).ready(function () {
                 }
             }
         }
+        // let backBtn = document.createElement('button');
+        // backBtn.innerHTML = 'Potvrdi izmene';
+        // backBtn.className = 'confirmBtn';
+        // userContent.appendChild(backBtn);       
     }
+    //sacuvati korigovane izmene korisnik
+
     $('#userInfo').click(function(){
         userData(loggedUser[0]);
-        // user = [];
+        $(this).unbind()  //remove event listener       
     });
 
     function remPrevTable() {
         $('thead').empty();
         $('tbody').empty();
-        $('.table h4').hide();
+        $('.table h4').hide();       
     }
 
     $('#allPatients').click(function () {
@@ -366,7 +374,7 @@ $(document).ready(function () {
             createTable(allPatients,8);
         });  
 
-        let tr = document.querySelectorAll('tr .delete'); 
+        let tr = document.querySelectorAll('tr .delete'); //naci pacijenta u allPatient nizu i obrisati ga
         for(let i=0;i< tr.length; i++) {
             tr[i].addEventListener('click',delete1(allPatients, 'allPatients'));
         }
@@ -410,15 +418,7 @@ $(document).ready(function () {
                 count.push(values[c])
                 console.log(count)
             }   
-        }          
-            // let nizNum = ['a','b','c','d','e','f','g','h']
-            // let num = [0,1,2,3,4,5,6,7,8]    
-        
-            //      let x = {};  
-            //      for(let i in nizNum) { 
-            //          x[nizNum[i]] = num.slice();
-            //      }    
-               
+        }    
         console.log(values.length)
         
         for (let i in allPatients) {
@@ -434,8 +434,8 @@ $(document).ready(function () {
                 }
                 break;
             }
-        }
-        console.log(filter)
+        }  
+            console.log(filter)
 
         filter.length ? createTable(filter,6,5,4) : $('.table h4').show();  
             $('.expand').click(function() {   
@@ -564,7 +564,11 @@ $(document).ready(function () {
     $('.usluge .next').click(function() {
         if($("#pregled").val() && $("#stomat").val()) {
             confirm = 'true' 
-        } else {              
+        } else {   
+            $('.usluge p').css('visibility','visible');
+            setTimeout(function() {
+                $('.usluge p').css('visibility','hidden');   
+            }, 1300);              
             confirm = '';
         }       
     });    
@@ -640,8 +644,7 @@ $(document).ready(function () {
         $('.userLog form').hide();
         $('#ul li:nth-child(2)').hide();
         $('#ul li:nth-child(3)').hide(); 
-        schedule(2,3,1);           
-        // localStorage.removeItem("loggedUser"); //prebaciti nakon zakazanog termina
+        schedule(2,3,1); 
     } else {
         $('body').show();
         schedule(4,1,1);         
@@ -671,4 +674,48 @@ $(document).ready(function () {
         $('#logout').hide();
     }); 
 
+    $('.card').click(function() {       
+        let icon =  $(this).find('i');
+        $('.stomatologPodaci').slideToggle();
+        if(icon.hasClass('active1')){
+            icon.removeClass('active1'); 
+        } else if(icon.not('active1')){ 
+            $('.card i').removeClass('active1');
+            icon.addClass('active1');           
+            for(let i of stomatolozi) {
+                if($(this).attr('id') == i.id){
+                    setTimeout(function() {                    
+                        $('.stomatologPodaci h4').html(i.ime);
+                        $('.stomatologPodaci p').html(i.p);
+                        $('.stomatologPodaci').slideDown();
+                    },300);  
+                }
+            }  
+        } 
+     });    
+     $('.stomatologPodaci i').click(function() {
+        $('.stomatologPodaci').slideUp();        
+     }); 
+
+     let dr1 = {
+        id: 'dr1',
+        ime: 'Dr Ana Rebic',       
+         p: 'Stomatološki fakultet u Beogradu završila je 2008.godine. U toku akademske godine 2007/2008 učestvovala je na fakultetu u izvođenju praktične nastave kao demonstrator na predmetu Bolesti zuba kao i u studentskim naučno-istraživačkim radovima. Završila kurs za mašinsku preparaciju kanala korena zuba i svakodnevno ga primenjuje u praksi.<br/><br/> Doktorsku disertaciju iz naučne oblasti Stomatološka protetika na temu:” Polimorfizmi u MTHFR, GSTM1, GSTT1, MMP9 genima kao faktori predispozicije za pojavu temporomandibularnih disfunkcija” odbranila je 2016.godine. Bavi se dijagnostikom i terapijom problema sa viličnim zglobom. Specijalizaciju iz stomatološke protetike završila je 2017.godine takođe na Stomatološkom fakultetu Univerziteta u Beogradu. Bila je angažovana na projektu Ministarstva za nauku i tehnološki razvoj Republike Srbije (2011-2017) u okviru kojeg je publikovala brojne radove u naučnim i stručnim časopisima i učestvovala u brojnim naučnim skupovima. Član je evropske asocijacije za oseointegraciju EAO. Intenzivno se usavršava i primenjuje znanja iz oblasti implantologije, konvencionalne protetike, protetike na implantatima i estetske stomatologije.'
+     }
+     let dr2 = {
+        id: 'dr2',
+        ime: 'Dr Milan Stankovic',
+        p: 'Stomatološki fakultet završio je u Beogradu 2002. godine. Specijalizaciju iz Oralne Hirurgije završio je 2010. godine takodje na Stomatološkom fakultetu u Beogradu. Konstantno se usavršava iz oblasti implantologije i pohađao je više kurseva u zemlji i inostranstvu.<br/><br/> Od naročitog značaja su sinus lift procedure i druge augmentacione metode uz ugradnju implantata koje je stekao u Švajcarskoj na Univerzitetu u Bernu 2016. godine. Učestvovao na mnogim evropskim kongresima i član je evropske asocijacije za oseointegraciju EAO kao i Sekcije za oralnu hirurgiju i implantologiju. Svakodnevno primenjuje savremene hirurške procedure u okviru preprotetske pripreme i ima izuzetne rezultate u implantološko-protetskoj rehabilitaciji pacijenata.'
+    }
+
+    let dr3 = {
+        id: 'dr3',
+        ime: 'Dr Marijana Cvetkovic',
+        p: 'Diplomirala na Stomatološkom fakultetu u Beogradu 2010. godine. Akademske specijalističke studije iz Bolesti zuba na temu:“ Kompleksnost kanalne građe donjih premolara” završila je na Stomatološkom fakultetu u Beogradu 2015.godine. <br/><br/>U okviru kliničke prakse najviše je posvećena konzervativnoj stomatologiji kao što su popravka, izbeljivanje i lečenje zuba primenjujući savremene tehnike mašinske preparacije kanala korena zuba kao i slaganja boja kompozitnih ispuna (belih plombi). Pohađa dodatne kurseve iz oblasti endodoncije i prati inovacije savremenih materijala i procedura u stomatologiji.'
+    }
+    let stomatolozi = [dr1, dr2, dr3];
+    
+    let c = "DUODENTAL OSNOVAN JE SA MISIJOM DA SVAKOM PACIJENTU PRUŽI KOMPLETNU ORALNU NEGU, OBEZBEDI NAJBOLJU USLUGU KOMBINUJUĆI SAVREMENA ZNANJA I TEHNOLOGIJU U OBLASTI STOMATOLOGIJE. POSVEĆENOST SVAKOM PACIJENTU JESTE IMPERATIV NAŠEG POSLOVANJA KOJE ZA ISHOD IMA ZDRAV I SAVRŠEN OSMEH";
+    console.log(c.toLowerCase())
+   
 });
