@@ -16,12 +16,14 @@ $(document).ready(function () {
     let user = [];
     let loggedUser;
     let loggedAdmin;
+    let changeUser = {};
     let startTime = 10;
     let randTime = [];
     let minutes;
     let $dateVal = new Date().toDateString(); 
     setTime(time);
     let parms = [admName, admPass, '#imeAdm', '#passAdm'];
+    let inputTable = document.querySelectorAll('tBody tr');
     
     localStorage.getItem('loggedUser')?
     loggedUser = JSON.parse(localStorage.getItem('loggedUser')): 
@@ -186,7 +188,7 @@ $(document).ready(function () {
             patient.stomatolog.push(generate(stomatolog)); 
             do {
                 patient.noWeekend = randomDate(new Date('2016-05-01'), new Date());
-                } while (!patient.noWeekend);
+                } while (!patient.noWeekend); 
             patient.date.push(`${new Date(patient.noWeekend).toDateString()} ${randTime[Math.floor(Math.random()*14)]}`);
         }  
         let randNum = ('0000' + randNumber()).slice(-7); 
@@ -321,6 +323,8 @@ $(document).ready(function () {
                 remPrevTable();
                 user.push(val[this.firstChild.innerHTML-1]); 
                 userData(user[0]);
+                let inputTable = document.querySelectorAll('tBody tr'); 
+                inputTable[4].lastElementChild.disabled = true;
                 user = [];
             }
         }); 
@@ -331,27 +335,51 @@ $(document).ready(function () {
         userContent.appendChild(table);
         // table.setAttribute('id', 'userTable');
         table.appendChild(tbody);
-        for(let i=0; i<Object.keys(val).length - 2; i++) {
+        for(let i = 0; i < Object.keys(val).length - 2; i++) {
             let tr = document.createElement('tr');
             tbody.appendChild(tr);
-            for(let j=0; j<2; j++) {
-                if(j==0) {                   
+            for(let j = 0; j < 2; j++) {
+                if(j == 0) {                   
                     let th = document.createElement('th');
                     let capitalised = Object.keys(val)[i];
                     th.innerHTML = capitalised.charAt(0).toUpperCase() + capitalised.slice(1);
                     tr.appendChild(th);
                 } else {
                     let td = document.createElement('input'); //td
-                    td.value = Object.values(val)[i];   //td.innerHTML
+                    td.value = Object.values(val)[i];   //td.innerHTML                    
                     tr.appendChild(td);
                 }
             }
         }
-        // let backBtn = document.createElement('button');
-        // backBtn.innerHTML = 'Potvrdi izmene';
-        // backBtn.className = 'confirmBtn';
-        // userContent.appendChild(backBtn);       
+        let backBtn = document.createElement('button');
+        backBtn.innerHTML = 'Potvrdi izmene <i class="far fa-edit"></i>';
+        backBtn.className = 'confirmBtn';
+        backBtn.addEventListener('mouseover', bab);
+        backBtn.addEventListener('mouseleave', bab1);
+        backBtn.addEventListener('click', editData);       
+        userContent.appendChild(backBtn); 
+
     }
+    let bab = () =>  $('.confirmBtn i').addClass('fas fa-pen');  
+    let bab1 = () => $('.confirmBtn i').removeClass('fas fa-pen');
+    
+    function editData() {  
+        let inputTable = document.querySelectorAll('tBody tr');            
+        for(let i in allPatients) { 
+            for(let j = 0; j < inputTable.length; j++) {
+                let value = inputTable[j].lastElementChild.value;  
+                let key = inputTable[j].lastElementChild.previousElementSibling.innerHTML;                        
+                key = key.charAt(0).toLowerCase() + key.slice(1);
+                changeUser[key] = value;                 
+                if (changeUser.brojKartona == allPatients[i].brojKartona) {                    
+                    allPatients.splice(i, 1);   
+                    allPatients.push(changeUser);
+                    set();
+                    break;                 
+                }               
+            }  
+        } 
+    }    
     //sacuvati korigovane izmene korisnik
 
     $('#userInfo').click(function(){
@@ -362,7 +390,8 @@ $(document).ready(function () {
     function remPrevTable() {
         $('thead').empty();
         $('tbody').empty();
-        $('.table h4').hide();       
+        $('.table h4').hide(); 
+        $('.confirmBtn').remove();     
     }
 
     $('#allPatients').click(function () {
@@ -376,32 +405,13 @@ $(document).ready(function () {
 
         let tr = document.querySelectorAll('tr .delete'); //naci pacijenta u allPatient nizu i obrisati ga
         for(let i=0;i< tr.length; i++) {
-            tr[i].addEventListener('click',delete1(allPatients, 'allPatients'));
+            tr[i].addEventListener('click',deleteUser(allPatients, 'allPatients'));
         }
     });
 
-    // allPatients = JSON.parse(localStorage.getItem('listaPacijenata')); 
-    // let set = function() {localStorage.setItem('listaPacijenata',JSON.stringify(value))};
-
-    function delete1(value,text) { 
-        return function() {  
-            if(window.confirm(`Da li zelite da obrisete pacijenta?`)){
-            $(this).parent().fadeOut(1300); 
-                let b = this.parentElement.firstChild.innerHTML;
-                console.log(b);
-                for(let i = value.length; i > b; i--){ 
-                    allPatients.splice(b-1,1);  
-                    set();
-                    setTimeout(function() {document.getElementById(text).click()},1000);
-                    break;
-                } 
-            }
-        }
-    };  
-
     let filter = [];
     let values = [];
-    let count = [];
+    let count = [];   
     let search = ['#imePac', '#prezimePac', '#email', '#telefon', '#karton', '#usluga', '#stomatolog'];
     let searchValues = ['ime', 'prezime', 'email', 'telefon', 'brojKartona', 'usluga', 'stomatolog'];
 
@@ -442,12 +452,40 @@ $(document).ready(function () {
                 remPrevTable();                   
                 createTable(filter,8);               
             });  
-        let tr = document.querySelectorAll('tr .delete'); 
-        for(let i=0;i< tr.length; i++) {
-            tr[i].addEventListener('click',delete1(filter, 'filter'));
+
+        let tr1 = document.querySelectorAll('tr .delete');        
+        for(let i=0;i< tr1.length; i++) {
+            tr1[i].addEventListener('click',deleteUser(filter, 'filter'));
         }           
         values = [];
     });
+
+    // allPatients = JSON.parse(localStorage.getItem('listaPacijenata')); 
+    // let set = function() {localStorage.setItem('listaPacijenata',JSON.stringify(value))};
+
+    function deleteUser(value,text) { 
+        return function() {           
+            if(window.confirm(`Da li zelite da obrisete pacijenta?`)){
+            $(this).parent().fadeOut(1300);           
+                let b = this.parentElement.firstChild.innerHTML; 
+                for(let i = value.length; i >= b; i--){                   
+                    if(filter.length) {
+                        for (let j in allPatients) {                            
+                            (value[b-1].brojKartona == allPatients[j].brojKartona) &&                               
+                            allPatients.splice(j, 1);                            
+                        } 
+                    } else {                       
+                        allPatients.splice(b-1,1);                      
+                    }
+                    set();
+                    setTimeout(function() {
+                        document.getElementById(text).click()
+                    }, 1000);
+                    break;
+                } 
+            }
+        }
+    }  
     
     //date min today. max a year from now
     function dateLimit(oneYear) {
@@ -465,7 +503,7 @@ $(document).ready(function () {
     $("#date").attr("max", dateLimit(1));
 
     // let currentDate = new Date();  
-    //     $("#date").val(currentDate);
+    // $("#date").val(currentDate);
     if(window.location.href.indexOf('login/zakazivanje')!= -1) {
         let dateVal = document.getElementById("date");
         dateVal.valueAsDate = new Date();

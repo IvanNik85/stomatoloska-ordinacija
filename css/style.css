@@ -10,7 +10,7 @@ h1, h2 {
 }
 /* refaktorisati */
 .Header {
-    height: 800px;
+    height: 100vh;
     background: url(../images/image.jpg) no-repeat center;
     background-size: cover;
 }
@@ -224,7 +224,7 @@ transition: 0.3s;
 #scrollTop {
     width: 70px;
     height: 70px;
-    border: 2px solid #000;   
+    border: 2px solid rgb(192, 191, 191);   
     border-radius: 5px;
     background-color: transparent;
     display: none;

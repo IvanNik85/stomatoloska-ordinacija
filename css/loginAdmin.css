@@ -65,7 +65,7 @@ fieldset {
 .welcome {
     margin-bottom: 50px;
 }
-#allPatients, #filter {
+#allPatients, #filter, .confirmBtn {
     display: block;
     width: 140px;
     height: 40px;
@@ -74,12 +74,18 @@ fieldset {
     border-radius: 4px;
     outline: none;
     color: #fff;
-    margin: 40px auto;
+    margin: 40px auto;    
 }
-#allPatients:hover{
+#allPatients:hover, .confirmBtn:hover {
     background-color: rgb(204, 80, 43);
     color: #fff;
     transition: 0.3s;
+}
+.fa-pen {
+    font-size: 13px;   
+}
+.confirmBtn .fas:hover {
+    background-color: transparent;
 }
 .patientsTable th,.patientsTable td {
     width: 140px;
