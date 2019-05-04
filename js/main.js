@@ -22,8 +22,7 @@ $(document).ready(function () {
     let minutes;
     let $dateVal = new Date().toDateString(); 
     setTime(time);
-    let parms = [admName, admPass, '#imeAdm', '#passAdm'];
-    let inputTable = document.querySelectorAll('tBody tr');
+    let parms = [admName, admPass, '#imeAdm', '#passAdm'];    
     
     localStorage.getItem('loggedUser')?
     loggedUser = JSON.parse(localStorage.getItem('loggedUser')): 
@@ -308,11 +307,11 @@ $(document).ready(function () {
                     let num = document.createElement('td');
                     num.innerHTML = i + 1;
                     tr.appendChild(num);
-                }
+                }               
                 if(j != add && j != del) {
-                let td = document.createElement('td');
-                td.innerHTML = Object.values(val[i])[j];
-                tr.appendChild(td);
+                    let td = document.createElement('td');
+                    td.innerHTML = Object.values(val[i])[j];
+                    tr.appendChild(td);
                 }
             }
         }   
@@ -371,7 +370,9 @@ $(document).ready(function () {
                 let key = inputTable[j].lastElementChild.previousElementSibling.innerHTML;                        
                 key = key.charAt(0).toLowerCase() + key.slice(1);
                 changeUser[key] = value;                 
-                if (changeUser.brojKartona == allPatients[i].brojKartona) {                    
+                if (changeUser.brojKartona == allPatients[i].brojKartona) { 
+                    changeUser['username'] =  allPatients[i].username;
+                    changeUser['pass'] =  allPatients[i].pass;                 
                     allPatients.splice(i, 1);   
                     allPatients.push(changeUser);
                     set();
@@ -379,11 +380,12 @@ $(document).ready(function () {
                 }               
             }  
         } 
-    }    
-    //sacuvati korigovane izmene korisnik
+    }        
 
-    $('#userInfo').click(function(){
+    $('#userInfo').click(function(){        
         userData(loggedUser[0]);
+        let inputTable = document.querySelectorAll('tBody tr'); 
+        inputTable[4].lastElementChild.disabled = true;
         $(this).unbind()  //remove event listener       
     });
 
@@ -409,7 +411,7 @@ $(document).ready(function () {
         }
     });
 
-    let filter = [];
+    let filterEl = [];
     let values = [];
     let count = [];   
     let search = ['#imePac', '#prezimePac', '#email', '#telefon', '#karton', '#usluga', '#stomatolog'];
@@ -417,7 +419,7 @@ $(document).ready(function () {
 
     $('#filter').click(function () {
         remPrevTable();
-        filter = [];
+        filterEl = [];
         allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));
         for (let i = 0; i < 8; i++) {
             values.push($(search[i]).val());
@@ -430,32 +432,48 @@ $(document).ready(function () {
             }   
         }    
         console.log(values.length)
-        
-        for (let i in allPatients) {
-            for (let j=0;j<values.length;j++) {
-                for (let k=0;k<searchValues.length;k++) {
-                    let compare = (values[k] == allPatients[i][searchValues[k]])
-                    let compare1 = (values[j] == allPatients[i][searchValues[j]] && j != k);
-                    if (count.length == 1 && compare) {
-                        filter.push(allPatients[i]);
-                    } else if(count.length == 2 && compare && compare1) {                       
-                        filter.push(allPatients[i]);
-                    }                  
-                }
-                break;
-            }
-        }  
-            console.log(filter)
+                
+        filterEl = [...allPatients];
 
-        filter.length ? createTable(filter,6,5,4) : $('.table h4').show();  
+        for(let i = 0; i < 5; i++) {
+            if(values[i]) {
+                filterEl = filterEl.filter(function(value) {
+                    if(values[i] === value[searchValues[i]]) {                      
+                        return true;
+                    } else {                        
+                        return false;             
+                    }
+                });
+                filterEl == false && $('.table h4').show(); 
+            }
+        }
+        
+        for(let i = 5; i < 7; i++) {            
+            if(values[i]) {
+                filterEl = filterEl.filter(function(value) {
+                    let searchedValue = value[searchValues[i]];  
+                    console.log(searchedValue);                
+                    if(searchedValue.includes(values[i])) {
+                        return true
+                    } else {
+                        return false;
+                    }
+                });
+            }
+        }
+       
+        console.log(values[0])
+        console.log(filterEl)
+
+        filterEl.length != allPatients.length ? createTable(filterEl,6,5,4) : $('.table h4').show();  
             $('.expand').click(function() {   
                 remPrevTable();                   
-                createTable(filter,8);               
+                createTable(filterEl,8);               
             });  
 
         let tr1 = document.querySelectorAll('tr .delete');        
         for(let i=0;i< tr1.length; i++) {
-            tr1[i].addEventListener('click',deleteUser(filter, 'filter'));
+            tr1[i].addEventListener('click',deleteUser(filterEl, 'filter'));
         }           
         values = [];
     });
@@ -469,7 +487,7 @@ $(document).ready(function () {
             $(this).parent().fadeOut(1300);           
                 let b = this.parentElement.firstChild.innerHTML; 
                 for(let i = value.length; i >= b; i--){                   
-                    if(filter.length) {
+                    if(filterEl.length) {
                         for (let j in allPatients) {                            
                             (value[b-1].brojKartona == allPatients[j].brojKartona) &&                               
                             allPatients.splice(j, 1);                            
@@ -617,8 +635,10 @@ $(document).ready(function () {
             if($(this).val() == '') { 
                 confirm = '';  
                 b++;         
-                $(this).addClass('valid');
-                placeholder(this, 'Molimo popunite polje');
+                $(this).addClass('valid');   
+                setTimeout(() => {
+                    placeholder(this, 'Molimo popunite polje');
+                }, 150)                 
                 $(this).removeClass('true');
                 console.log(b);
                 return;
@@ -721,12 +741,13 @@ $(document).ready(function () {
             $('.card i').removeClass('active1');
             icon.addClass('active1');           
             for(let i of stomatolozi) {
-                if($(this).attr('id') == i.id){
-                    setTimeout(function() {                    
+                if($(this).attr('id') == i.id){                   
+                    setTimeout(prikazi, 300);
+                    function prikazi() {                    
                         $('.stomatologPodaci h4').html(i.ime);
                         $('.stomatologPodaci p').html(i.p);
                         $('.stomatologPodaci').slideDown();
-                    },300);  
+                    }  
                 }
             }  
         } 

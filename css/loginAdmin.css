@@ -98,6 +98,7 @@ fieldset {
 }
 table {
     margin-top: 40px;
+    overflow: scroll;
 }
 .patientsTable thead tr th {
     border-bottom: 1px solid black;
