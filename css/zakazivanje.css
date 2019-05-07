@@ -19,38 +19,35 @@ form {
     width: 100%;
     margin: auto;
     padding: 40px;
+    /* background-color: #498f92; */
+    background-image: linear-gradient(45deg,#0077a5, #268e7b);
 }
 fieldset {
     border: 2px solid black;
     border-radius: 5px;
     width: 100%;
 }
-select {
-    height: 30px;
+.ds select {
+    height: 35px;
     border-radius: 4px;
+    padding-left: 5px;
+    font-size: 18px;
 }
 #error {
     height: 25px;
     visibility: hidden;
-    color:red;
-    font-size: 17px;
+    color:rgb(251, 255, 0);
+    font-size: 18px;
 }
 #ime1::placeholder, #prezime1::placeholder,
 #email1::placeholder, #phone::placeholder,
 #passUser::placeholder,#confPass::placeholder,
 #username::placeholder { 
-    color: red;
+    color: rgb(251, 255, 0);
     opacity: 1; /* Firefox */
   }
 input#date {
     width: 90%;
-}
-#dateTime {
-    width: 30%;
-    height: 40px;
-    display: block;
-    margin: 10px auto;
-    color: #000;
 }
 .time {
     height: 60%;
@@ -58,6 +55,11 @@ input#date {
     flex-flow: row wrap;
     justify-content: center;
     margin-top: 35px;   
+}
+.disableBtn {
+    pointer-events: none;
+    text-decoration: line-through;
+    background-color: aquamarine;
 }
 /* multy Line form */
 
@@ -74,6 +76,10 @@ input#date {
 .wrapDates .userData {   
     width: 100%;
 } 
+.wrapDates label {
+    color: #fff;
+    font-size: 18px;
+}
 #ul {
     counter-reset: step;
 }
@@ -122,17 +128,20 @@ input#date {
     position: absolute;
     width: 100px;
     height: 40px;
-    outline: none;
+    /* outline: none; */
     border-radius: 10px; 
-    border: 3px solid rgb(138, 30, 30); 
+    border: 3px solid #000; 
     font-weight: bold;
-    background-color:#a50a0ae3;
+    background-color: #921818;
     color: #fff;
+}
+.prev:hover, .next:hover {
+    background-color: #6d1313;
+  
 }
 .prev:active, .next:active {
     transform: scale(.94);
-    transition: 0.3s;
-    outline: none;
+    transition: 0.3s;   
 }
 .prev {
     bottom: 30px;
@@ -150,11 +159,13 @@ input#date {
     text-align: center;
     line-height: 40px; 
     position: relative;
-    border: 2px solid#c5b1b1;
+    border: 2px solid #c5b1b1;
     border-radius: 35px;
     font-size: 18px;
     margin: 0 5px;
     cursor: pointer;
+    background-color: #000;
+    color: #fff;
 }
 .cont input {
     position: absolute;
@@ -176,6 +187,7 @@ input#date {
 }
 .cont:hover {
     border: 2px solid rgb(190, 10, 10); 
+    font-size: 22px;
     transition: 0.25s;
 }
 .cont input:checked ~ .check {
@@ -197,12 +209,17 @@ input#date {
     width: 10px;
     border-radius: 4px;
 }
-#dateTime {
+#dateTime {    
+    width: 30%;
+    height: 40px;
+    display: block;
+    margin: 10px auto;
+    color: #000;
     font-weight: bold;
     font-size: 18px;
     width: 200px;
     border-radius: 4px;    
-    border: 2px solid red;
+    border: 2px solid rgb(53, 23, 23);
     background-color: rgb(236, 234, 234);
 }
 /* input floating placeholder */
@@ -214,7 +231,9 @@ input#date {
     border: none;
     outline: none;
     width: 100%;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid#0e1427;    
+    background: transparent;
+    color: #fff;
 }
 .box div {
     position: relative;
@@ -225,15 +244,23 @@ input#date {
     left: 5px;
     top: 10px;
     transition: .4s;
+    color: #fff;
 }
 .box input:focus ~ label,
 .box input.valid ~ label {
     top: -12px;
     font-size: 12px;
-    color: orangered;
+    color: rgb(233, 145, 30);
     font-weight: bold;
     border: none;
 }
 .box input:focus { /*.box input.valid     */
-    border-bottom: 2px solid orangered;
+    border-bottom: 2px solid rgb(233, 145, 30);
+}
+.box input:-moz-selection { /* Code for Firefox */
+    background: rgb(6, 73, 112);
+}
+  
+.box input::selection {  
+    background: rgb(6, 73, 112);
 }

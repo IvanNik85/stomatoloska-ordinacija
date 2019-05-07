@@ -12,46 +12,68 @@
     <link rel="stylesheet" type="text/css" href="../css/loginUser.css" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/Navbar.css" />
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script> 
+    <script
+        src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"
+        integrity="sha256-0vBSIAi/8FxkNOSKyPEfdGQzFDak1dlqFKBYqBp1yC4="
+        crossorigin="anonymous">
+    </script>    
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg col-md"></div>
-            <div class="col-lg-8 col-md-10 toggle user">
-                <h1>Login User</h1>
-                <fieldset class="box">
-                    <img src="../images/userImg.png" alt="userImg">
-                    <form>
-                        <div>                           
-                            <input type="text" id='ime' autocomplete="off" required><br />
-                            <label for="ime">Username:</label>
-                        </div>
-
-                       <div>                            
-                            <input type="password" id="pass" autocomplete="off" required>
-                            <label for="pass">Password:</label>
-                       </div>
-
-                        <button type="button" id='submit'>Login</button>
-                    </form>
-                </fieldset>
-            </div>
-            <div class="col-lg col-md"></div>
-        </div>
-        <div class="content hide userCont">          
-            <div class="row">
-                <div class="col-md-12"><h1>Uspešno ste se ulogovali</h1></div>
-                <div class="col-lg-4 btns">
-                    <a href="./zakazivanje.html"><button type="button" id="schedule">Zakazivanje</button></a>
-                    <button type="button" id="userInfo">Pregled</button>
+    <div class="wrapper">
+        <div class="wrapImg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg col-md"></div>
+                    <div class="col-lg-8 col-md-10 toggle user">
+                        <h1>Login User</h1>
+                        <fieldset class="box">
+                            <img src="../images/userImg.png" alt="userImg">
+                            <form>
+                                <div>                           
+                                    <input type="text" id='ime' autocomplete="off" required><br />
+                                    <label for="ime">Username:</label>
+                                </div>
+        
+                            <div>                            
+                                    <input type="password" id="pass" autocomplete="off" required>
+                                    <label for="pass">Password:</label>
+                            </div>
+        
+                                <button type="button" id='submit'>Login</button>
+                            </form>
+                        </fieldset>
+                    </div>
+                    <div class="col-lg col-md"></div>
                 </div>
-                <div class="col-lg-8 userContent"> 
-                    <!-- <h3>Zakažite termin pregleda</h3>
-                    <h3>Pregledajte istoriju svojih pregleda</h3> -->
-                </div>               
+                <div class="content hide userCont">          
+                    <div class="row">
+                        <div class="col-md-12"><h1>Uspešno ste se ulogovali</h1></div>
+                        <div class="col-md-1 btns"></div>
+                        <div class="col-md-5 userContent">
+                            <i class="fas fa-clock"></i>
+                            <h3>Zakažite željeni termin pregleda</h3>
+                            <p>Pregled u ordinaciji inDentalPro možete zakazati: preko internet sajta ordinacije, telefonom ili neposrednim dolaskom kod nas. </p>
+                            <a href="./zakazivanje.html"><button type="button" id="schedule">Zakazivanje</button></a>
+                        </div> 
+                        <div class="col-md-5 userContent">
+                            <i class="fas fa-history"></i>
+                            <h3>Pregledajte istoriju svojih pregleda</h3>
+                            <p>Dostupan je tabelaran prikaz Vaših podataka kao i mogućnost izmene istih. Lako i jednostavno možete videti istoriju svojih pregleda. </p>
+                            <a href="./login/zakazivanje/#toTable"></a><button type="button" id="userInfo">Pregled</button></a>
+                        </div> 
+                        <div class="col-md-1"></div> 
+                    
+                    </div>
+                </div>
+                <div class="container">   
+                    <div class="row">
+                        <div class="col-md-12 generateUser">
+                            <div class="btnCont"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 html {
     scroll-behavior: smooth;
@@ -11,7 +12,7 @@ h1, h2 {
 /* refaktorisati */
 .Header {
     height: 100vh;
-    background: url(../images/image.jpg) no-repeat center;
+    background: url(../images/imageHeader.jpg) no-repeat center;   
     background-size: cover;
 }
 .wrap {   
@@ -35,10 +36,10 @@ h1, h2 {
     display: block;
     width: 100%;
     height: auto;
-  }
-  .infWrap {
-    padding-bottom: 50px; 
-  }
+}
+.infWrap {
+    padding-bottom: 60px; 
+}
 .infoTitle p {
     color: #333;
     font-size: 18px;
@@ -94,6 +95,7 @@ transition: 0.3s;
     padding: 0 50px 50px 50px;
     text-align: justify;
     margin: 0;
+    font-size: 18px;
 }
 .stomatologPodaci h4 {
     padding: 45px 35px 35px;
@@ -121,23 +123,63 @@ transition: 0.3s;
 .gallery h2 {
     padding-bottom: 20px;
 }
-/* .Zakazivanje {
-    height: 600px; 
-    padding-top: 300px; 
-} */
-.content {
+.Zakazivanje {
+    /* height: 600px; */
+    margin-top: 180px;  
+    background-color:#4c70b3;
+    color:#fff;
+}
+.contentSch h2 {    
+    margin-bottom: 45px;
+}
+.contentSch {
     margin-top: 100px;    
 }
-.content p, .content span {
+.contentSch p, .contentSch span {
     text-align: justify;   
     font-size: 18px;
     text-indent: 50px;
 }
-.content h2 {
-    margin-bottom: 45px;
+.choiseDent {
+    text-align: center;
+    padding-bottom: 30px;
 }
+.choiseDent h2 {
+    margin: 75px 0; 
+}
+.choiseDent p {
+    font-size: 18px;
+    text-align: left;
+}
+.choiseTitle {
+    display: flex;
+    justify-content: center; 
+    height: 36px;
+    line-height: 36px;   
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.choiseTitle i {
+    font-size: 0px;
+    margin-left: -65px;    
+}
+.choiseTitle .fas:hover {
+    background-color: transparent;    
+}
+.choiseDent p {
+    padding-bottom: 20px;
+}
+/* .choiseTitle .fa-calendar-alt {
+    color: rgb(231, 248, 132);
+}
+.choiseTitle .fa-dollar-sign {
+    color: rgb(248, 132, 142);
+}
+.choiseTitle .fa-cogs {
+    color: rgb(132, 244, 248);
+} */
 .login, .schedule {
-    background-color:#1c92b5;
+    background-image: linear-gradient(45deg,#0077a5, #268e7b);
     color: #fff;
     font-weight: bold;
     border: 1px solid black;
@@ -155,8 +197,12 @@ transition: 0.3s;
 }
 .login, .schedule {
     width: 140px;
-    height: 35px;
+    height: 40px;
     margin: 30px;
+    border: 2px solid rgb(55, 46, 139);
+}
+#last  {
+    padding-bottom: 30px;   
 }
 .Kontakt {
     /* height: 600px; */
@@ -164,6 +210,13 @@ transition: 0.3s;
 }
 .Kontakt i {
     color: #1c92b5;
+}
+.Kontakt p {
+   font-size: 17px;
+}
+.contactUs {
+    padding-bottom: 35px;
+    padding-top: 50px;
 }
 .Footer {
     height: 300px;
@@ -198,7 +251,7 @@ transition: 0.3s;
     border-radius: 4px;
     width: 45px;
     height: 45px;
-    line-height: 45px;
+    line-height: 41px;
     color: #9d9d9d;
     transition: all .3s;   
     -webkit-transition: all .3s;
@@ -207,7 +260,7 @@ transition: 0.3s;
 }
 #facebook:hover {    
     border: 2px solid #395599;
-    color: #fff;
+    color:  #fff;
 }
 #instagram:hover {    
     border: 2px solid #6835ba;
@@ -326,7 +379,20 @@ transition: 0.3s;
     }
     .sliderCont {    
         bottom: 45%;      
-     }
+    }
+    .contactUs {       
+        padding-top: 0;
+    }
+    .choiseTitle {
+        justify-content: flex-start;
+    }  
+    .choiseTitle i{
+        margin: 0;
+        padding-right: 30px;
+    }    
+    .Zakazivanje {       
+        margin-top: -200px; 
+    }  
 }
 @media (min-width: 768px) {
     .fa-arrow-right {     
@@ -337,7 +403,7 @@ transition: 0.3s;
     }
     .sliderCont {      
         bottom: 30%;     
-     } 
+     }      
 }
 @media (min-width: 992px) {
     .fa-arrow-right {      
@@ -348,7 +414,7 @@ transition: 0.3s;
     }
     .sliderCont {     
        bottom: 10%;    
-    }
+    }    
 }
 @media (min-width: 1200px) {
     .fa-arrow-right {    
@@ -361,9 +427,36 @@ transition: 0.3s;
         top: 0;      
      } 
 }
+@media (max-width: 500px) {
+    .Zakazivanje {       
+        margin-top: -250px; 
+    }   
+     .gallery .fa-arrow-left {
+         visibility: hidden;
+     } 
+     .gallery .fa-arrow-right  {
+        display: none !important;
+    }   
+    .sliderCont {
+        display: none;
+    }
+}
+@media (max-width: 400px) {
+    .Zakazivanje {       
+        margin-top: -350px; 
+    }   
+}
+@media (min-width: 992px) and (max-width: 1200px) {     
+    .Zakazivanje {       
+        margin-top: 80px; 
+    }
+}
 @media (min-width: 768px) and (max-width: 992px) { 
     #dr1 h4 {
         height: 67px;
         line-height: 67px
+    }
+    .Zakazivanje {       
+        margin-top: -80px; 
     }
 }

@@ -12,7 +12,11 @@
     <link rel="stylesheet" type="text/css" href="css/Navbar.css" />
     <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/jquery-ui-dist/jquery-ui.min.js"></script>  
+    <script
+        src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"
+        integrity="sha256-0vBSIAi/8FxkNOSKyPEfdGQzFDak1dlqFKBYqBp1yC4="
+        crossorigin="anonymous">
+    </script>  
 </head>
 
 <body>
@@ -97,7 +101,7 @@
     <div class="Galerija" id=galerija>
         <div class="container">
             <div class="row">               
-                <div class="col-md gallery">
+                <div class="col-md-12 gallery">
                     <h2>Galerija</h1>
                 </div>            
             </div>
@@ -109,18 +113,51 @@
                 <div class="row">                   
                     <div class="col-md"></div>
                     <div class="col-md-10">
-                        <div class="content">
+                        <div class="contentSch">
                             <h2>Zakazivanje termina</h1>
                             <p>inDentalPro osnovan je sa misijom da svakom pacijentu pruži kompletnu oralnu negu, obezbedi najbolju uslugu kombinujući savremena znanja i tehnologiju u oblasti stomatologije. Posvećenost svakom pacijentu jeste imperativ našeg poslovanja koje za ishod ima zdrav i savršen osmeh</p>
                             <p>Osnovana 2005. godine, ordinacija inDentalPro je svoje poslovanje počela kao porodična ordinacija u cilju pružanja vrhunskih usluga svakom pacijentu. Tokom godina, investirajući u najsavremeniju tehnologiju i stručne kadrove, proširila je svoje poslovanje sa svrhom najkompletnije usluge u oblasti zdravstvene zaštite. Kombinacija porodične tradicije, koja svoje znanje pokazuje u praksi, sa savremenim instrumentima i stručnim partnerima, obezbeđuje svojim pacijentima zdrav osmeh koji svojom lepotom pokazuje predan rad u oblasti oralne zaštite. Kako bi Vam pružili vrhunsku negu Vaših zuba, a uz to prijateljsku reč i prijatnu atmosferu, tim naših lekara će Vas uvek dočekati sa korisnim savetima i ukazati stručnu pomoć.</p>
+                            <p id='last'>U cilju unapređenja komunikacije sa našim pacijentima, Stomatološka ordinacija inDentalPro je integrisala novu uslugu - od sada imate mogućnost On-Line zakazivanja termina u našoj ordinaciji. Ova usluga je dostupna svim posetiocima sajta. Integracijom sistema On-Line zakazivanja, korisnici usluga Stomatološke ordinacije inDentalPro mogu brzo i lako doći do informacije o raspoloživim slobodnim terminima u našoj ordinaciji, kao i da u par koraka zakažu svoj termin.</p>
                             <a href="./login/loginUser.html"><button class="login">Login</button></a><span>Postojeći korisnik? Ulogujte se</span><br>
                             <a href="./login/zakazivanje.html"><button class="schedule">Zakazivanje</button></a><span>Novi korisnik? Zakazite termin</span>
                         </div>
                     </div>
                     <div class="col-md"></div>
                 </div>
-            </div>
+            <div class="container">
+                <div class="choiseDent">
+                    <div class="row"> 
+                        <div class="col-md-12">
+                            <h2>Zasto odabrati inDentalPro?</h2>   
+                        </div>                    
+                    <div class="row">                                        
+                        <div class="col-md-4">
+                            <div class="choiseTitle">
+                                <span><i class="fas fa-calendar-alt"></i></span>
+                                <h4>Zakazivanje</h4>
+                            </div>
+                            <p>Prvi korak ka lepom, zdravom osmehu je zakazivanje termina. Molimo Vas da kontaktirate našu kancelariju telefonom ili popunite formular kako biste zakazali Vaš sledeći termin.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="choiseTitle">
+                                <span><i class="fas fa-dollar-sign"></i></span>
+                                <h4>Povoljne cene</h4>
+                            </div>
+                            <p>Odlična nega i kvalitetni implanti po ceni koju svako može priuštiti, čineći troškove dentalnih implanta pristupačnijim. Konačno, odličan kvalitet uz odličnu cenu.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="choiseTitle">
+                                <span><i class="fas fa-cogs"></i></span>
+                                <h4>Stručnost</h4>
+                            </div>
+                            <p>Naš tim od 3 stručnjaka obučio se u Velikoj Britaniji i inostranstvu, stvarajući visoko kvalifikovan, prijateljski i sposoban tim koji najbolje služi potrebama naših pacijenata.</p>
+                        </div> 
+                    </div>
+                    </div>
+                </div>  
+            </div>               
         </div>
+    </div>
 
     <div class="Kontakt" id=kontakt>
         <div class="container">
@@ -133,8 +170,8 @@
                     </div>                  
                 </div> 
                 <div class="col-md"></div>              
-                <div class="col-md-4">
-                    <p>Sarajevska A/1<br/>
+                <div class="col-md-4 contactUs">
+                    <p>Sarajevska 32 A/1<br/>
                        11000 Beograd, Srbija<br/>
                     <p>
                     <i class="fa fa-phone"></i>
@@ -145,7 +182,8 @@
                         info@indentalpro.rs
                     </p>
                     <p>Radno vreme:<br>
-                    Radnim danima 10-17h</p>
+                       Radnim danima 10-17h
+                    </p>
                 </div>
                 <div class="col-md-8">                    
                     <div>

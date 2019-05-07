@@ -10,81 +10,92 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="../css/loginAdmin.css" />
-    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="../css/style.css" /> -->
     <link rel="stylesheet" type="text/css" href="../css/Navbar.css" />
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script> 
+    <script
+        src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"
+        integrity="sha256-0vBSIAi/8FxkNOSKyPEfdGQzFDak1dlqFKBYqBp1yC4="
+        crossorigin="anonymous">
+    </script>  
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg col-md"></div>
-            <div class="col-lg-8 col-md-10 toggle admn">
-                <h1>Admin login</h1>
-                <fieldset class="box">
-                    <img src="../images/pass.png" alt="password">
-                    <form>                        
-                        <div>
-                            <input type="text" id='imeAdm' autocomplete="off" required><br />
-                            <label for="imeAdm">Username:</label>
-                        </div>
-                        
-                        <div>
-                            <input type="password" id="passAdm" required>
-                            <label for="passAdm">Password:</label>
-                        </div>
 
-                        <button type="button" id='submitAdmin'>Login</button>
-                    </form>
-                </fieldset>
-            </div>
-            <div class="col-lg col"></div>
-        </div>
-    </div>    
-    <div class="container">
-        <div class="content hide admCont">          
-            <div class="row">
-                <div class="col-md-12"><h1>Dobrodosli na Admin stranu</h1></div>
-                <div class="col-xl-4 filter">
-                    <button type="button" id="allPatients">Prikaz pacijenata</button><br>
-                    <div class="filters">
-                        <h3>Filtritaj pacijente po:</h3>
+    <div class="wrapperAdm">
+        <div class="wrapAdmImg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg col-md"></div>
+                    <div class="col-lg-8 col-md-10 toggle admn">
+                        <h1>Admin login</h1>
+                        <fieldset class="box">
+                            <img src="../images/pass.png" alt="password">
+                            <form>                        
+                                <div>
+                                    <input type="text" id='imeAdm' autocomplete="off" required><br />
+                                    <label for="imeAdm">Username:</label>
+                                </div>
+                                
+                                <div>
+                                    <input type="password" id="passAdm" required>
+                                    <label for="passAdm">Password:</label>
+                                </div>
 
-                        <input type="text" placeholder="Imenu" id="imePac">
-                        <input type="text" placeholder="Prezimenu" id="prezimePac">                        
-                        <input type="email" placeholder="Email-u" id="email" autocomplete="off">
-                        <input type="text" placeholder="Br.telefona" id="telefon">
-                        <input type="text" placeholder="Broju kartona" id="karton">
-                        <!-- <input type="date" placeholder="Datumu pregleda" id="datum"> -->
-
-                        <select id="usluga">
-                            <option value="">Tipu obavljenog pregleda</option>
-                            <option value="Pregled">Pregled</option>
-                            <option value="Plombiranje">Plombiranje</option>
-                            <option value="Vađenje">Vađenje</option>
-                            <option value="Protetika">Protetika</option>
-                        </select><br />
-
-                        <select id="stomatolog">
-                            <option value="">Odabranom stomatologu</option>
-                            <option value="Dr Milan Stankovic">Dr Milan Stankovic</option>
-                            <option value="Dr Marijana Cvetkovic">Dr Marijana Cvetkovic</option>
-                            <option value="Dr Ana Rebic">Dr Ana Rebic</option>
-                        </select><br />
-                                              
-                        <button type="button" id="filter">Filtritaj</button>
-                    </div>                    
+                                <button type="button" id='submitAdmin'>Login</button>
+                            </form>
+                        </fieldset>
+                    </div>
+                    <div class="col-lg col"></div>
                 </div>
-                <div class="col-xl-8 col-lg-10 col-md-12">  
-                    <div class="table">            
-                        <h3>Izaberite neku od opcija pretrage pacijenata po odgovarajućim kriterijumima</h3>
-                        <h4 id="dd">Nema odabranih parametara, pokusajte ponovo!</h4>
-                    </div>  
-                </div>               
-            </div>
+            </div>    
+            <div class="container">
+                <div class="content hide admCont">          
+                    <div class="row">
+                        <div class="col-md-12"><h1>Dobrodosli na Admin stranu</h1></div>
+                        <div class="col-xl-4 filter">
+                            <button type="button" id="allPatients">Prikaz pacijenata</button><br>
+                            <div class="filters">
+                                <h3>Filtritaj pacijente po:</h3>
+
+                                <input type="text" placeholder="Imenu" id="imePac">
+                                <input type="text" placeholder="Prezimenu" id="prezimePac">                        
+                                <input type="email" placeholder="Email-u" id="email" autocomplete="off">
+                                <input type="text" placeholder="Br.telefona" id="telefon">
+                                <input type="text" placeholder="Broju kartona" id="karton">
+                                <!-- <input type="date" placeholder="Datumu pregleda" id="datum"> -->
+
+                                <select id="usluga">
+                                    <option value="">Tipu obavljenog pregleda</option>
+                                    <option value="Pregled">Pregled</option>
+                                    <option value="Plombiranje">Plombiranje</option>
+                                    <option value="Vađenje">Vađenje</option>
+                                    <option value="Protetika">Protetika</option>
+                                </select><br />
+
+                                <select id="stomatolog">
+                                    <option value="">Odabranom stomatologu</option>
+                                    <option value="Dr Milan Stankovic">Dr Milan Stankovic</option>
+                                    <option value="Dr Marijana Cvetkovic">Dr Marijana Cvetkovic</option>
+                                    <option value="Dr Ana Rebic">Dr Ana Rebic</option>
+                                </select><br />
+                                                        
+                                <button type="button" id="filter">Filtritaj</button>
+                            </div>                    
+                        </div>
+                        <div class="col-xl-8 col-lg-10 col-md-12">  
+                            <div class="table">            
+                                <h3>Izaberite neku od opcija pretrage pacijenata po odgovarajućim kriterijumima</h3>
+                                <h4 id="dd">Nema odabranih parametara, pokusajte ponovo!</h4>
+                                <div class="btnCont"></div>
+                                <button id="scrollTop"><i class="fa fa-angle-up"></i></button>
+                            </div>  
+                        </div>               
+                    </div>
+                </div>
+            </div>  
         </div>
-    </div>    
+    </div>      
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src='../js/main.js' type="module"></script>

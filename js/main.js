@@ -10,7 +10,7 @@ if(window.location.href.indexOf('/login/')== -1) {
     gallery();
 }
 
-$(document).ready(function () { 
+$(document).ready(function () {    
     let admName = 'ivan';
     let admPass = 'nik';
     let user = [];
@@ -64,6 +64,7 @@ $(document).ready(function () {
             // $('ul li:last-child').hide().html(`<li><a href="##">Ivan</a></li>`);
             $('.toggle').hide();
             $('.content').show();
+            $('.wrapImg').css('backgroundColor',' rgba(0, 0, 0, .8)'); 
         } 
     }
     function nijePotvrda(a, b, c, d) {
@@ -115,7 +116,10 @@ $(document).ready(function () {
     }
 
     $('#scrollTop').click(topFunction);
-    window.onscroll = function () { scrollFunction() };
+    window.onscroll = function () {
+         scrollFunction();
+         changeColor();        
+         }
     function scrollFunction() {
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 1850) {
             // $(window).scrollTop()
@@ -229,7 +233,11 @@ $(document).ready(function () {
         let dateTime = [$("input[name='time']:checked").val()];
         let username = $('#username').val();
         let password = $('#confPass').val(); 
-        
+
+        if(dateTime[0]==null) {
+            alert(`Nije uneto vreme`);
+            return;
+        }
         for(let i in allPatients) {
             if(loggedUser[0] && loggedUser[0].ime == allPatients[i].ime && 
                 loggedUser[0].prezime == allPatients[i].prezime ) {
@@ -253,6 +261,40 @@ $(document).ready(function () {
             console.log(allPatients);
         } 
     });
+
+    $('.next').click(function() {
+        disableButtons($('#dateTime').html());
+    });
+    $('#date').on('input',function(e) { 
+        disableButtons(new Date(e.target.value).toDateString());
+    })
+    function disableButtons(dateV) {   
+        allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));    
+        let cont = document.querySelectorAll('.time .cont');  //disable buttons
+        for(let i in allPatients) {
+            for(let j=0;j<14;j++) {   
+                let timeVal = cont[j].firstElementChild.nextElementSibling;                         
+                let dateT = `${dateV} ${timeVal.innerHTML}`; 
+                if(allPatients[i].date.includes(dateT) == false ) {
+                    cont[j].firstElementChild.disabled = false;
+                }                                                                  
+                if (allPatients[i].date.includes(dateT)) { //dateT
+                    console.log(allPatients[i])
+                    cont[j].style.pointerEvents = 'none';
+                    cont[j].style.border = '2px solid red';
+                    cont[j].style.backgroundColor = '#d3d3d3';
+                    cont[j].firstElementChild.disabled = true;
+                    timeVal.style.textDecoration = 'line-through';                                 
+                } else if(cont[j].firstElementChild.disabled != true) {                            
+                    console.log(`delete`)  
+                    cont[j].style.pointerEvents = 'auto'; 
+                    cont[j].style.border ='2px solid #c5b1b1'; 
+                    cont[j].style.backgroundColor = '#3c2c2cc4'; 
+                    timeVal.style.textDecoration = 'none';               
+                    }  
+                }        
+            } 
+        }   
 
     let showTable = document.querySelector('.table');
     let table = document.createElement('table');
@@ -329,9 +371,9 @@ $(document).ready(function () {
         }); 
     }
     
-    let userContent = document.querySelector('.table, .userContent'); //.table
+    let generateUser = document.querySelector('.table, .generateUser'); //.table
     function userData(val) { 
-        userContent.appendChild(table);
+        generateUser.appendChild(table);
         // table.setAttribute('id', 'userTable');
         table.appendChild(tbody);
         for(let i = 0; i < Object.keys(val).length - 2; i++) {
@@ -350,20 +392,34 @@ $(document).ready(function () {
                 }
             }
         }
+        let btns = document.querySelector('.btnCont');
+        generateUser.appendChild(btns)
         let backBtn = document.createElement('button');
         backBtn.innerHTML = 'Potvrdi izmene <i class="far fa-edit"></i>';
         backBtn.className = 'confirmBtn';
-        backBtn.addEventListener('mouseover', bab);
-        backBtn.addEventListener('mouseleave', bab1);
+        backBtn.addEventListener('mouseover', icon1);
+        backBtn.addEventListener('mouseleave', icon2);
         backBtn.addEventListener('click', editData);       
-        userContent.appendChild(backBtn); 
-
+        btns.appendChild(backBtn);
+        let back = document.createElement('button');
+        back.innerHTML = '<i class="fas fa-angle-left"></i>';
+        back.className = 'back';
+        back.addEventListener('click', goBack);  
+        btns.appendChild(back)
     }
-    let bab = () =>  $('.confirmBtn i').addClass('fas fa-pen');  
-    let bab1 = () => $('.confirmBtn i').removeClass('fas fa-pen');
+
+    let icon1 = () =>  $('.confirmBtn i').addClass('fas fa-pen');  
+    let icon2 = () => $('.confirmBtn i').removeClass('fas fa-pen');
+
+    function goBack() {        
+        remPrevTable();
+        $('.userCont').slideDown(700);
+        $('.generateUser').show();
+        set();
+    }
     
     function editData() {  
-        let inputTable = document.querySelectorAll('tBody tr');            
+        let inputTable = document.querySelectorAll('tBody tr');                      
         for(let i in allPatients) { 
             for(let j = 0; j < inputTable.length; j++) {
                 let value = inputTable[j].lastElementChild.value;  
@@ -375,6 +431,8 @@ $(document).ready(function () {
                     changeUser['pass'] =  allPatients[i].pass;                 
                     allPatients.splice(i, 1);   
                     allPatients.push(changeUser);
+                    loggedUser = [];
+                    loggedUser.push(changeUser);
                     set();
                     break;                 
                 }               
@@ -382,18 +440,20 @@ $(document).ready(function () {
         } 
     }        
 
-    $('#userInfo').click(function(){        
-        userData(loggedUser[0]);
-        let inputTable = document.querySelectorAll('tBody tr'); 
+    $('#userInfo').click(function(){ 
+        userData(loggedUser[0]);       
+        let inputTable = document.querySelectorAll('tBody tr');
         inputTable[4].lastElementChild.disabled = true;
-        $(this).unbind()  //remove event listener       
+        $('.content').slideUp(700);
+        // $(this).unbind()  //remove event listener       
     });
 
     function remPrevTable() {
         $('thead').empty();
         $('tbody').empty();
         $('.table h4').hide(); 
-        $('.confirmBtn').remove();     
+        $('.confirmBtn').remove();
+        $('.back').remove();    
     }
 
     $('#allPatients').click(function () {
@@ -413,7 +473,7 @@ $(document).ready(function () {
 
     let filterEl = [];
     let values = [];
-    let count = [];   
+    // let count = [];   
     let search = ['#imePac', '#prezimePac', '#email', '#telefon', '#karton', '#usluga', '#stomatolog'];
     let searchValues = ['ime', 'prezime', 'email', 'telefon', 'brojKartona', 'usluga', 'stomatolog'];
 
@@ -424,13 +484,13 @@ $(document).ready(function () {
         for (let i = 0; i < 8; i++) {
             values.push($(search[i]).val());
         }
-        count = [];
-        for(let c in values) {           
-            if(values[c]) {
-                count.push(values[c])
-                console.log(count)
-            }   
-        }    
+        // count = [];
+        // for(let c in values) {           
+        //     if(values[c]) {
+        //         count.push(values[c])
+        //         console.log(count)
+        //     }   
+        // }    
         console.log(values.length)
                 
         filterEl = [...allPatients];
@@ -460,8 +520,7 @@ $(document).ready(function () {
                     }
                 });
             }
-        }
-       
+        }       
         console.log(values[0])
         console.log(filterEl)
 
@@ -503,8 +562,7 @@ $(document).ready(function () {
                 } 
             }
         }
-    }  
-    
+    }      
     //date min today. max a year from now
     function dateLimit(oneYear) {
         let today = new Date();
@@ -542,8 +600,7 @@ $(document).ready(function () {
             $(this).attr('value', `${newValue} ${$(this).next().text()}`)
         })
     });
-    function time() {
-        // $('.time').append(`<button type="button" value="${$dateVal} ${startTime}:${minutes}0">${startTime}:${minutes}0</button>`);
+    function time() {       
         $('.time').append(`<label class="cont"><input type="radio" name="time" 
                             value = "${$dateVal} ${startTime}:${minutes}0">
                            <span>${startTime}:${minutes}0</span>
@@ -647,17 +704,27 @@ $(document).ready(function () {
             }           
         });   
     });
-    $('.userLog .next').click(function() {
+    $('.userLog .next').click(function() {  //refaktorisati switch
+        let text;
         $('.userLog input').each(function(){ 
-            let text = 'Molimo popunite polje';
-            if($(this).val() ==''){       
+            text = 'Molimo popunite polje';
+            if($(this).val() == ''){       
                 $(this).addClass('valid');
-                placeholder(this, text);
+                setTimeout(() => {
+                    placeholder(this, text);
+                }, 150); 
                 confirm = '';
-            } else if($("#passUser").val()!=$("#confPass").val()){             
-                placeholder("#passUser", 'lozinke se ne poklapaju');   
-                placeholder("#confPass", 'lozinke se ne poklapaju');            
-            }  else {
+            } else if($("#passUser").val()!=$("#confPass").val()){  
+                setTimeout(() => {
+                    placeholder("#passUser", 'lozinke se ne poklapaju');   
+                    placeholder("#confPass", 'lozinke se ne poklapaju');
+                }, 150);  
+            }  else if($("#username").val() == ''){
+                $("#username").addClass('valid');
+                setTimeout(() => {
+                    placeholder("#username", text);
+                }, 150); 
+            } else {
                 confirm = 'true';                
             }
         })  
@@ -697,6 +764,7 @@ $(document).ready(function () {
     } 
     if(loggedUser[0]){ 
         $('body').show();
+        $('.wrapImg').css('backgroundColor',' rgba(0, 0, 0, .8)');
         $('#ul li').css('width','50%');
         $('.userData form').hide();
         $('.userLog form').hide();
@@ -772,9 +840,23 @@ $(document).ready(function () {
         ime: 'Dr Marijana Cvetkovic',
         p: 'Diplomirala na Stomatološkom fakultetu u Beogradu 2010. godine. Akademske specijalističke studije iz Bolesti zuba na temu:“ Kompleksnost kanalne građe donjih premolara” završila je na Stomatološkom fakultetu u Beogradu 2015.godine. <br/><br/>U okviru kliničke prakse najviše je posvećena konzervativnoj stomatologiji kao što su popravka, izbeljivanje i lečenje zuba primenjujući savremene tehnike mašinske preparacije kanala korena zuba kao i slaganja boja kompozitnih ispuna (belih plombi). Pohađa dodatne kurseve iz oblasti endodoncije i prati inovacije savremenih materijala i procedura u stomatologiji.'
     }
-    let stomatolozi = [dr1, dr2, dr3];
+    let stomatolozi = [dr1, dr2, dr3];    
     
-    let c = "DUODENTAL OSNOVAN JE SA MISIJOM DA SVAKOM PACIJENTU PRUŽI KOMPLETNU ORALNU NEGU, OBEZBEDI NAJBOLJU USLUGU KOMBINUJUĆI SAVREMENA ZNANJA I TEHNOLOGIJU U OBLASTI STOMATOLOGIJE. POSVEĆENOST SVAKOM PACIJENTU JESTE IMPERATIV NAŠEG POSLOVANJA KOJE ZA ISHOD IMA ZDRAV I SAVRŠEN OSMEH";
-    console.log(c.toLowerCase())
+    function changeColor() {
+        if ($(window).scrollTop() > 2700) {           
+            $('.choiseDent .fa-calendar-alt').animate({
+                'color': 'rgb(231, 248, 132)',
+                'font-size': '30px',
+            }, 1200);
+            $('.choiseDent .fa-dollar-sign').animate({
+                'color': 'rgb(248, 132, 142)',
+                'font-size': '30px',
+            }, 1200);
+            $('.choiseDent .fa-cogs').animate({
+                'color': 'rgb(132, 244, 248)',
+                'font-size': '30px',
+            }, 1200);
+        } 
+    }   
    
 });

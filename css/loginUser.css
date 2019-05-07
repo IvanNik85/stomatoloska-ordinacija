@@ -3,8 +3,22 @@
     padding: 0;   
     box-sizing: border-box; 
 }
-body {
-    padding-top: 90px;
+body {    
+    /* color: #dacd25; */
+    /* background-color:#4c70b3; */
+    display: none;
+}
+.wrapper {
+    width: 100%;    
+    min-height: 101vh;    
+    background: url(../images/waitingRoom.jpg) no-repeat fixed; 
+    background-size: cover;     
+   }   
+.wrapImg {
+    background-color: rgba(0, 0, 0, .6);
+    padding-top: 90px; 
+    width: 100%;
+    min-height: 101vh;  
 }
 html {
     scroll-behavior: smooth;
@@ -32,27 +46,15 @@ nav {
     color: rgb(240, 238, 235);
     text-shadow: 0 0 5px rgb(255, 253, 253);;
     background-color: rgb(33, 113, 179);
-    box-shadow: -8px 0 8px rgba(28, 63, 129, 0.6);    
+    box-shadow: 4px 0 8px rgba(129, 130, 133, 0.6);    
     transition: all 0.3s;
     font-size: 17px;
 }
 #submit:active {
     transform: scale(.94);
 }
-/* input#ime, input#pass {
-    border: 1px solid rgb(15, 78, 129);
-    border-radius: 5px;
-    padding-left: 10px;
-    width: 100%;
-    height: 50px;
-}
-input#ime:focus, input#pass:focus {
-    border: 2px solid rgb(33, 113, 179); 
-    outline: none;
-    transition: 0.15s;
-} */
 #ime::placeholder, #pass::placeholder { 
-    color: red;
+    color: orangered;
     opacity: 1; /* Firefox */
   }
 form {
@@ -67,10 +69,11 @@ form {
     padding-top: 100px;
 }
 fieldset {
-    border: 2px solid rgb(0, 0, 0);
+    border: 2px solid #ab9f66;
     border-radius: 5px;
     margin: 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, .5);
+    background: rgba(0, 0, 0, .7)
     /* background-color:rgba(47, 72, 117, 0.67) */
 }
 .hide {
@@ -81,18 +84,28 @@ fieldset {
 }
 #schedule, #userInfo, .confirmBtn {    
     display: block;
-    margin: 10px auto;
+    margin: 43px auto;
     width: 150px;
-    height: 40px;
-    background-color: rgba(230, 228, 142, 0.67);
+    height: 45px;
+    background-image: linear-gradient(45deg,#259077,#122175);
+    color: #fff;
+    font-size: 17px;
     border: 3px solid rgb(43, 43, 146);
     border-radius: 40px;
     outline: none;
 }
 #schedule:hover, #userInfo:hover, .confirmBtn:hover{   
     background-color: rgb(79, 79, 207);
-    color: #fff;
+    /* color: #fff; */
+    font-size: 18px;
+    color: #dacd25;
     transition: all 0.3s;
+}
+.confirmBtn {
+    width: 170px;
+}
+.confirmBtn .fas:hover {
+    background-color: transparent;
 }
 h3 {
     margin: 5px 0;
@@ -100,18 +113,87 @@ h3 {
 .btns, .userContent {
     margin-top: 150px;
 }
+.userCont h3, p {
+    color: #fff;    
+}
+.userCont h3 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.userCont {
+    margin-top: 40px;
+}
+.user h1 {
+    color: #fff;
+    margin: 50px 0;
+}
+.userCont h1 {
+    color: #dacd25;
+}
+.userCont p {
+    margin: 20px;
+    font-size: 18px;
+}
+.userContent i {
+    display: block;
+    text-align: center;
+    color: #dacd25;
+    font-size: 45px;
+    padding-bottom: 30px;
+}
+.userCont .fas:hover {
+    background: none;
+}
+.generateUser {
+    position: relative;
+    /* overflow-x: scroll; */
+}
+.generateUser .patientsTable {
+    margin: auto;
+    margin-top: 100px;
+    border: 2px solid rgb(25, 11, 63);
+    border-radius: 2px;
+    font-size: 17px;
+}
+.btnCont .fa-angle-left {    
+    display: block;
+    margin: auto;   
+    font-size: 40px;
+    line-height: 40px;
+    color: #fff;
+}
+.back { 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 45px;
+    border-radius: 10px;
+    bottom: 40px;  
+    background-image: linear-gradient(45deg,#259077,#69aec9);  
+    border: 2px solid #122175;
+}
+.back .fas:hover {
+    background: none;
+}
+.btnCont {
+    width: 60%;
+    margin: auto;
+    position: relative;
+}
 .patientsTable th, .patientsTable td {
-    width: 140px;
+    width: 180px;
     height: 45px;
     border: 1px solid black;
     text-align: left;   
     padding-left: 20px;
 }
 .patientsTable tbody tr th {
-    background-color: rgb(212, 208, 208);
+    background-color: rgb(30, 82, 136);
+    color:  #dacd25;
 }
 tr input {
-    width: 300px;
+    width: 500px;
     height: 50px;
     padding-left: 25px;
 }
@@ -125,7 +207,7 @@ tr input {
     position: absolute;  
     transform: translate(-50%);
     left: 50%;
-    top: 15%;
+    top: 28%;
     margin: auto;
     width: 50px;
     height: 50px;
@@ -139,7 +221,9 @@ tr input {
     border: none;
     outline: none;
     width: 100%;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #fff;
+    background: transparent;
+    color: #fff;
 }
 .box div {
     position: relative;
@@ -150,15 +234,35 @@ tr input {
     left: 5px;
     top: 10px;
     transition: .4s;
+    color: #fff;
 }
 .box input:focus ~ label,
 .box input.valid ~ label{
     top: -12px;
     font-size: 12px;
-    color: orangered;
+    color:#ab9f66;
     font-weight: bold;
     border: none;
 }
 .box input:focus { /*.box input.valid     */
-    border-bottom: 2px solid orangered;
+    border-bottom: 2px solid#ab9f66;
+}
+@media (min-width: 768px) and (max-width: 992px) { 
+    .btnCont {
+        width: 100%;
+    } 
+}
+@media (min-width: 992px) and (max-width: 1199px) { 
+    .btnCont {
+        width: 70%;
+    } 
+}
+@media (max-width: 767px) {
+    .userContent {     
+        margin-top: 0; 
+        padding-bottom: 40px;
+    } 
+    .btnCont {
+        width: 120%;
+    }
 }
