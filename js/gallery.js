@@ -53,11 +53,11 @@ export function gallery() {
                 $('#cir' + c).css('background-color', '#1299b7');
             }
         }   
-        //pokretanje slika pri ucitavanju      
+          
         $(window).on('load', function(){ 
             stop = setInterval(desno, 2500);                
         }); 
-        //kruzici klik         
+              
         $('.sliderCont a').on('click', function(){
             clearInterval(stop); 
             $('.sliderCont a').css('background-color', 'rgb(214, 205, 205)');
@@ -68,37 +68,32 @@ export function gallery() {
             if($(this).attr('id').slice(-1) == 0) {
                 c = 0;                
             }  
-            //$(this).eq(0)             
         });         
-        //onemogucen desni klik
+        
         $(document).bind("contextmenu", function(e) {
             return false;
         });
-        //klik nadesno
+        
         $('.slideImage img, .fa-angle-right').on('click', function() {
             desno();
             clearInterval(stop);   
         });
-        //taster nadesno
+      
         $(this).keydown(function(e) {
             if (e.which == 39) {
                 desno();  
                 clearInterval(stop);                  
-            }
-        });
-        //klik nalevo           
-        $('.fa-angle-left').on('click', function() {
-            levo();
-            clearInterval(stop);   
-        });
-        //taster nalevo
-        $(this).keydown(function(e) {
-            if (e.which == 37) {
+            } else if(e.which == 37) {
                 levo();
                 clearInterval(stop);   
             }
         });
-        //desni klik nalevo
+        
+        $('.fa-angle-left').on('click', function() {
+            levo();
+            clearInterval(stop);   
+        });        
+       
         $('slideImage img').contextmenu(function() {
             levo();
             clearInterval(stop);   

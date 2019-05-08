@@ -1,5 +1,5 @@
-import { navMeni} from './navbarMenu.js'
-import { gallery} from './gallery.js'
+import { navMeni} from './navbarMenu.js';
+import { gallery} from './gallery.js';
 
 if(window.location.href.indexOf('/login/')!= -1) {    
     navMeni('.', '');    
@@ -10,7 +10,7 @@ if(window.location.href.indexOf('/login/')== -1) {
     gallery();
 }
 
-$(document).ready(function () {    
+$(document).ready(function () {  
     let admName = 'Ivan';
     let admPass = 'nik';
     let user = [];
@@ -30,15 +30,13 @@ $(document).ready(function () {
     
     localStorage.getItem('loggedAdmin')?
     loggedAdmin = JSON.parse(localStorage.getItem('loggedAdmin')): 
-    loggedAdmin = '';
-    //napomena - prilikom unosa imena korisnika koristiti toLowerCase
+    loggedAdmin = '';    
    
     $('#submitAdmin').click(function () {
         refactorAdmin();
     });
 
-    $('#imeAdm, #passAdm').keypress(enterAdm);
-    // $(window).keypress(enter);
+    $('#imeAdm, #passAdm').keypress(enterAdm);   
     function enterAdm(event) {
         event.which == 13 && refactorAdmin();
     }    
@@ -59,9 +57,8 @@ $(document).ready(function () {
         }
     }
     
-    function potvrda(a, b, c, d) { 
-        if ($(c).val() == a && $(d).val() == b) {
-            // $('ul li:last-child').hide().html(`<li><a href="##">Ivan</a></li>`);
+    function potvrda(a, b, c, d) {         
+        if ($(c).val() == a && $(d).val() == b) {           
             $('.toggle').hide();
             $('.content').show();
             $('.wrapImg').css('backgroundColor',' rgba(0, 0, 0, .8)'); 
@@ -84,8 +81,7 @@ $(document).ready(function () {
     }  
    
     $('#submit').click(function () {
-        refactorUser();
-        // console.log(loggedUser[0].ime)
+        refactorUser();      
     });
 
     $('#ime, #pass').keypress(enter);
@@ -121,8 +117,7 @@ $(document).ready(function () {
          changeColor();        
          }
     function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 1850) {
-            // $(window).scrollTop()
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 1850) {          
             $('#scrollTop').slideDown(400);           
         } else {
             $('#scrollTop').slideUp(400);
@@ -177,7 +172,7 @@ $(document).ready(function () {
     function generate(value) {
         return value[Math.floor(Math.random() * value.length)];
     }
-    // Dodati datum kao objekt ili niz    
+       
     function generatePatients() {
         let visit = Math.ceil(Math.random()*3);
         patient.ime = generate(ime);
@@ -211,8 +206,7 @@ $(document).ready(function () {
     while (allPatients.length < 100) {
         generatePatients();
     }
-
-    // console.log(allPatients);
+    
     if (!localStorage.getItem('listaPacijenata')) {
         let myJSON = JSON.stringify(allPatients);
         localStorage.setItem('listaPacijenata', myJSON);
@@ -256,8 +250,7 @@ $(document).ready(function () {
                                              pregled, stomat, dateTime, username, password));
             localStorage.setItem('listaPacijenata', JSON.stringify(allPatients));
             $("input, select").val('');
-            location.reload();
-            console.log(allPatients);
+            location.reload();           
         } 
     });
 
@@ -267,35 +260,32 @@ $(document).ready(function () {
     $('#date').on('input',function(e) { 
         disableButtons(new Date(e.target.value).toDateString());
     })
-    let nizz = [];
+    
     function disableButtons(dateV) { 
-        nizz = [];
-        allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));    
-        let cont = document.querySelectorAll('.time .cont');  //disable buttons
+        let cont = document.querySelectorAll('.time .cont');  
         for(let i in allPatients) {
             for(let j=0;j<14;j++) {   
                 let timeVal = cont[j].firstElementChild.nextElementSibling;                         
                 let dateT = `${dateV} ${timeVal.innerHTML}`;
                 if(allPatients[i].datum.includes(dateT) == true ) {
-                    nizz.push(dateT)
-                }   
-                if (allPatients[i].datum.includes(dateT)) {                     
+                    cont[j].firstElementChild.disabled = true;                 
+                }               
+                if (allPatients[i].datum.includes(dateT) && cont[j].firstElementChild.disabled == true) {                     
                     cont[j].style.pointerEvents = 'none';
                     cont[j].style.border = '2px solid #ffc107';
                     cont[j].style.backgroundColor = '#d3d3d3';
-                    timeVal.style.textDecoration = 'line-through';                                                
-                }  else if(allPatients[i].datum.includes(dateT)==false) {  
+                    timeVal.style.textDecoration = 'line-through';  
+                    cont[j].firstElementChild.disabled = true;                                              
+                }  else  {  
                     cont[j].style.pointerEvents = 'auto'; 
                     cont[j].style.border ='2px solid #c5b1b1'; 
                     cont[j].style.backgroundColor = '#3c2c2cc4'; 
                     timeVal.style.textDecoration = 'none'; 
-                    }  
-                }        
-            } 
-            set();
-            console.log(nizz)
+                    cont[j].firstElementChild.disabled = false;
+                }   
+            }        
         }   
-      
+    }   
 
     let showTable = document.querySelector('.table');
     let table = document.createElement('table');
@@ -312,7 +302,7 @@ $(document).ready(function () {
         for (let i = 0; i < val.length; i++) {
             let tr = document.createElement('tr');
             tbody.appendChild(tr);
-            for (let j = 0; j < len; j++) { //Object.keys(val[0]).length - 1
+            for (let j = 0; j < len; j++) { 
                 if (i == 0 && j == 0) {
                     let num = document.createElement('th');
                     num.innerHTML = 'Br.';
@@ -372,10 +362,10 @@ $(document).ready(function () {
         }); 
     }
     
-    let generateUser = document.querySelector('.table, .generateUser'); //.table
+    let generateUser = document.querySelector('.table, .generateUser'); 
+
     function userData(val) { 
-        generateUser.appendChild(table);
-        // table.setAttribute('id', 'userTable');
+        generateUser.appendChild(table);       
         table.appendChild(tbody);
         for(let i = 0; i < Object.keys(val).length - 2; i++) {
             let tr = document.createElement('tr');
@@ -387,8 +377,8 @@ $(document).ready(function () {
                     th.innerHTML = capitalised.charAt(0).toUpperCase() + capitalised.slice(1);
                     tr.appendChild(th);
                 } else {
-                    let td = document.createElement('input'); //td
-                    td.value = Object.values(val)[i];   //td.innerHTML                    
+                    let td = document.createElement('input'); 
+                    td.value = Object.values(val)[i];                      
                     tr.appendChild(td);
                 }
             }
@@ -452,8 +442,7 @@ $(document).ready(function () {
         userData(loggedUser[0]);       
         let inputTable = document.querySelectorAll('tBody tr');
         inputTable[4].lastElementChild.disabled = true;
-        $('.content').slideUp(700);
-        // $(this).unbind()  //remove event listener       
+        $('.content').slideUp(700);             
     });
 
     function remPrevTable() {
@@ -473,7 +462,7 @@ $(document).ready(function () {
             createTable(allPatients,8);
         });  
 
-        let tr = document.querySelectorAll('tr .delete'); //naci pacijenta u allPatient nizu i obrisati ga
+        let tr = document.querySelectorAll('tr .delete'); 
         for(let i=0;i< tr.length; i++) {
             tr[i].addEventListener('click',deleteUser(allPatients, 'allPatients'));
         }
@@ -481,7 +470,6 @@ $(document).ready(function () {
 
     let filterEl = [];
     let values = [];
-    // let count = [];   
     let search = ['#imePac', '#prezimePac', '#email', '#telefon', '#karton', '#usluga', '#stomatolog'];
     let searchValues = ['ime', 'prezime', 'email', 'telefon', 'brojKartona', 'usluga', 'stomatolog'];
 
@@ -491,15 +479,7 @@ $(document).ready(function () {
         allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));
         for (let i = 0; i < 8; i++) {
             values.push($(search[i]).val());
-        }
-        // count = [];
-        // for(let c in values) {           
-        //     if(values[c]) {
-        //         count.push(values[c])
-        //         console.log(count)
-        //     }   
-        // }    
-        console.log(values.length)
+        }  
                 
         filterEl = [...allPatients];
 
@@ -528,9 +508,7 @@ $(document).ready(function () {
                     }
                 });
             }
-        }       
-        console.log(values[0])
-        console.log(filterEl)
+        }      
 
         filterEl.length != allPatients.length ? createTable(filterEl,6,5,4) : $('.table h4').show();  
             $('.expand').click(function() {   
@@ -544,9 +522,6 @@ $(document).ready(function () {
         }           
         values = [];
     });
-
-    // allPatients = JSON.parse(localStorage.getItem('listaPacijenata')); 
-    // let set = function() {localStorage.setItem('listaPacijenata',JSON.stringify(value))};
 
     function deleteUser(value,text) { 
         return function() {           
@@ -571,11 +546,11 @@ $(document).ready(function () {
             }
         }
     }      
-    //date min today. max a year from now
+
     function dateLimit(oneYear) {
         let today = new Date();
         let dd = today.getDate();
-        let mm = today.getMonth() + 1; //January is 0!
+        let mm = today.getMonth() + 1; 
         let yyyy = today.getFullYear();        
 
         dd < 10 && (dd = '0' + dd);
@@ -585,9 +560,7 @@ $(document).ready(function () {
     }       
     $("#date").attr("min", dateLimit(0));
     $("#date").attr("max", dateLimit(1));
-
-    // let currentDate = new Date();  
-    // $("#date").val(currentDate);
+    
     if(window.location.href.indexOf('login/zakazivanje')!= -1) {
         let dateVal = document.getElementById("date");
         dateVal.valueAsDate = new Date();
@@ -631,9 +604,9 @@ $(document).ready(function () {
             randTime.push(`${startTime}:${minutes}0`);     
         }
     }      
-
+    //verifikacija input polja
     function stateCheck(check) {
-        (check.val().length > 0) ?  //verifikacija input polja
+        (check.val().length > 0) ?  
             check.addClass('valid'):               
             check.removeClass('valid');                
     }

@@ -9,7 +9,6 @@ html {
 h1, h2 {
     text-align: center;
 }
-/* refaktorisati */
 .Header {
     height: 100vh;
     background: url(../images/imageHeader.jpg) no-repeat center;   
@@ -118,15 +117,13 @@ transition: 0.3s;
     box-sizing: border-box;
     border-radius: 4px;
 } 
-.Galerija {
-    /* height: 700px; */
+.Galerija {  
     padding-top: 100px;
 }
 .gallery h2 {
     padding-bottom: 20px;
 }
-.Zakazivanje {
-    /* height: 600px; */
+.Zakazivanje {   
     margin-top: 180px;  
     background-color:#4c70b3;
     color:#fff;
@@ -171,22 +168,18 @@ transition: 0.3s;
 .choiseDent p {
     padding-bottom: 20px;
 }
-/* .choiseTitle .fa-calendar-alt {
-    color: rgb(231, 248, 132);
-}
-.choiseTitle .fa-dollar-sign {
-    color: rgb(248, 132, 142);
-}
-.choiseTitle .fa-cogs {
-    color: rgb(132, 244, 248);
-} */
 .login, .schedule {
     background-image: linear-gradient(45deg,#0077a5, #268e7b);
-    color: #fff;
-    font-weight: bold;
-    border: 1px solid black;
+    color: #fff;    
+    font-size: 18px;
+    margin: 30px;
+    border: 2px solid rgb(55, 46, 139);
     border-radius: 5px;
+    width: 140px;  
     height: 40px;
+}
+.login:hover, .schedule:hover {
+   box-shadow: 8px 2px 8px #10649e;
 }
 .content a button:hover {
     background-color: #10649e
@@ -197,17 +190,10 @@ transition: 0.3s;
 .col-md-6 p {
     padding-top: 30px;
 }
-.login, .schedule {
-    width: 140px;
-    height: 40px;
-    margin: 30px;
-    border: 2px solid rgb(55, 46, 139);
-}
 #last  {
     padding-bottom: 30px;   
 }
-.Kontakt {
-    /* height: 600px; */
+.Kontakt {  
     padding-bottom: 150px;
 }
 .Kontakt i {
@@ -307,10 +293,6 @@ transition: 0.3s;
 }
 /* GALLERY */
 
-/* .gallery {
-    height: 612px;
-    position: relative;  
-} */
 .slideImage {
     width: 100%;
     height: 650px;
@@ -346,9 +328,7 @@ transition: 0.3s;
     padding: 10px;
     border: 1px solid rgb(95, 95, 95);
     color:rgb(18, 153, 183);
-    margin: 0;
-    /* position: absolute;
-    left: 200; */
+    margin: 0;    
     z-index: 1;
     display: block;
 }
@@ -444,6 +424,13 @@ transition: 0.3s;
     .Zakazivanje {       
         margin-top: -250px; 
     }   
+    .hideSpan {
+        display: none;
+    }
+    .schedule, .login {
+        display: block;
+        margin: 15px auto;
+    }
      .gallery .fa-angle-left {
          visibility: hidden;
      } 

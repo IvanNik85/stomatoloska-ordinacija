@@ -3,9 +3,7 @@
     padding: 0;   
     box-sizing: border-box; 
 }
-body {    
-    /* color: #dacd25; */
-    /* background-color:#4c70b3; */
+body { 
     display: none;
 }
 .wrapper {
@@ -37,9 +35,9 @@ nav {
     border-radius: 50%;
     outline: none;
     transform: scale(1);
-    border: 3px solid rgb(10, 33, 59);
+    border: 1px solid rgb(10, 33, 59);
     font-weight: bold;
-    background-color: rgb(113, 189, 233);
+    background-image: linear-gradient( rgb(122, 195, 236), #082d5e);   
     transition: all 0.3s;
 }
 #submit:hover {
@@ -73,8 +71,7 @@ fieldset {
     border-radius: 5px;
     margin: 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, .5);
-    background: rgba(0, 0, 0, .7)
-    /* background-color:rgba(47, 72, 117, 0.67) */
+    background: rgba(0, 0, 0, .7);  
 }
 .hide {
     display: none;
@@ -95,8 +92,7 @@ fieldset {
     outline: none;
 }
 #schedule:hover, #userInfo:hover, .confirmBtn:hover{   
-    background-color: rgb(79, 79, 207);
-    /* color: #fff; */
+    background-color: rgb(79, 79, 207);    
     font-size: 18px;
     color: #dacd25;
     transition: all 0.3s;
@@ -148,8 +144,7 @@ h3 {
     background: none;
 }
 .generateUser {
-    position: relative;
-    /* overflow-x: scroll; */
+    position: relative;  
 }
 .generateUser .patientsTable {
     margin: auto;
@@ -203,12 +198,6 @@ tr input {
     height: 50px;
     padding-left: 25px;
 }
-/* #userTable td {
-    width: 350px; 
-} */
-/* #userTable tr:hover {
-    background-color: aqua;
-} */
 .box img {
     position: absolute;  
     transform: translate(-50%);
@@ -250,7 +239,7 @@ tr input {
     font-weight: bold;
     border: none;
 }
-.box input:focus { /*.box input.valid     */
+.box input:focus { 
     border-bottom: 2px solid#ab9f66;
 }
 @media (min-width: 768px) and (max-width: 992px) { 
