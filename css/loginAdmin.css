@@ -14,7 +14,7 @@ body {
 }
 .wrapAdmImg {
     padding-top: 120px;
-    background-color: rgba(184, 199, 212, 0.4);
+    background-color: rgba(35, 35, 35, 0.6);
     padding-top: 90px; 
     width: 100%;
     min-height: 101vh;  
@@ -30,6 +30,7 @@ html {
 .admCont h1 {
     margin: 50px 0;
     text-align: center;
+    color: #fff;
 }
 nav {
     background-color: rgba(0, 0, 0, .5);
@@ -123,18 +124,19 @@ fieldset {
 .patientsTable tr:hover {
     background-color: rgb(136, 238, 229);
 }
-table {
+table {    
+    text-align: center;
+    margin: auto;    
     margin-top: 40px;
-    overflow: scroll;
 }
 .patientsTable thead tr th {
     border-bottom: 1px solid black;
-    background-color: rgb(212, 208, 208);
+    background-color:#b5b5b5;
 }
 .patientsTable tbody tr th {
-    background-color: rgb(212, 208, 208);
+    background-color:#62b5a9
 }
-.patientsTable td {
+.patientsTable tr {
     background-color: #fff;
 } 
 .patientsTable .expand {
@@ -150,6 +152,9 @@ table {
 .patientsTable .delete:hover {
     background-color:rgb(204, 42, 42); 
     cursor: pointer;
+}
+select#stomatolog {
+    margin-top: -30 !important;
 }
 tr input {
     width: 550px;
@@ -173,8 +178,8 @@ tr input {
 select#usluga, select#stomatolog {
     height: 35px;
     width: 90%;
-    margin: 5px 0;
-    padding-left: 5px;
+    /* margin: 5px 0;
+    padding-left: 5px; */
     border-radius: 4px;
     outline: none;
 }
@@ -184,11 +189,19 @@ select#usluga:focus, select#stomatolog:focus {
 }
 .table h3 {
     margin: 20px 70px;
+    text-align: center;
+    color: #fff;
 }
 .table h4 {
     margin: 100px 70px;
-    color:#da1b2a;
+    color:#ff0000;
     display: none;
+}
+#stomatolog {
+    margin-top: -12px;
+}
+#usluga {
+    margin-top: 5px; 
 }
 #filter {
     background-color: rgb(32, 137, 148);
@@ -197,11 +210,18 @@ select#usluga:focus, select#stomatolog:focus {
     background-color: rgb(148, 32, 119);
     transition: 0.5s;
 }
-/* .filters {
+.filters {
     display: flex;
     align-items: center;
     flex-flow: column wrap;
-} */
+}
+.filters h3 {
+    color: #fff;
+    margin-bottom: 30px;
+}
+.table {
+    margin: auto;
+}
 .box img {
     position: absolute;  
     transform: translate(-50%);
@@ -272,4 +292,9 @@ select#usluga:focus, select#stomatolog:focus {
 #scrollTop:hover i {
     color: #ffe600;    
     transition: 0.2s;    
+}
+@media (min-width: 992px) and (max-width: 1199px) { 
+    .filters input,.filters select#usluga,.filters select#stomatolog {
+        width: 70%;
+    } 
 }

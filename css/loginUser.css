@@ -100,6 +100,7 @@ fieldset {
     font-size: 18px;
     color: #dacd25;
     transition: all 0.3s;
+    outline: none;
 }
 .confirmBtn {
     width: 170px;
@@ -126,9 +127,11 @@ h3 {
 .user h1 {
     color: #fff;
     margin: 50px 0;
+    text-align: center;
 }
 .userCont h1 {
     color: #dacd25;
+    text-align: center;
 }
 .userCont p {
     margin: 20px;
@@ -154,6 +157,9 @@ h3 {
     border: 2px solid rgb(25, 11, 63);
     border-radius: 2px;
     font-size: 17px;
+}
+.generateUser .patientsTable input::placeholder {
+    color: red;
 }
 .btnCont .fa-angle-left {    
     display: block;

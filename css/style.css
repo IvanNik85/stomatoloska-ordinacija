@@ -20,9 +20,9 @@ h1, h2 {
     height: 100%;   
 }
 .Header h1 {
-    padding-top: 150px;
+    padding-top: 196px;
     padding-bottom: 40px;
-    font-size: 45px;
+    font-size: 50px;
     color: #fff;
 }
 .Header p {
@@ -38,13 +38,12 @@ h1, h2 {
     height: auto;
 }
 .infWrap {
-    padding-bottom: 60px; 
+    padding-bottom: 55px; 
 }
 .infoTitle p {
     color: #333;
     font-size: 18px;
-    line-height: 28px;
-    margin-top: 45px;
+    line-height: 28px;    
     text-align: center;
     text-align: justify;
     text-indent: 50px;
@@ -52,6 +51,9 @@ h1, h2 {
 .infoTitle {
     margin-top: 100px;
     margin-bottom: 60px;
+}
+.infoTitle h2 {
+    margin-bottom: 45px;
 }
 .card:hover {
 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4);
@@ -342,39 +344,43 @@ transition: 0.3s;
 .slideImage i {
     font-size: 60px;
     padding: 10px;
-    border: 2px solid black;
-    color: orange;
+    border: 1px solid rgb(95, 95, 95);
+    color:rgb(18, 153, 183);
     margin: 0;
     /* position: absolute;
     left: 200; */
     z-index: 1;
     display: block;
 }
-.fa-arrow-right {
+.fa-angle-right {
     position: absolute;
     transform: translate(0, -50%);
     -webkit-transform: translate(0, -50%);
     -moz-transform: translate(0, -50%);
+    width: 60px;
+    text-align: center;
     top: 55%;
     right: 0; 
 }
-.fa-arrow-left {
+.fa-angle-left {
     position: absolute;
     transform: translate(0, -50%);
     -webkit-transform: translate(0, -50%);
     -moz-transform: translate(0, -50%);
+    width: 60px;
+    text-align: center;
     top: 50%;
     left: 0;   
 }
-.fas:hover {
+.slideImage .fa:hover {
     background-color: rgba(0, 0, 0, 0.75);
     cursor: pointer;
 }
 @media (max-width: 768px) {
-    .fa-arrow-right {     
+    .fa-angle-right {     
         top: 25%;
     }
-    .fa-arrow-left {      
+    .fa-angle-left {      
         top: 25%;
     }
     .sliderCont {    
@@ -393,12 +399,19 @@ transition: 0.3s;
     .Zakazivanje {       
         margin-top: -200px; 
     }  
+    .card {
+        width:70%;
+        margin: auto;
+    }
+    .infWrap {
+        padding-bottom: 45px; 
+    }
 }
 @media (min-width: 768px) {
-    .fa-arrow-right {     
+    .fa-angle-right {     
         top: 30%;
     }
-    .fa-arrow-left {     
+    .fa-angle-left {     
         top: 30%;
     }
     .sliderCont {      
@@ -406,10 +419,10 @@ transition: 0.3s;
      }      
 }
 @media (min-width: 992px) {
-    .fa-arrow-right {      
+    .fa-angle-right {      
         top: 45%;
     }
-    .fa-arrow-left {       
+    .fa-angle-left {       
         top: 45%;
     }
     .sliderCont {     
@@ -417,10 +430,10 @@ transition: 0.3s;
     }    
 }
 @media (min-width: 1200px) {
-    .fa-arrow-right {    
+    .fa-angle-right {    
         top: 55%;
     }
-    .fa-arrow-left {     
+    .fa-angle-left {     
         top: 55%;
     }  
     .sliderCont {      
@@ -431,10 +444,10 @@ transition: 0.3s;
     .Zakazivanje {       
         margin-top: -250px; 
     }   
-     .gallery .fa-arrow-left {
+     .gallery .fa-angle-left {
          visibility: hidden;
      } 
-     .gallery .fa-arrow-right  {
+     .gallery .fa-angle-right  {
         display: none !important;
     }   
     .sliderCont {

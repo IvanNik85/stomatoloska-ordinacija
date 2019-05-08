@@ -20,10 +20,10 @@ export function gallery() {
         }
     }
     let arr = document.createElement('i');
-    arr.className = 'fas fa-arrow-right';
+    arr.className = 'fa fa-angle-right';
     slideImage.appendChild(arr);
     let arr1 = document.createElement('i');
-    arr1.className = 'fas fa-arrow-left';
+    arr1.className = 'fa fa-angle-left';
     slideImage.appendChild(arr1);
     
     $(document).ready(function () {
@@ -75,7 +75,7 @@ export function gallery() {
             return false;
         });
         //klik nadesno
-        $('.slideImage img, .fa-arrow-right').on('click', function() {
+        $('.slideImage img, .fa-angle-right').on('click', function() {
             desno();
             clearInterval(stop);   
         });
@@ -87,7 +87,7 @@ export function gallery() {
             }
         });
         //klik nalevo           
-        $('.fa-arrow-left').on('click', function() {
+        $('.fa-angle-left').on('click', function() {
             levo();
             clearInterval(stop);   
         });

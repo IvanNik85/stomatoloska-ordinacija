@@ -11,7 +11,7 @@ if(window.location.href.indexOf('/login/')== -1) {
 }
 
 $(document).ready(function () {    
-    let admName = 'ivan';
+    let admName = 'Ivan';
     let admPass = 'nik';
     let user = [];
     let loggedUser;
@@ -143,11 +143,11 @@ $(document).ready(function () {
         }
     }
     class PatientData extends Patient {
-        constructor(ime, prezime, email, telefon, brojKartona, usluga, stomatolog, date, username, password) {
+        constructor(ime, prezime, email, telefon, brojKartona, usluga, stomatolog, datum, username, password) {
             super(ime, prezime, email, telefon, brojKartona);
             this.usluga = usluga;
             this.stomatolog = stomatolog;
-            this.date = date;
+            this.datum = datum;
             this.username = username;
             this.pass = password;
         }
@@ -185,22 +185,21 @@ $(document).ready(function () {
         patient.email = `${patient.ime}.${patient.prezime}@${generate(email)}.com`;
         patient.usluga = [];
         patient.stomatolog = [];
-        patient.date = [];       
+        patient.datum = [];       
         for(let i=0; i<visit; i++) {
             patient.usluga.push(generate(usluga));
             patient.stomatolog.push(generate(stomatolog)); 
             do {
                 patient.noWeekend = randomDate(new Date('2016-05-01'), new Date());
                 } while (!patient.noWeekend); 
-            patient.date.push(`${new Date(patient.noWeekend).toDateString()} ${randTime[Math.floor(Math.random()*14)]}`);
+            patient.datum.push(`${new Date(patient.noWeekend).toDateString()} ${randTime[Math.floor(Math.random()*14)]}`);
         }  
         let randNum = ('0000' + randNumber()).slice(-7); 
         patient.username = `${patient.ime}${patient.prezime.slice(0,3)}`;
         patient.pass = `${patient.ime}${(randNumber() % 1000)}`;
-        let phone = `${generate(mreza)}/${randNumber()}`;
-        // patient.date = `${new Date(patient.date).toDateString()} ${randTime[Math.floor(Math.random()*14)]}`;
+        let phone = `${generate(mreza)}/${randNumber()}`;        
         let newPatient = new PatientData(patient.ime, patient.prezime, patient.email, phone, randNum, 
-                         patient.usluga, patient.stomatolog, patient.date, patient.username, patient.pass);
+                         patient.usluga, patient.stomatolog, patient.datum, patient.username, patient.pass);
         for (let j in allPatients) {
             if (patient.ime === allPatients[j].ime && patient.prezime === allPatients[j].prezime) {
                 allPatients.splice(j, 1);
@@ -243,7 +242,7 @@ $(document).ready(function () {
                 loggedUser[0].prezime == allPatients[i].prezime ) {
                 allPatients.splice(i,1);
                 set();
-                loggedUser[0]['date'].push(dateTime[0]);
+                loggedUser[0]['datum'].push(dateTime[0]);
                 loggedUser[0]['usluga'].push(pregled[0]);
                 loggedUser[0]['stomatolog'].push(stomat[0]);
                 allPatients.push(loggedUser[0]);
@@ -268,33 +267,35 @@ $(document).ready(function () {
     $('#date').on('input',function(e) { 
         disableButtons(new Date(e.target.value).toDateString());
     })
-    function disableButtons(dateV) {   
+    let nizz = [];
+    function disableButtons(dateV) { 
+        nizz = [];
         allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));    
         let cont = document.querySelectorAll('.time .cont');  //disable buttons
         for(let i in allPatients) {
             for(let j=0;j<14;j++) {   
                 let timeVal = cont[j].firstElementChild.nextElementSibling;                         
-                let dateT = `${dateV} ${timeVal.innerHTML}`; 
-                if(allPatients[i].date.includes(dateT) == false ) {
-                    cont[j].firstElementChild.disabled = false;
-                }                                                                  
-                if (allPatients[i].date.includes(dateT)) { //dateT
-                    console.log(allPatients[i])
+                let dateT = `${dateV} ${timeVal.innerHTML}`;
+                if(allPatients[i].datum.includes(dateT) == true ) {
+                    nizz.push(dateT)
+                }   
+                if (allPatients[i].datum.includes(dateT)) {                     
                     cont[j].style.pointerEvents = 'none';
-                    cont[j].style.border = '2px solid red';
+                    cont[j].style.border = '2px solid #ffc107';
                     cont[j].style.backgroundColor = '#d3d3d3';
-                    cont[j].firstElementChild.disabled = true;
-                    timeVal.style.textDecoration = 'line-through';                                 
-                } else if(cont[j].firstElementChild.disabled != true) {                            
-                    console.log(`delete`)  
+                    timeVal.style.textDecoration = 'line-through';                                                
+                }  else if(allPatients[i].datum.includes(dateT)==false) {  
                     cont[j].style.pointerEvents = 'auto'; 
                     cont[j].style.border ='2px solid #c5b1b1'; 
                     cont[j].style.backgroundColor = '#3c2c2cc4'; 
-                    timeVal.style.textDecoration = 'none';               
+                    timeVal.style.textDecoration = 'none'; 
                     }  
                 }        
             } 
+            set();
+            console.log(nizz)
         }   
+      
 
     let showTable = document.querySelector('.table');
     let table = document.createElement('table');
@@ -425,7 +426,14 @@ $(document).ready(function () {
                 let value = inputTable[j].lastElementChild.value;  
                 let key = inputTable[j].lastElementChild.previousElementSibling.innerHTML;                        
                 key = key.charAt(0).toLowerCase() + key.slice(1);
-                changeUser[key] = value;                 
+                changeUser[key] = value;      
+                if (!value) {                   
+                    inputTable[j].lastElementChild.setAttribute('placeholder', 'Molimo unesite vrednost');
+                    setTimeout(function() {    
+                    inputTable[j].lastElementChild.setAttribute('placeholder', '');                
+                }, 1300);
+                    return;                   
+                }           
                 if (changeUser.brojKartona == allPatients[i].brojKartona) { 
                     changeUser['username'] =  allPatients[i].username;
                     changeUser['pass'] =  allPatients[i].pass;                 
@@ -704,7 +712,7 @@ $(document).ready(function () {
             }           
         });   
     });
-    $('.userLog .next').click(function() {  //refaktorisati switch
+    $('.userLog .next').click(function() {  
         let text;
         $('.userLog input').each(function(){ 
             text = 'Molimo popunite polje';

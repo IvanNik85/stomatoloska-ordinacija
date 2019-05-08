@@ -3,12 +3,24 @@
     padding: 0;    
     box-sizing: border-box;
 }
-body {
-    padding-top: 90px;
+body {    
     display: none;
 }
 nav {
     background-color: rgba(0, 0, 0, .5);
+}
+.scheduleImg {
+    width: 100%;    
+    min-height: 101vh;    
+    background: url(../images/schedule2.jpg) no-repeat fixed; 
+    background-size: cover;   
+}
+.scheduleWrap {
+    padding-top: 90px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding-top: 90px; 
+    width: 100%;
+    min-height: 101vh;  
 }
 form {
     display: flex;
@@ -18,12 +30,12 @@ form {
     height: 500px;
     width: 100%;
     margin: auto;
-    padding: 40px;
-    /* background-color: #498f92; */
-    background-image: linear-gradient(45deg,#0077a5, #268e7b);
+    padding: 0 40px;
+    /* background-color: #498f92; */  
 }
 fieldset {
     border: 2px solid black;
+    background-color: rgba(6, 77, 61, 0.7);
     border-radius: 5px;
     width: 100%;
 }
@@ -36,14 +48,14 @@ fieldset {
 #error {
     height: 25px;
     visibility: hidden;
-    color:rgb(251, 255, 0);
+    color: red;
     font-size: 18px;
 }
 #ime1::placeholder, #prezime1::placeholder,
 #email1::placeholder, #phone::placeholder,
 #passUser::placeholder,#confPass::placeholder,
 #username::placeholder { 
-    color: rgb(251, 255, 0);
+    color:rgb(255, 51, 0);
     opacity: 1; /* Firefox */
   }
 input#date {
@@ -69,6 +81,7 @@ input#date {
 }
 .wrap1 h1 {
     margin-bottom: 50px;
+    color: #fff;
 }
 .multyLine {
     position: relative;   
@@ -89,10 +102,12 @@ input#date {
     float: left;
     position: relative;
     margin-bottom: 40px;
+    color: #fff;
 }
 #ul li:before {
     content: counter(step);
     counter-increment: step;
+    position: relative;
     display: block;
     width: 30px;
     height: 30px;
@@ -100,6 +115,7 @@ input#date {
     transform: translate(0,-50%);
     line-height: 30px;
     /* border: 2px solid rgb(19, 78, 19); */
+    z-index: 2;
     border-radius: 50%;
     background-color: rgb(201, 195, 195);    
     transition: 0.3s;
@@ -112,23 +128,27 @@ input#date {
     background-color:rgb(201, 195, 195);
     left: -50%;
     top: 4px;
-    z-index: -1;
+    z-index: 1;
     transition: 0.3s;
 }
 #ul li:first-child:after {
     content: none;
 }
-#ul li.active:before, #ul li.active:after{
+#ul li.active:before, #ul li.active:after{    
     background-color: rgb(44, 179, 116);
     color: #fff;
+    z-index: 3;
     transition: 0.3s;
+}
+#ul li.active:after {
+    z-index: 2;
 }
 /* prev and next buttons */
 .prev, .next {
     position: absolute;
     width: 100px;
     height: 40px;
-    /* outline: none; */
+    outline: none;
     border-radius: 10px; 
     border: 3px solid #000; 
     font-weight: bold;
@@ -137,11 +157,12 @@ input#date {
 }
 .prev:hover, .next:hover {
     background-color: #6d1313;
-  
+    outline: none;  
 }
 .prev:active, .next:active {
     transform: scale(.94);
     transition: 0.3s;   
+    outline: none;
 }
 .prev {
     bottom: 30px;
@@ -151,6 +172,10 @@ input#date {
     bottom: 30px;
     right: 60px;
 }
+.dateTime {
+    margin-top: -50px;
+}
+
 /* time buttons */
 .cont {
     display: inline-block;
@@ -165,7 +190,7 @@ input#date {
     margin: 0 5px;
     cursor: pointer;
     background-color: #000;
-    color: #fff;
+    color: #ff9800;
 }
 .cont input {
     position: absolute;
@@ -191,7 +216,7 @@ input#date {
     transition: 0.25s;
 }
 .cont input:checked ~ .check {
-    background-color: rgb(220, 228, 106);
+    background-color: #c5c37a
 }
 .check:after {
     content: "";
@@ -222,6 +247,9 @@ input#date {
     border: 2px solid rgb(53, 23, 23);
     background-color: rgb(236, 234, 234);
 }
+.cont {    
+    line-height: 36px;
+}
 /* input floating placeholder */
 .box input {
     padding: 10px 0;
@@ -231,9 +259,9 @@ input#date {
     border: none;
     outline: none;
     width: 100%;
-    border-bottom: 2px solid#0e1427;    
+    border-bottom: 2px solid#f9f1cc;    
     background: transparent;
-    color: #fff;
+    color: #f9f1cc;;
 }
 .box div {
     position: relative;
@@ -244,18 +272,18 @@ input#date {
     left: 5px;
     top: 10px;
     transition: .4s;
-    color: #fff;
+    color: #f9f1cc;;
 }
 .box input:focus ~ label,
 .box input.valid ~ label {
     top: -12px;
     font-size: 12px;
-    color: rgb(233, 145, 30);
+    color:#f7e597;
     font-weight: bold;
     border: none;
 }
 .box input:focus { /*.box input.valid     */
-    border-bottom: 2px solid rgb(233, 145, 30);
+    border-bottom: 2px solid #f7e597;
 }
 .box input:-moz-selection { /* Code for Firefox */
     background: rgb(6, 73, 112);
@@ -263,4 +291,69 @@ input#date {
   
 .box input::selection {  
     background: rgb(6, 73, 112);
+}
+@media (max-width: 1199px) { 
+    .topDate {
+        margin-top: -70px;
+    } 
+    .dateTime {
+        margin-top: -40px;
+    } 
+    input#date {
+        width: 60%;
+    }
+}
+@media (max-width: 500px) { 
+    /* .topDate {
+        margin-top: 0px;
+    } 
+    .dateTime {
+        padding-top: 50px;
+    }  */    
+    input#date {
+        width: 60%;
+    }
+    .cont {
+        width: 140px;
+        height: 35px;
+        line-height: 30px;
+        margin: 3px;        
+    }
+    .check {
+        top: 10px;
+        height: 12px;
+        width: 12px;       
+    }
+    .cont .check:after {
+        height: 8px;
+        width: 8px;
+        top: 2px;
+        left: 2px;
+    }
+}
+@media (max-width: 440px) {
+    #dateTime {
+        height: 35px;
+    }
+    #date {
+        position: relative;
+        z-index: 19;
+    }
+    .next { 
+        bottom: 3px;  
+        right: 5px;
+    } 
+    .prev {   
+        bottom: 3px;  
+        left: 5px;
+    }   
+    .topDate {
+        margin-top: 230px;       
+    }
+    #dateTime {
+        margin-top: 40px;
+    }
+    fieldset {
+        overflow-y: scroll;       
+    }
 }
