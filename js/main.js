@@ -10,7 +10,7 @@ if(window.location.href.indexOf('/login/')== -1) {
     gallery();
 }
 
-$(document).ready(function () {  
+$(document).ready(function () { 
     let admName = 'Ivan';
     let admPass = 'nik';
     let user = [];
@@ -42,8 +42,13 @@ $(document).ready(function () {
     }    
 
     function refactorAdmin() {
-        if(loggedUser[0]) {
-            alert(`Niste se izlogovali`);
+        if(loggedUser[0]) {   
+            Swal.fire({
+                title: 'Greška!',
+                text: 'Niste se izlogovali!',
+                type: 'error',
+                confirmButtonText: 'Ok'
+              })                
             return;
         }
         if($('#imeAdm').val() == admName && $('#passAdm').val() == admPass) {
@@ -70,7 +75,13 @@ $(document).ready(function () {
             $(d).attr('placeholder', 'Molimo unesite password');
             $('.box label').hide();
             setTimeout(function () {
-                alert(`Neispravno ime ili password. Pokušajte ponovo!`)
+                Swal.fire({
+                    title: 'Neispravno ime ili password!',
+                    text: 'Pokušajte ponovo!',
+                    type: 'error',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#0cb999',
+                  }) 
             }, 20);
             setTimeout(function () {
                 $('#imeAdm, #passAdm').removeAttr('placeholder');
@@ -96,7 +107,12 @@ $(document).ready(function () {
             let password = allPatients[i].pass;
             var parUser = [username, password, '#ime', '#pass'];
             if(loggedAdmin) {
-                alert(`Niste se izlogovali`);
+                Swal.fire({
+                    title: 'Greška!',
+                    text: 'Niste se izlogovali!',
+                    type: 'error',
+                    confirmButtonText: 'Ok'
+                  }) 
                 return;
             }
             if (username == $('#ime').val() && password == $('#pass').val()) {               
@@ -227,8 +243,17 @@ $(document).ready(function () {
         let username = $('#username').val();
         let password = $('#confPass').val(); 
 
+        $(this).click(function() {
+            disableButtons($('#dateTime').html());
+        });
+
         if(dateTime[0]==null) {
-            alert(`Nije uneto vreme`);
+            Swal.fire({
+                title: 'Nije uneto vreme',
+                text: 'Pokušajte ponovo!',
+                type: 'error',
+                confirmButtonText: 'Ok'
+              })             
             return;
         }
         for(let i in allPatients) {
@@ -260,31 +285,34 @@ $(document).ready(function () {
     $('#date').on('input',function(e) { 
         disableButtons(new Date(e.target.value).toDateString());
     })
-    
+   
     function disableButtons(dateV) { 
-        let cont = document.querySelectorAll('.time .cont');  
+        allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));        
+        let cont = document.querySelectorAll('.time .cont'); 
+        let c = 0;      
+        while (c < 14) {
+            cont[c].setAttribute('id','false'+c)
+             cont[c].style.pointerEvents = 'auto';
+            cont[c].style.border = '2px solid #d3d3d3';
+            cont[c].style.backgroundColor = '#000';
+            cont[c].firstElementChild.nextElementSibling.style.textDecoration = 'none';  
+            cont[c].firstElementChild.disabled = false; 
+            c++  
+        }               
         for(let i in allPatients) {
-            for(let j=0;j<14;j++) {   
+            for(let j=0;j<14;j++) { 
                 let timeVal = cont[j].firstElementChild.nextElementSibling;                         
-                let dateT = `${dateV} ${timeVal.innerHTML}`;
-                if(allPatients[i].datum.includes(dateT) == true ) {
-                    cont[j].firstElementChild.disabled = true;                 
-                }               
-                if (allPatients[i].datum.includes(dateT) && cont[j].firstElementChild.disabled == true) {                     
+                let dateT = `${dateV} ${timeVal.innerHTML}`; 
+                if (allPatients[i].datum.includes(dateT)) {  
+                    console.log(dateT)                           
                     cont[j].style.pointerEvents = 'none';
                     cont[j].style.border = '2px solid #ffc107';
                     cont[j].style.backgroundColor = '#d3d3d3';
                     timeVal.style.textDecoration = 'line-through';  
-                    cont[j].firstElementChild.disabled = true;                                              
-                }  else  {  
-                    cont[j].style.pointerEvents = 'auto'; 
-                    cont[j].style.border ='2px solid #c5b1b1'; 
-                    cont[j].style.backgroundColor = '#3c2c2cc4'; 
-                    timeVal.style.textDecoration = 'none'; 
-                    cont[j].firstElementChild.disabled = false;
-                }   
-            }        
-        }   
+                    cont[j].firstElementChild.disabled = true; 
+                } 
+            }  
+        }          
     }   
 
     let showTable = document.querySelector('.table');
@@ -568,7 +596,12 @@ $(document).ready(function () {
     $('#date').on('input',function(e){
         var day = new Date(e.target.value).getDay();        
         if( day == 0 || day == 6){ 
-            alert(`Odaberite radni dan u nedelji`)
+            Swal.fire({
+                title: 'Greška!',
+                text: 'Odaberite radni dan u nedelji',
+                type: 'error',
+                confirmButtonText: 'Ok'
+              }) 
             this.valueAsDate = new Date();
         } 
     });

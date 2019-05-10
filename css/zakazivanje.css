@@ -141,7 +141,7 @@ input#date {
     z-index: 2;
 }
 /* prev and next buttons */
-.prev, .next {
+.prev, .next, .finish{
     position: absolute;
     width: 100px;
     height: 40px;
@@ -152,11 +152,11 @@ input#date {
     background-color: #921818;
     color: #fff;
 }
-.prev:hover, .next:hover {
+.prev:hover, .next:hover, .finish:hover {
     background-color: #6d1313;
     outline: none;  
 }
-.prev:active, .next:active {
+.prev:active, .next:active, .finish:active {
     transform: scale(.94);
     transition: 0.3s;   
     outline: none;
@@ -165,7 +165,7 @@ input#date {
     bottom: 30px;
     left: 60px;
 }
-.next {
+.next, .finish {
     bottom: 30px;
     right: 60px;
 }
@@ -330,7 +330,7 @@ input#date {
         position: relative;
         z-index: 19;
     }
-    .next { 
+    .next, .finish { 
         bottom: 3px;  
         right: 5px;
     } 
@@ -347,4 +347,7 @@ input#date {
     fieldset {
         overflow-y: scroll;       
     }
+}
+#date {
+    border-radius: 5px;
 }

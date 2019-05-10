@@ -261,3 +261,6 @@ tr input {
         width: 120%;
     }
 }
+.swal2-icon.swal2-error {
+    border-color: #66bbb3 !important;
+}
