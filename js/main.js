@@ -244,7 +244,7 @@ $(document).ready(function () {
         let password = $('#confPass').val(); 
 
         $(this).click(function() {
-            disableButtons($('#dateTime').html());
+            disableButtons($('#dateTime').html());          
         });
 
         if(dateTime[0]==null) {
@@ -265,8 +265,8 @@ $(document).ready(function () {
                 loggedUser[0]['usluga'].push(pregled[0]);
                 loggedUser[0]['stomatolog'].push(stomat[0]);
                 allPatients.push(loggedUser[0]);
-                set();
-                return;      
+                set();                
+                return;   
             }
         }
         if (localStorage.getItem('listaPacijenata')) {
@@ -290,29 +290,27 @@ $(document).ready(function () {
         allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));        
         let cont = document.querySelectorAll('.time .cont'); 
         let c = 0;      
-        while (c < 14) {
-            cont[c].setAttribute('id','false'+c)
-             cont[c].style.pointerEvents = 'auto';
+        while (c < 14) {          
+            cont[c].style.pointerEvents = 'auto';
             cont[c].style.border = '2px solid #d3d3d3';
             cont[c].style.backgroundColor = '#000';
-            cont[c].firstElementChild.nextElementSibling.style.textDecoration = 'none';  
-            cont[c].firstElementChild.disabled = false; 
+            cont[c].style.color = '#fff';
+            cont[c].firstElementChild.nextElementSibling.style.textDecoration = 'none';            
             c++  
         }               
         for(let i in allPatients) {
             for(let j=0;j<14;j++) { 
                 let timeVal = cont[j].firstElementChild.nextElementSibling;                         
                 let dateT = `${dateV} ${timeVal.innerHTML}`; 
-                if (allPatients[i].datum.includes(dateT)) {  
-                    console.log(dateT)                           
+                if (allPatients[i].datum.includes(dateT)) { 
                     cont[j].style.pointerEvents = 'none';
                     cont[j].style.border = '2px solid #ffc107';
                     cont[j].style.backgroundColor = '#d3d3d3';
-                    timeVal.style.textDecoration = 'line-through';  
-                    cont[j].firstElementChild.disabled = true; 
+                    cont[j].style.color = '#000';
+                    timeVal.style.textDecoration = 'line-through';
                 } 
             }  
-        }          
+        }   
     }   
 
     let showTable = document.querySelector('.table');
@@ -589,24 +587,43 @@ $(document).ready(function () {
     $("#date").attr("min", dateLimit(0));
     $("#date").attr("max", dateLimit(1));
     
-    if(window.location.href.indexOf('login/zakazivanje')!= -1) {
-        let dateVal = document.getElementById("date");
-        dateVal.valueAsDate = new Date();
+    let dateVal = document.getElementById("date");
+    let today=new Date();  //Today's Date
+    function determineDate(n) {        
+        if(window.location.href.indexOf('login/zakazivanje')!= -1 && new Date().getDay()!=6 &&
+        new Date().getDay()!=0) {        
+           return new Date();
+        } else if(new Date().getDay() == 6) {       
+            console.log(`subota`)
+           return new Date(today.getFullYear(),today.getMonth(),today.getDate() + n);        
+        } else {
+            console.log(`nedelja`)
+           return new Date(today.getFullYear(),today.getMonth(),today.getDate() + n-1);
+        }
     }
+    dateVal.valueAsDate = determineDate(3); 
+
     $('#date').on('input',function(e){
         var day = new Date(e.target.value).getDay();        
-        if( day == 0 || day == 6){ 
-            Swal.fire({
-                title: 'Greška!',
-                text: 'Odaberite radni dan u nedelji',
-                type: 'error',
-                confirmButtonText: 'Ok'
-              }) 
-            this.valueAsDate = new Date();
-        } 
+        if(day == 6){ 
+            weekend(); 
+            this.valueAsDate = determineDate(3);
+        } else if(day == 0) {
+            weekend();
+            this.valueAsDate = determineDate(3);
+        }
     });
+    function weekend() {
+        Swal.fire({
+            title: 'Neradan dan!',
+            text: 'Odaberite radni dan u nedelji',
+            type: 'error',
+            confirmButtonText: 'Ok'
+        })          
+        disableButtons($('#dateTime').html())
+    }
     
-    $('#date').change(function() {
+    $('#date').change(function() {   
         let newValue = new Date($('#date').val()).toDateString();
         $('#dateTime').text(newValue);
 
@@ -620,7 +637,7 @@ $(document).ready(function () {
                            <span>${startTime}:${minutes}0</span>
                            <span class="check"></span></label>`)   
     }
-    $('.dateTime').prepend(`<button type="button" id="dateTime" disabled>${$dateVal}</button>`);
+    $('.dateTime').prepend(`<button type="button" id="dateTime" disabled>${determineDate(2).toDateString()}</button>`);
     
     function setTime(timeCall) {
         for(let i=1; i< 15; i++) {

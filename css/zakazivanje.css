@@ -91,6 +91,9 @@ input#date {
     color: #fff;
     font-size: 18px;
 }
+.wrapDates label:hover {
+    background-color: #921818;
+}
 #ul {
     counter-reset: step;
 }
