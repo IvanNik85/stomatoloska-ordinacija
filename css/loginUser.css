@@ -8,7 +8,7 @@ body {
 }
 .wrapper {
     width: 100%;    
-    min-height: 101vh;    
+    min-height: 100vh;    
     background: url(../images/waitingRoom.jpg) no-repeat fixed; 
     background-size: cover;     
    }   
@@ -16,7 +16,7 @@ body {
     background-color: rgba(0, 0, 0, .6);
     padding-top: 90px; 
     width: 100%;
-    min-height: 101vh;  
+    min-height: 100vh;  
 }
 html {
     scroll-behavior: smooth;
@@ -52,7 +52,7 @@ nav {
     transform: scale(.94);
 }
 #ime::placeholder, #pass::placeholder { 
-    color: orangered;
+    color: #d4c264c4;
     opacity: 1; /* Firefox */
   }
 form {
@@ -262,5 +262,19 @@ tr input {
     }
 }
 .swal2-icon.swal2-error {
-    border-color: #66bbb3 !important;
+    border-color:#e0c32de0 !important;
 }
+.swal2-icon.swal2-error [class^=swal2-x-mark-line] {
+    background-color: #62b1e0 !important;
+}
+.swal2-confirm.swal2-styled {
+    background-color: #62b1e0 !important; 
+}
+.swal2-icon.swal2-warning {
+    color: #62b1e0 !important;
+    border-color:#e0c32de0 !important;
+}
+
+
+
+

@@ -44,9 +44,9 @@ $(document).ready(function () {
     function refactorAdmin() {
         if(loggedUser[0]) {   
             Swal.fire({
-                title: 'Greška!',
-                text: 'Niste se izlogovali!',
-                type: 'error',
+                title: 'Niste se izlogovali!',
+                text: 'Molimo pokušajte ponovo!',
+                type: 'warning',
                 confirmButtonText: 'Ok'
               })                
             return;
@@ -67,6 +67,7 @@ $(document).ready(function () {
             $('.toggle').hide();
             $('.content').show();
             $('.wrapImg').css('backgroundColor',' rgba(0, 0, 0, .8)'); 
+            scrollbar();
         } 
     }
     function nijePotvrda(a, b, c, d) {
@@ -77,7 +78,7 @@ $(document).ready(function () {
             setTimeout(function () {
                 Swal.fire({
                     title: 'Neispravno ime ili password!',
-                    text: 'Pokušajte ponovo!',
+                    text: 'Molimo pokušajte ponovo!',
                     type: 'error',
                     confirmButtonText: 'Ok',
                     confirmButtonColor: '#0cb999',
@@ -108,9 +109,9 @@ $(document).ready(function () {
             var parUser = [username, password, '#ime', '#pass'];
             if(loggedAdmin) {
                 Swal.fire({
-                    title: 'Greška!',
-                    text: 'Niste se izlogovali!',
-                    type: 'error',
+                    title: 'Niste se izlogovali!',
+                    text: 'Molimo pokušajte ponovo!',
+                    type: 'warning',
                     confirmButtonText: 'Ok'
                   }) 
                 return;
@@ -230,7 +231,7 @@ $(document).ready(function () {
     let set = () => localStorage.setItem('listaPacijenata', JSON.stringify(allPatients));
     allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));  
 
-    $('.finish').click(function () {
+    $('.finish').click(function () {         
         let inputName = $('#ime1').val();
         let inputSurname = $('#prezime1').val();
         let inputEmail = $('#email1').val();
@@ -250,7 +251,7 @@ $(document).ready(function () {
         if(dateTime[0]==null) {
             Swal.fire({
                 title: 'Nije uneto vreme',
-                text: 'Pokušajte ponovo!',
+                text: 'Molimo pokušajte ponovo!',
                 type: 'error',
                 confirmButtonText: 'Ok'
               })             
@@ -258,15 +259,16 @@ $(document).ready(function () {
         }
         for(let i in allPatients) {
             if(loggedUser[0] && loggedUser[0].ime == allPatients[i].ime && 
-                loggedUser[0].prezime == allPatients[i].prezime ) {
+                loggedUser[0].prezime == allPatients[i].prezime && 
+                loggedUser[0].brojKartona == allPatients[i].brojKartona) {
                 allPatients.splice(i,1);
                 set();
                 loggedUser[0]['datum'].push(dateTime[0]);
                 loggedUser[0]['usluga'].push(pregled[0]);
                 loggedUser[0]['stomatolog'].push(stomat[0]);
                 allPatients.push(loggedUser[0]);
-                set();                
-                return;   
+                set();                                
+                return;                   
             }
         }
         if (localStorage.getItem('listaPacijenata')) {
@@ -374,10 +376,12 @@ $(document).ready(function () {
                 }
             }
         }   
+        $('.patientsTable').css('height','auto')
         $('.patientsTable tbody tr').click(function(e){   
             if(($(e.target).hasClass('delete'))) {
                 e.preventDefault();
             } else {
+                $('.patientsTable').css('height','auto'); 
                 remPrevTable();
                 user.push(val[this.firstChild.innerHTML-1]); 
                 userData(user[0]);
@@ -446,9 +450,9 @@ $(document).ready(function () {
                 if (!value) {                   
                     inputTable[j].lastElementChild.setAttribute('placeholder', 'Molimo unesite vrednost');
                     setTimeout(function() {    
-                    inputTable[j].lastElementChild.setAttribute('placeholder', '');                
-                }, 1300);
-                    return;                   
+                    inputTable[j].lastElementChild.setAttribute('placeholder', '');
+                }, 1300);   
+                    return;                                    
                 }           
                 if (changeUser.brojKartona == allPatients[i].brojKartona) { 
                     changeUser['username'] =  allPatients[i].username;
@@ -464,11 +468,12 @@ $(document).ready(function () {
         } 
     }        
 
-    $('#userInfo').click(function(){ 
+    $('#userInfo').click(function(){         
         userData(loggedUser[0]);       
         let inputTable = document.querySelectorAll('tBody tr');
         inputTable[4].lastElementChild.disabled = true;
-        $('.content').slideUp(700);             
+        $('.content').slideUp(700);   
+        scrollbar();          
     });
 
     function remPrevTable() {
@@ -479,13 +484,14 @@ $(document).ready(function () {
         $('.back').remove();    
     }
 
-    $('#allPatients').click(function () {
+    $('#allPatients').click(function () {        
         remPrevTable();
         allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));
         createTable(allPatients,6,5,4);
         $('.expand').click(function() {           
             remPrevTable();
-            createTable(allPatients,8);
+            createTable(allPatients,8); 
+            $('.patientsTable').css('height','100vh')           
         });  
 
         let tr = document.querySelectorAll('tr .delete'); 
@@ -499,7 +505,7 @@ $(document).ready(function () {
     let search = ['#imePac', '#prezimePac', '#email', '#telefon', '#karton', '#usluga', '#stomatolog'];
     let searchValues = ['ime', 'prezime', 'email', 'telefon', 'brojKartona', 'usluga', 'stomatolog'];
 
-    $('#filter').click(function () {
+    $('#filter').click(function () {        
         remPrevTable();
         filterEl = [];
         allPatients = JSON.parse(localStorage.getItem('listaPacijenata'));
@@ -537,9 +543,10 @@ $(document).ready(function () {
         }      
 
         filterEl.length != allPatients.length ? createTable(filterEl,6,5,4) : $('.table h4').show();  
-            $('.expand').click(function() {   
+            $('.expand').click(function() { 
                 remPrevTable();                   
-                createTable(filterEl,8);               
+                createTable(filterEl,8);
+                $('.patientsTable').css('height','100vh') 
             });  
 
         let tr1 = document.querySelectorAll('tr .delete');        
@@ -550,7 +557,7 @@ $(document).ready(function () {
     });
 
     function deleteUser(value,text) { 
-        return function() {           
+        return function() {                       
             if(window.confirm(`Da li zelite da obrisete pacijenta?`)){
             $(this).parent().fadeOut(1300);           
                 let b = this.parentElement.firstChild.innerHTML; 
@@ -590,8 +597,7 @@ $(document).ready(function () {
     let dateVal = document.getElementById("date");
     let today=new Date();  //Today's Date
     function determineDate(n) {        
-        if(window.location.href.indexOf('login/zakazivanje')!= -1 && new Date().getDay()!=6 &&
-        new Date().getDay()!=0) {        
+        if(new Date().getDay()!=6 && new Date().getDay()!=0) {        
            return new Date();
         } else if(new Date().getDay() == 6) {       
             console.log(`subota`)
@@ -601,7 +607,10 @@ $(document).ready(function () {
            return new Date(today.getFullYear(),today.getMonth(),today.getDate() + n-1);
         }
     }
-    dateVal.valueAsDate = determineDate(3); 
+    if(window.location.href.indexOf('login/zakazivanje')!= -1) {
+        dateVal.valueAsDate = determineDate(3); 
+    }
+   
 
     $('#date').on('input',function(e){
         var day = new Date(e.target.value).getDay();        
@@ -889,5 +898,12 @@ $(document).ready(function () {
             }, 1200);
         } 
     }   
-   
+
+    if(window.location.href.indexOf('login/loginAdmin.html')!= -1 && loggedAdmin) {
+        scrollbar();
+    }
+    function scrollbar() {  
+        $('.wrapperAdm, .wrapper, .wrapImg, .wrapAdmImg').css('min-height', '101vh');
+    }
+
 });

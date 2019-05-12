@@ -8,7 +8,7 @@ body {
 }
 .wrapperAdm {
     width: 100%;    
-    min-height: 101vh;    
+    min-height: 100vh;    
     background: url(../images/adminType.jpg) no-repeat fixed; 
     background-size: cover;   
 }
@@ -17,7 +17,7 @@ body {
     background-color: rgba(35, 35, 35, 0.6);
     padding-top: 90px; 
     width: 100%;
-    min-height: 101vh;  
+    min-height: 100vh;  
 }
 html {
     scroll-behavior: smooth;
@@ -52,7 +52,7 @@ nav {
     transition: all 0.3s;
 }
 #submitAdmin:hover {
-    color: rgb(230, 208, 19);
+    color: #dcc763;
     text-shadow: 0 0 8px rgb(250, 225, 0);
     background-color: rgb(78, 16, 58);
     box-shadow: 8px 0 8px rgba(97, 94, 77, 0.6);    
@@ -63,7 +63,7 @@ nav {
     transform: scale(.94);
 }
 #imeAdm::placeholder, #passAdm::placeholder { 
-    color: orangered;
+    color: #d4c264c4;
     opacity: 1; /* Firefox */
   }
 form {
@@ -111,7 +111,7 @@ fieldset {
 }
 .confirmBtn .fas:hover {
     background-color: transparent;   
-}
+}  
 .patientsTable th,.patientsTable td {
     width: 140px;
     height: 40px;
@@ -124,7 +124,12 @@ fieldset {
 table {    
     text-align: center;
     margin: auto;    
-    margin-top: 40px;
+    margin-top: 40px; 
+}
+.patientsTable {
+    display: block;
+    overflow-x: auto;
+    /* height: 100vh; */
 }
 .patientsTable thead tr th {
     border-bottom: 1px solid black;
@@ -295,4 +300,24 @@ select#usluga:focus, select#stomatolog:focus {
     .filters input,.filters select#usluga,.filters select#stomatolog {
         width: 70%;
     } 
+}
+@media (max-width: 768px) { 
+    table .patientsTable {
+        display: block;
+        overflow: auto;        
+        height: 100vh;
+    } 
+}
+.swal2-icon.swal2-error {
+    border-color:#e0c32de0 !important;
+}
+.swal2-icon.swal2-error [class^=swal2-x-mark-line] {
+    background-color: #aa3f81 !important;
+}
+.swal2-icon.swal2-warning {
+    color: #aa3f81 !important;
+    border-color:#e0c32de0 !important;
+}
+.swal2-confirm.swal2-styled {
+    background-color: #aa3f81 !important; 
 }

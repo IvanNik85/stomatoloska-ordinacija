@@ -11,7 +11,7 @@ nav {
 }
 .scheduleImg {
     width: 100%;    
-    min-height: 101vh;    
+    min-height: 100vh;    
     background: url(../images/schedule2.jpg) no-repeat fixed; 
     background-size: cover;   
 }
@@ -20,7 +20,7 @@ nav {
     background-color: rgba(0, 0, 0, 0.8);
     padding-top: 90px; 
     width: 100%;
-    min-height: 101vh;  
+    min-height: 100vh;  
 }
 form {
     display: flex;
@@ -54,7 +54,7 @@ fieldset {
 #email1::placeholder, #phone::placeholder,
 #passUser::placeholder,#confPass::placeholder,
 #username::placeholder { 
-    color:rgb(255, 51, 0);
+    color:#e42323;
     opacity: 1; /* Firefox */
   }
 input#date {
@@ -353,4 +353,13 @@ input#date {
 }
 #date {
     border-radius: 5px;
+}
+.swal2-icon.swal2-error {
+    border-color: #629e53 !important;
+}
+.swal2-confirm.swal2-styled {
+    background-color: #b61d1d !important; 
+}
+.swal2-icon.swal2-error [class^=swal2-x-mark-line] {
+    background-color: #de2d2dd6 !important;
 }
