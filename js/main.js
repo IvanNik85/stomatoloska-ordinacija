@@ -47,7 +47,8 @@ $(document).ready(function () {
                 title: 'Niste se izlogovali!',
                 text: 'Molimo pokušajte ponovo!',
                 type: 'warning',
-                confirmButtonText: 'Ok'
+                confirmButtonColor: '#aa3f81',
+                confirmButtonText: 'Ok',                
               })                
             return;
         }
@@ -81,7 +82,7 @@ $(document).ready(function () {
                     text: 'Molimo pokušajte ponovo!',
                     type: 'error',
                     confirmButtonText: 'Ok',
-                    confirmButtonColor: '#0cb999',
+                    confirmButtonColor: '#aa3f81',
                   }) 
             }, 20);
             setTimeout(function () {
@@ -557,26 +558,36 @@ $(document).ready(function () {
     });
 
     function deleteUser(value,text) { 
-        return function() {                       
-            if(window.confirm(`Da li zelite da obrisete pacijenta?`)){
-            $(this).parent().fadeOut(1300);           
-                let b = this.parentElement.firstChild.innerHTML; 
-                for(let i = value.length; i >= b; i--){                   
-                    if(filterEl.length) {
-                        for (let j in allPatients) {                            
-                            (value[b-1].brojKartona == allPatients[j].brojKartona) &&                               
-                            allPatients.splice(j, 1);                            
-                        } 
-                    } else {                       
-                        allPatients.splice(b-1,1);                      
-                    }
-                    set();
-                    setTimeout(function() {
-                        document.getElementById(text).click()
-                    }, 1000);
-                    break;
-                } 
-            }
+        return function() {    
+            Swal.fire({
+                title: 'Pacijent će biti obrisan!',
+                text: "Da li ste sigurni?",
+                type: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#d45656',
+                cancelButtonColor: '#2ab17f',
+                confirmButtonText: 'Delete'
+            }).then((result) => {
+                if (result.value) {
+                    $(this).parent().fadeOut(1300);           
+                    let b = this.parentElement.firstChild.innerHTML; 
+                    for(let i = value.length; i >= b; i--){                   
+                        if(filterEl.length) {
+                            for (let j in allPatients) {                            
+                                (value[b-1].brojKartona == allPatients[j].brojKartona) &&                               
+                                allPatients.splice(j, 1);                            
+                            } 
+                        } else {                       
+                            allPatients.splice(b-1,1);                      
+                        }
+                        set();
+                        setTimeout(function() {
+                            document.getElementById(text).click()
+                        }, 1000);
+                        break;
+                    } 
+                }
+            })  
         }
     }      
 
@@ -598,13 +609,11 @@ $(document).ready(function () {
     let today=new Date();  //Today's Date
     function determineDate(n) {        
         if(new Date().getDay()!=6 && new Date().getDay()!=0) {        
-           return new Date();
-        } else if(new Date().getDay() == 6) {       
-            console.log(`subota`)
-           return new Date(today.getFullYear(),today.getMonth(),today.getDate() + n);        
+            return new Date();
+        } else if(new Date().getDay() == 6) {
+            return new Date(today.getFullYear(),today.getMonth(),today.getDate() + n);        
         } else {
-            console.log(`nedelja`)
-           return new Date(today.getFullYear(),today.getMonth(),today.getDate() + n-1);
+            return new Date(today.getFullYear(),today.getMonth(),today.getDate() + n-1);
         }
     }
     if(window.location.href.indexOf('login/zakazivanje')!= -1) {
