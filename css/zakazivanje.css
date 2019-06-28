@@ -44,6 +44,9 @@ fieldset {
     padding-left: 5px;
     font-size: 18px;
 }
+.ds select:focus {
+    outline: none;
+}
 #error {
     height: 25px;
     visibility: hidden;
@@ -59,6 +62,9 @@ fieldset {
   }
 input#date {
     width: 90%;
+}
+input#date:focus {
+    outline: none;
 }
 .time {
     height: 60%;
@@ -150,7 +156,7 @@ input#date {
     height: 40px;
     outline: none;
     border-radius: 10px; 
-    border: 3px solid #000; 
+    border: 1px solid #000; 
     font-weight: bold;
     background-color: #921818;
     color: #fff;
@@ -161,7 +167,9 @@ input#date {
 }
 .prev:active, .next:active, .finish:active {
     transform: scale(.94);
-    transition: 0.3s;   
+    transition: 0.3s;       
+}
+.prev:focus, .next:focus, .finish:focus {
     outline: none;
 }
 .prev {

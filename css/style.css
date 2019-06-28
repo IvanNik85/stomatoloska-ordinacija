@@ -284,6 +284,9 @@ transition: 0.3s;
     border: 1px solid #ffe600;
     transition: 0.2s;
 }
+#scrollTop:focus, .login:focus, .schedule:focus {
+    outline: none;
+}
 #scrollTop:hover i {
     color: #ffe600;    
     transition: 0.2s;    
