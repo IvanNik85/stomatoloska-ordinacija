@@ -11,7 +11,7 @@ if(window.location.href.indexOf('/login/')== -1) {
 }
 
 $(document).ready(function () { 
-    let admName = 'Ivan';
+    let admName = 'ivan';
     let admPass = 'nik';
     let user = [];
     let loggedUser;
