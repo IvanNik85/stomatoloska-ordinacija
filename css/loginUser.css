@@ -153,7 +153,7 @@ h3 {
     margin-top: 100px;
     border: 2px solid rgb(25, 11, 63);
     border-radius: 2px;
-    font-size: 17px;
+    font-size: 17px;    
 }
 .generateUser .patientsTable input::placeholder {
     color: red;
@@ -194,6 +194,7 @@ h3 {
 .patientsTable tbody tr th {
     background-color: rgb(30, 82, 136);
     color:  #dacd25;
+    padding-right: 10px;
 }
 tr input {
     width: 500px;
@@ -260,7 +261,27 @@ tr input {
         padding-bottom: 40px;
     } 
     .btnCont {
-        width: 120%;
+        width: 100%;
+    }
+    .generateUser .patientsTable {
+        width: 100%;    
+        display: block;
+        overflow-x: auto;    
+    }   
+    .patientsTable th, tr input {       
+        font-size: 16px;
+    }   
+}
+@media (max-width: 500px) {    
+    fieldset {
+        margin: 0;
+    }
+    .confirmBtn {
+        width: 150px;
+        font-size: 16px;
+    }
+    .btnCont .fa-angle-left {        
+        font-size: 30px;
     }
 }
 .swal2-icon.swal2-error {

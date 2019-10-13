@@ -311,6 +311,11 @@ select#usluga:focus, select#stomatolog:focus {
         height: 100vh !important;
     } 
 }
+@media (max-width: 500px) {
+    fieldset {
+        margin: 0;
+    }
+}
 .swal2-icon.swal2-error {
     border-color:#e0c32de0 !important;
 }

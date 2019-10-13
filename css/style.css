@@ -27,6 +27,10 @@ h1, h2 {
 .Header p {
     font-size: 18px;
     color: #fff;
+    text-align: justify;
+}
+.Header p > span {
+    color:#7acbea;
 }
 .Info {
     height: 600px;
@@ -389,6 +393,18 @@ transition: 0.3s;
     .infWrap {
         padding-bottom: 45px; 
     }
+    .stomatologPodaci p {
+        padding: 0 25px 50px 25px;
+    }
+    .infoTitle p, .contentSch p {
+        padding: 0 25px;        
+    }
+    .choiseDent {
+        padding: 0 25px;        
+    }
+    iframe {
+        width: 100%;
+    }
 }
 @media (min-width: 768px) {
     .fa-angle-right {     
@@ -442,6 +458,10 @@ transition: 0.3s;
     }   
     .sliderCont {
         display: none;
+    }    
+    .infoTitle p, .contentSch p, .choiseDent p, .contactUs p, 
+    .Header p, .login, .schedule {
+        font-size: 16px;
     }
 }
 @media (max-width: 400px) {
