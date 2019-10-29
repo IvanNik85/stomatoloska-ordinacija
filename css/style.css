@@ -10,6 +10,7 @@ h1, h2 {
     text-align: center;
 }
 .Header {
+    min-height: 600px;
     height: 100vh;
     background: url(../images/imageHeader.jpg) no-repeat center;   
     background-size: cover;    
@@ -25,18 +26,13 @@ h1, h2 {
     font-size: 50px;    
     color: #fff;  
 }
-.show-on-scroll {
-    opacity: 0;
-    transform: scale(.7, .7);    
-    transition: all 2s ease; 
-}
 .choiseTitle .show-on-scroll {
     transition: all 1s 1s ease !important; 
 }
 .choiseTitle .textSlide {
     transform: translateX(150px);
 }
-/* animate */
+/* animate on scroll*/
 .is-visible {
     opacity: 1 !important;
     transform: scale(1, 1) !important;
@@ -44,6 +40,11 @@ h1, h2 {
 .slideLeft, .slideUp {
     opacity: 1 !important;  
     transform: translate(0px) !important; 
+}
+.show-on-scroll {
+    opacity: 0;
+    transform: scale(.7, .7);    
+    transition: all 2s ease; 
 }
 .textSlideUp {
     opacity: 0;
@@ -297,13 +298,18 @@ transition: 0.3s;
     -moz-transition: all .3s;
     -o-transition: all .3s; 
 }
+/* Social icon animations */
+#facebook, #instagram, #youtube, #twitter {
+    border: 2px solid #9d9d9d;
+    color: #9d9d9d;
+} 
 #facebook:hover {    
     border: 2px solid #395599;
-    color:  #fff;
+    color:  #fff;    
 }
 #instagram:hover {    
     border: 2px solid #6835ba;
-    color:  #fff;
+    color:  #fff;    
 }
 #youtube:hover {    
     border: 2px solid #f80000;
@@ -312,6 +318,58 @@ transition: 0.3s;
 #twitter:hover {
     border: 2px solid  #29a4da;
     color:  #fff;
+}
+#facebook.colorChange {
+    animation: animate1 1.5s .2s ease-in-out;          
+}
+#instagram.colorChange {
+    animation: animate2 1.5s .6s ease-in-out;
+}
+#youtube.colorChange {
+    animation: animate3 1.5s 1s ease-in-out; 
+}
+#twitter.colorChange {
+    animation: animate4 1.5s 1.4s ease-in-out;
+}
+@keyframes animate1 {
+    0% {
+        border: 2px solid #395599;
+        color:  #fff;
+    }
+    100% {
+        border: 2px solid #9d9d9d;
+        color: #9d9d9d;
+    }
+}
+@keyframes animate2 {
+    0% {
+        border: 2px solid #6835ba;
+        color:  #fff;
+    }
+    100% {
+        border: 2px solid #9d9d9d;
+        color: #9d9d9d;
+    }
+}
+@keyframes animate3 {
+    0% {
+        border: 2px solid #f80000;
+        color:  #fff;
+    }
+    100% {
+        border: 2px solid #9d9d9d;
+        color: #9d9d9d;
+    }
+}
+@keyframes animate4 {
+    0% {
+        border: 2px solid  #29a4da;
+        color:  #fff;
+    }
+    100% {
+        border: 2px solid #9d9d9d;
+        color: #9d9d9d;
+    }
 }
 #scrollTop {
     width: 70px;
@@ -543,3 +601,4 @@ transition: 0.3s;
         margin-left: -50px;
     }
 }
+

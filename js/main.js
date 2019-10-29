@@ -37,6 +37,7 @@ $(document).ready(function () {
     const headings = document.querySelectorAll('.show-on-scroll');
     const text = document.querySelectorAll('.textSlide');
     const data = document.querySelectorAll('.textSlideUp');
+    const socialIcons = document.querySelectorAll('.social-icons ul li a');
     //reveal headings
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -61,6 +62,13 @@ $(document).ready(function () {
             } 
         });
     });
+    const observerThree = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.intersectionRatio > 0) {
+            entry.target.classList.add('colorChange');
+            } 
+        });
+    });
     headings.forEach(heading => {
         observer.observe(heading);
     });
@@ -69,6 +77,9 @@ $(document).ready(function () {
     });
     data.forEach(data => {
         observerTwo.observe(data);
+    });
+    socialIcons.forEach(data => {
+        observerThree.observe(data);
     });
 
     $('#submitAdmin').click(function () {
