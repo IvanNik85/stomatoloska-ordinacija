@@ -12,7 +12,8 @@ h1, h2 {
 .Header {
     height: 100vh;
     background: url(../images/imageHeader.jpg) no-repeat center;   
-    background-size: cover;
+    background-size: cover;    
+    overflow: hidden;
 }
 .wrap {   
     background-color: rgba(0, 0, 0, 0.5);
@@ -21,19 +22,49 @@ h1, h2 {
 .Header h1 {
     padding-top: 196px;
     padding-bottom: 40px;
-    font-size: 50px;
-    color: #fff;
+    font-size: 50px;    
+    color: #fff;  
+}
+.show-on-scroll {
+    opacity: 0;
+    transform: scale(.7, .7);    
+    transition: all 2s ease; 
+}
+.choiseTitle .show-on-scroll {
+    transition: all 1s 1s ease !important; 
+}
+.choiseTitle .textSlide {
+    transform: translateX(150px);
+}
+/* animate */
+.is-visible {
+    opacity: 1 !important;
+    transform: scale(1, 1) !important;
+}
+.slideLeft, .slideUp {
+    opacity: 1 !important;  
+    transform: translate(0px) !important; 
+}
+.textSlideUp {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: transform 2s ease, opacity .5s linear; 
+}
+.textSlide {
+    opacity: 0;
+    transform: translateX(400px);
+    transition: transform 2s ease, opacity .5s linear;   
 }
 .Header p {
     font-size: 18px;
     color: #fff;
-    text-align: justify;
+    text-align: justify;    
 }
 .Header p > span {
     color:#7acbea;
 }
 .Info {
-    height: 600px;
+    height: 600px;    
 }
 .Info .image {
     display: block;
@@ -41,7 +72,7 @@ h1, h2 {
     height: auto;
 }
 .infWrap {
-    padding-bottom: 55px; 
+    padding-bottom: 55px;     
 }
 .infoTitle p {
     color: #333;
@@ -54,9 +85,10 @@ h1, h2 {
 .infoTitle {
     margin-top: 100px;
     margin-bottom: 60px;
+    overflow: hidden;
 }
 .infoTitle h2 {
-    margin-bottom: 45px;
+    margin-bottom: 45px;    
 }
 .card:hover {
 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4);
@@ -136,7 +168,8 @@ transition: 0.3s;
     margin-bottom: 45px;
 }
 .contentSch {
-    margin-top: 100px;    
+    margin-top: 100px;   
+    overflow: hidden; 
 }
 .contentSch p, .contentSch span {
     text-align: justify;   
@@ -146,6 +179,7 @@ transition: 0.3s;
 .choiseDent {
     text-align: center;
     padding-bottom: 30px;
+    overflow: hidden;
 }
 .choiseDent h2 {
     margin: 75px 0; 
@@ -172,11 +206,23 @@ transition: 0.3s;
 .choiseDent p {
     padding-bottom: 20px;
 }
+.choiseDent .fa-calendar-alt {
+    color: rgb(231, 248, 132);
+    font-size: 30px;
+}
+.choiseDent .fa-dollar-sign {
+    color: rgb(248, 132, 142);
+    font-size: 30px; 
+}
+.choiseDent .fa-cogs {
+    color: rgb(132, 244, 248);
+    font-size: 30px; 
+}
 .login, .schedule {
     background-image: linear-gradient(45deg,#0077a5, #268e7b);
     color: #fff;    
     font-size: 18px;
-    margin: 30px;
+    margin: 20px 30px;
     border: 2px solid rgb(55, 46, 139);
     border-radius: 5px;
     width: 140px;  
@@ -195,10 +241,11 @@ transition: 0.3s;
     padding-top: 30px;
 }
 #last  {
-    padding-bottom: 30px;   
+    padding-bottom: 40px;   
 }
 .Kontakt {  
     padding-bottom: 150px;
+    overflow: hidden;
 }
 .Kontakt i {
     color: #1c92b5;
@@ -396,7 +443,7 @@ transition: 0.3s;
     .stomatologPodaci p {
         padding: 0 25px 50px 25px;
     }
-    .infoTitle p, .contentSch p {
+    .infoTitle p, .contentSch p, .Header p {
         padding: 0 25px;        
     }
     .choiseDent {
@@ -404,6 +451,12 @@ transition: 0.3s;
     }
     iframe {
         width: 100%;
+    }
+    .choiseTitle .textSlide {
+        transition: transform 2s .8s ease, opacity .3s .8s linear;        
+    }
+    .choiseTitle .show-on-scroll {
+        transition: all 1s 1.2s ease !important;      
     }
 }
 @media (min-width: 768px) {
@@ -448,7 +501,7 @@ transition: 0.3s;
     }
     .schedule, .login {
         display: block;
-        margin: 15px auto;
+        margin: 8px auto;
     }
      .gallery .fa-angle-left {
          visibility: hidden;
@@ -459,7 +512,10 @@ transition: 0.3s;
     .sliderCont {
         display: none;
     }    
-    .infoTitle p, .contentSch p, .choiseDent p, .contactUs p, 
+    .textSlide {       
+        transform: translateX(200px);
+    }
+    .infoTitle p, .contentSch p, .choiseDent p, .contactUs p,  
     .Header p, .login, .schedule {
         font-size: 16px;
     }
@@ -481,5 +537,9 @@ transition: 0.3s;
     }
     .Zakazivanje {       
         margin-top: -80px; 
+    }
+    .choiseTitle i {
+        font-size: 0px;
+        margin-left: -50px;
     }
 }
