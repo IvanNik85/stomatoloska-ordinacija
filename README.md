@@ -19,7 +19,7 @@ Završni projekat: Stomatološka ordinacija (zakazivanje termina).<br>
 JavaScript Grupa 1<br>
 Ivan Nikolić
 
-https://indentalpro-dental-clinic.netlify.com
+https://indentalpro-dental-clinic.netlify.app
 
 Projekat sadrži main stranu, stranu za login korisnika koji žele da vide istoriju pregleda, vrše izmenu ličnih podataka i zakazuju nove termine, admin stranu, koja omogućava generisanje tabele pacijenata i filtriranje pacijenata i stranu zakazivanja, koja po koracima vodi ka registrovanju i zakazivanju termina novih pacijenata ili zakazivanju novih termina za ulogovane postojeće korisnike. Sve strane imaju importovan burger meni preko modula, na main strani se nalazi pokretna galerija slika, kontakt i ostale informacije.
 Pacijenti se smeštaju u local storage i izgenerisana je random baza od 100 pacijenata koja se naknadno dopunjuje. 
