@@ -4,7 +4,7 @@ Final project: Dental clinic (scheduling appointments)<br>
 JavaScript Group 1 <br>
 Ivan Nikolic
 
-https://indentalpro-dental-clinic.netlify.com
+https://indentalpro-dental-clinic.netlify.app
 
 The project contains the main page, the login page for users who want to see the examination history, edit personal data and schedule new appointments, the admin page, which allows generating a patient table and filtering patients and the scheduling page, which, by steps, leads to the registration and scheduling of new patients' appointments or scheduling new appointments for existing users. All pages have an imported burger menu via the module, on the main page there is a sliding picture gallery, contact and other information.
 Patients are placed in local storage and a random base of 100 patients is generated.
